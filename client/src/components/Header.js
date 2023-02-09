@@ -3,26 +3,28 @@ import { AppBar, IconButton, Toolbar, Typography} from '@mui/material'
 import HomeIcon from '@mui/icons-material/Home';
 import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import Sidenav from './Sidenav';
+import { useNavigate } from "react-router-dom";
 
-const Header = () => {
+const Header = ({currentUser, setCurrentUser}) => {
+    
+  const navigate = useNavigate()
+
+  const handleHome = () => {
+    navigate('/')
+  }
+
   return (
     
     <div>
-        hello
         <AppBar>
             <Toolbar>
+                <Sidenav currentUser={currentUser} setCurrentUser={setCurrentUser}/>
                 <IconButton
                     size="large"
                     edge="start"
                     color="inherit"
-                    aria-label="menu"
-                    sx={{ mr: 2 }}>
-                    <MenuIcon />
-                </IconButton>
-                <IconButton
-                    size="large"
-                    edge="start"
-                    color="inherit">
+                    onClick={handleHome}>
                     <HomeIcon />
                 </IconButton>
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>WaterCooler</Typography>

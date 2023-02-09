@@ -19,6 +19,9 @@ tommy = User.create(username: "tommyling", name: "Tommy Xioma", password: "tommy
 p1 = Project.create(title: "Ski-Buddy", description: "I am creating a project for north east skiers to be able to talk about mountains.", github_link: "ski-buddy/mitchellj04/github.com", user_id: justin.id)
 p2 = Project.create(title: "Gaming-AU", description: "This is a gaming website for Australia", github_link: "gaming-buddy/tommy/github.com", user_id: tommy.id)
 
+# POSTS 
+post = Post.create()
+
 # CATEGORIES
 c1 = Category.create(code: "React")
 c2 = Category.create(code: "Javascript")

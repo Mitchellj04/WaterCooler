@@ -1,7 +1,9 @@
 import { Grid } from '@mui/material'
 
 import React from 'react'
+import PostMain from './Posts/PostMain';
 import Project from './ProjectMain';
+import Sidenav from './Sidenav';
 
 const Home = ({projects}) => {
   return (
@@ -14,7 +16,7 @@ const Home = ({projects}) => {
                 </Grid>
 
                 <Grid item xs={5}>
-                    Posts
+                    <PostMain />
                 </Grid>
 
     </Grid>

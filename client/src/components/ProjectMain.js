@@ -1,10 +1,10 @@
 import React from 'react'
-import ProjectItem from './ProjectItem'
+import ProjectList from './Projects/ProjectList'
 
 const Project = ({projects}) => {
 
 
-    const allProjects = projects.map((project) => <ProjectItem project={project} />)
+    const allProjects = projects.map((project) => <ProjectList project={project} />)
   return (
     <>
     
