@@ -1,4 +1,4 @@
-import { Box, Button, Grid, Paper, TextField, Typography } from '@mui/material'
+import { Alert, Box, Button, Grid, Paper, TextField, Typography } from '@mui/material'
 import React, { useState } from 'react'
 
 const LoginForm = ({setCurrentUser}) => {
@@ -33,12 +33,12 @@ const LoginForm = ({setCurrentUser}) => {
                 .then((data) => setCurrentUser(data)) 
             }
             else{
-                resp.json().then((data) => setErrors(data))
+                resp.json().then((data) => setErrors(data.error))
             }
         })
     }
 
-    
+
     console.log(errors)
   return (
     <>
@@ -60,6 +60,7 @@ const LoginForm = ({setCurrentUser}) => {
                             style={fieldStyle}
                             onChange={(e) => setPassword(e.target.value)}/>
                         <Button type="submit" variant='contained'>Submit</Button>
+                        {errors.map((err) => <Alert key="id" severity='error'>{err}</Alert>)}
                     </form>
                 </Paper>
             </Box>
