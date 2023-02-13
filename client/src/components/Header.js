@@ -6,7 +6,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Sidenav from './Sidenav';
 import { useNavigate } from "react-router-dom";
 
-const Header = ({currentUser, setCurrentUser}) => {
+const Header = ({currentUser, setCurrentUser, setErrorMain}) => {
     
   const navigate = useNavigate()
 
@@ -14,12 +14,16 @@ const Header = ({currentUser, setCurrentUser}) => {
     navigate('/')
   }
 
+  const appStyle = {
+    backgroundColor:"#6c95e9",
+
+  }
   return (
     
     <div>
-        <AppBar>
+        <AppBar style={appStyle}>
             <Toolbar>
-                <Sidenav currentUser={currentUser} setCurrentUser={setCurrentUser}/>
+                <Sidenav currentUser={currentUser} setCurrentUser={setCurrentUser} setErrorMain={setErrorMain}/>
                 <IconButton
                     size="large"
                     edge="start"
@@ -27,7 +31,7 @@ const Header = ({currentUser, setCurrentUser}) => {
                     onClick={handleHome}>
                     <HomeIcon />
                 </IconButton>
-                    <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>WaterCooler</Typography>
+                    <Typography variant="h3" component="div" sx={{ flexGrow: 1 }} style={{textAlign:"center"}}>WaterCooler</Typography>
                 <IconButton
                     size="large"
                     aria-label="account of current user"

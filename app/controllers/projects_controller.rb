@@ -4,12 +4,12 @@ skip_before_action :authorize, only: :index
 
     def index 
         project = Project.all 
-        render json: project, status: 200
+        render json: project
     end
 
     def show 
         project = find_project
-        render json: project, status: 200
+        render json: project
     end
 
     def create 

@@ -33,7 +33,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
 
-function Sidenav({currentUser, setCurrentUser}) {
+function Sidenav({currentUser, setCurrentUser, setErrorMain}) {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
   const navigate = useNavigate()
@@ -61,15 +61,27 @@ function Sidenav({currentUser, setCurrentUser}) {
   const handleProfile = () => {
     if (currentUser === null){
       navigate('/login')
+      setErrorMain(["Please login to see profile"])
     }
     else {
       navigate('/profile')
     }
   }
+
+  const handleLogin = () => {
+    if (currentUser === null){
+      navigate('/login')
+      setErrorMain([])
+    }
+    else {
+      navigate('/profile')
+    }
+  }
+
   const handleLog = () => {
     if (currentUser === null) {
      return <ListItem key={'login'} disablePadding>
-      <ListItemButton onClick={handleProfile}>
+      <ListItemButton onClick={handleLogin}>
         <ListItemIcon>
                   <LoginIcon />
                 </ListItemIcon>
@@ -89,6 +101,10 @@ function Sidenav({currentUser, setCurrentUser}) {
     }
   }
 
+  const allProjects = () => {
+    navigate('/projects-all')
+  }
+
   return (
     <Box sx={{ display: 'flex' }}>
               <Toolbar>
@@ -104,7 +120,6 @@ function Sidenav({currentUser, setCurrentUser}) {
         </Toolbar>
              <Drawer
         sx={{
-          width: drawerWidth,
           flexShrink: 0,
           '& .MuiDrawer-paper': {
             width: drawerWidth,
@@ -122,17 +137,49 @@ function Sidenav({currentUser, setCurrentUser}) {
         </DrawerHeader>
         <Divider />
         <List>
-          {['Posts', 'Projects', 'Categories', 'Create'].map((text, index) => (
+          {/* {['Posts', 'Projects', 'Categories', 'Create'].map((text, index) => (
             <ListItem key={text} disablePadding>
               <ListItemButton>
                 <ListItemIcon>
-                  {index % 2 === 0 ? <FeedIcon /> : <DynamicFeedIcon /> }
+                  {index % 2 === 0 ? <FeedIcon /> : <DynamicFeedIcon onClick={allProjects}/> }
                 </ListItemIcon>
                 <ListItemText primary={text} />
               </ListItemButton>
             </ListItem>
             
-          ))}
+          ))} */}
+          <ListItem>
+            <ListItemButton>
+              <ListItemIcon>
+                <FeedIcon />
+              </ListItemIcon>
+              <ListItemText primary="Posts"/>
+            </ListItemButton>
+          </ListItem>
+          <ListItem>
+            <ListItemButton onClick={allProjects}>
+              <ListItemIcon>
+                <DynamicFeedIcon />
+              </ListItemIcon>
+              <ListItemText primary="Projects"/>
+            </ListItemButton>
+          </ListItem>         
+          <ListItem>
+            <ListItemButton>
+              <ListItemIcon>
+                <FeedIcon />
+              </ListItemIcon>
+              <ListItemText primary="Categories"/>
+            </ListItemButton>
+          </ListItem>
+          <ListItem>
+            <ListItemButton>
+              <ListItemIcon>
+                <DynamicFeedIcon />
+              </ListItemIcon>
+              <ListItemText primary="Create"/>
+            </ListItemButton>
+          </ListItem>
         </List>
         <Divider />
         <List>

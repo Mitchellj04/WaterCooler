@@ -1,11 +1,13 @@
 class UsersController < ApplicationController
+  
     wrap_parameters format: []
-    skip_before_action :authorize, only: :create
-    rescue_from ActiveRecord::RecordInvalid, with: :user_error
+    skip_before_action :authorize, only: [:create]
+    # rescue_from ActiveRecord::RecordInvalid, with: :user_error
 
-    def show 
-        user = @current_user
-        render json: user, status: 200
+  
+    def profile
+      current_user = @current_user
+      render json: current_user
     end
 
     def create 

@@ -3,20 +3,27 @@ import React, { useState } from 'react'
 import Box from '@mui/material/Box';
 import { useNavigate } from "react-router-dom";
 
-const ProjectList = ({project, currentUser}) => {
+const ProjectList = ({project, currentUser, setErrorMain}) => {
     const [category, setCategory] = useState(project.categories)
     const [projectUser, setProjectUser] = useState(project.user.username)
     const navigate = useNavigate()
 
+
+    // console.log(currentUser)
+
+    // function categoryNav(code){
+    //   navigate(`/categories/${code}`)
+    // }
+
     const mapCategory = category.map((data) => {
-        return <Button>{data.code}</Button>
+        return <Button variant='outlined' >{data.code}</Button>
     })
 
-    console.log(projectUser)
-
     const hanldeProject = () => {
-      if (currentUser === undefined){
+      if (currentUser === null){
+        
         navigate('/login')
+        setErrorMain(["Please login to collaborate"])
       }
       else{
       navigate(`/projects/${project.id}`)
@@ -25,14 +32,14 @@ const ProjectList = ({project, currentUser}) => {
 
   return (
     <div>
-        <Box>
+        <Box style={{paddingTop: 25}}>
         <Typography>{project.title}</Typography>
         <Typography>{project.description}</Typography>
         <Typography>{project.github_link}</Typography>
         <Typography>Creator: {projectUser}</Typography>
         {mapCategory}
-        <Button variant='contained' color="secondary" onClick={hanldeProject}>Collaborate</Button>
         </Box>
+        <Button variant='contained' color="secondary" onClick={hanldeProject} style={{marginTop: 15}}>Collaborate</Button>
     </div>
   )
 }

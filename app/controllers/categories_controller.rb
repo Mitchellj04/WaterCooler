@@ -1,7 +1,13 @@
 class CategoriesController < ApplicationController
+    skip_before_action :authorize, only: :index
 
     def index 
         category = Category.all
+        render json: category, status: 200
+    end
+
+    def show
+        category = category_find
         render json: category, status: 200
     end
 
@@ -25,5 +31,9 @@ class CategoriesController < ApplicationController
 
     def category_params
         params.permit(:code)
+    end
+
+    def category_find
+        Category.find(params[:id])
     end
 end

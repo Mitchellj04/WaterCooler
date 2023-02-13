@@ -10,6 +10,7 @@ const ProjectItem = () => {
   const [collaborate, setCollaborate] = useState(false)
   const {id} = useParams()
 
+  console.log(id)
   useEffect(() => {
     fetch(`/projects/${id}`)
     .then((resp) => resp.json())

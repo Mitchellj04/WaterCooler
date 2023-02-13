@@ -1,8 +1,12 @@
+import { Box, Button, Typography } from '@mui/material'
 import React from 'react'
 
 const PostList = () => {
+
+
   return (
-    <div>PostList</div>
+    <div>        
+    </div>
   )
 }
 

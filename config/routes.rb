@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
   resources :comments
-  resources :posts
+  resources :posts , only: [:index]
   # resources :collaborations
-  resources :categories, only: [:index, :create]
+  resources :categories, only: [:index, :create, :show]
   resources :projects, only: [:index, :create, :show]
-  resources :users, only: [:create, :update, :show]
+  resources :users, only: [:create, :update]
 
-  get "/categories/:type", to: "categories#select"
+  get "/user", to: "users#profile"
+  get "/categories_filter/:type", to: "categories#select"
   post '/login', to: "sessions#create"
   delete '/logout', to: "sessions#destroy"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

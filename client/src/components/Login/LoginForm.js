@@ -1,10 +1,10 @@
 import { Alert, Box, Button, Grid, Paper, TextField, Typography } from '@mui/material'
 import React, { useState } from 'react'
 
-const LoginForm = ({setCurrentUser}) => {
+const LoginForm = ({setCurrentUser, setErrorMain, errorMain}) => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
-    const [errors, setErrors] = useState([])
+    // const [errors, setErrors] = useState([])
 
 
     const fieldStyle = {
@@ -33,13 +33,13 @@ const LoginForm = ({setCurrentUser}) => {
                 .then((data) => setCurrentUser(data)) 
             }
             else{
-                resp.json().then((data) => setErrors(data.error))
+                resp.json().then((data) => setErrorMain(data.error))
             }
         })
     }
 
 
-    console.log(errors)
+    console.log(errorMain)
   return (
     <>
         <Grid>
@@ -60,7 +60,7 @@ const LoginForm = ({setCurrentUser}) => {
                             style={fieldStyle}
                             onChange={(e) => setPassword(e.target.value)}/>
                         <Button type="submit" variant='contained'>Submit</Button>
-                        {errors.map((err) => <Alert key="id" severity='error'>{err}</Alert>)}
+                        {errorMain.map((err) => <Alert key="id" severity='error'>{err}</Alert>)}
                     </form>
                 </Paper>
             </Box>

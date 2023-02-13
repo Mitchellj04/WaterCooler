@@ -1,14 +1,15 @@
 import React from 'react'
 import ProjectList from './Projects/ProjectList'
 
-const Project = ({projects}) => {
+const Project = ({projects, currentUser, setErrorMain}) => {
 
 
-    const allProjects = projects.map((project) => <ProjectList project={project} />)
+    const homeProjects = projects.map((project) => <ProjectList project={project} currentUser={currentUser} setErrorMain={setErrorMain} />)
+    
   return (
     <>
     
-    <div>{allProjects}</div>
+    <div>{homeProjects}</div>
     </>
   )
 }

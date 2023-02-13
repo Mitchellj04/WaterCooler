@@ -1,12 +1,6 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 const PostMain = () => {
-
-    // useEffect(() => {
-    //     fetch('/posts')
-    //     .then((resp) => resp.json())
-    //     .then((data) => console.log(data))
-    // })
 
   return (
     <div></div>
