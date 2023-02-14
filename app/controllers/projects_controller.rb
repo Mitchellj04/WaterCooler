@@ -17,6 +17,12 @@ skip_before_action :authorize, only: :index
         render json: project, status: 200
     end
 
+    def update 
+        project = find_project
+        project.update(project_params)
+        render json: project, status: 200
+    end
+
     private 
 
     def find_project

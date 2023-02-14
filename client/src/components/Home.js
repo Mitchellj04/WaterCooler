@@ -3,10 +3,10 @@ import { Grid, Typography } from '@mui/material'
 import React from 'react'
 import CategoryMain from './Categories/CategoryMain';
 import PostMain from './Posts/PostMain';
-import Project from './ProjectMain';
+import ProjectMain from './ProjectMain';
 import Sidenav from './Sidenav';
 
-const Home = ({projects, currentUser, setErrorMain, posts}) => {
+const Home = ({projects, currentUser, setErrorMain, posts, setProjects}) => {
 
   // console.log(currentUser)
   return (
@@ -17,12 +17,12 @@ const Home = ({projects, currentUser, setErrorMain, posts}) => {
         </Grid>
                 <Grid item xs={5}>
                     <Typography variant="h4" style={{paddingBottom:25}}>Projects</Typography>
-                    <Project projects={projects} currentUser={currentUser} setErrorMain={setErrorMain} />
+                    <ProjectMain projects={projects} setProjects={setProjects} currentUser={currentUser} setErrorMain={setErrorMain} />
                 </Grid>
 
                 <Grid item xs={5}>
                     <Typography variant="h4">Posts</Typography>
-                    <PostMain posts={posts}/>
+                    <PostMain posts={posts} currentUser={currentUser}/>
                 </Grid>
 
     </Grid>

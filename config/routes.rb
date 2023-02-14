@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
   resources :comments
-  resources :posts , only: [:index]
+  resources :posts , only: [:index, :create, :show, :destroy, :update]
   # resources :collaborations
   resources :categories, only: [:index, :create, :show]
-  resources :projects, only: [:index, :create, :show]
+  resources :projects, only: [:index, :create, :show, :destroy, :update]
   resources :users, only: [:create, :update]
 
   get "/user", to: "users#profile"

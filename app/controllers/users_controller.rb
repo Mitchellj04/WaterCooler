@@ -16,6 +16,12 @@ class UsersController < ApplicationController
         render json: user, status: :created
     end
 
+    def update 
+        user = @current_user
+        user.update(user_params)
+        render json: user, status: 200
+    end
+
 
     private 
 
@@ -28,6 +34,6 @@ class UsersController < ApplicationController
     end
 
     def user_params
-        params.permit(:username, :age, :name, :password)
+        params.permit(:username, :age, :name, :password, :bio, :experience)
     end
 end

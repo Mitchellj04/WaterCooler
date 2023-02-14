@@ -1,10 +1,10 @@
 import React from 'react'
 import ProjectList from './Projects/ProjectList'
 
-const Project = ({projects, currentUser, setErrorMain}) => {
+const ProjectMain = ({projects, setProjects, currentUser, setErrorMain}) => {
 
 
-    const homeProjects = projects.map((project) => <ProjectList project={project} currentUser={currentUser} setErrorMain={setErrorMain} key={project.id}/>)
+    const homeProjects = projects.map((project) => <ProjectList project={project} setProjects={setProjects} currentUser={currentUser} setErrorMain={setErrorMain} key={project.id}/>)
     
   return (
     <>
@@ -14,4 +14,4 @@ const Project = ({projects, currentUser, setErrorMain}) => {
   )
 }
 
-export default Project
+export default ProjectMain

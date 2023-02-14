@@ -1,12 +1,23 @@
 import { Box, Button, Grid, Typography } from '@mui/material'
 import React from 'react'
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit'
 
-const AllProjects = ({projects}) => {
+const AllProjects = ({projects, currentUser}) => {
 
     console.log(projects)
 
+
+    function projectEdit(user){
+        if(currentUser.username === user){
+          return <>
+          <Button startIcon={<EditIcon className='editButton'/>}></Button>
+          <Button startIcon={<DeleteIcon color="secondary" className="deleteButton"/>}></Button></>
+        }
+    }
+
     const displayAll = projects.map((data) => {
-        return <Grid item xs={4} style={{marginTop: 20}} key={data.id}>
+        return <><Grid item xs={4} style={{marginTop: 20}} key={data.id}>
             <Box>
             <Typography variant='h6'>{data.title}</Typography>
             <Typography>{data.description}</Typography>
@@ -14,8 +25,12 @@ const AllProjects = ({projects}) => {
             <Typography>User: {data.user.username}</Typography>
             </Box>
             <Button variant='contained' color="secondary" style={{marginTop: 10}}>Collaborate</Button>
+            <div>{projectEdit(data.user.username)}</div>
         </Grid>
+        </>
     })
+
+
   return (
     <>
     <Typography variant="h4" style={{paddingTop: 100}}>Projects</Typography>

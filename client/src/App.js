@@ -59,12 +59,12 @@ function App() {
         <Header currentUser={currentUser} setCurrentUser={setCurrentUser} setErrorMain={setErrorMain}/>
         <div className="App" style={{backgroundColor:"#9f9f9f"}}>
         <Routes>
-          <Route exact path='/' element={<Home projects={projects} currentUser={currentUser} setErrorMain={setErrorMain} posts={posts}/>}/>
-          <Route path='/profile' element={<UserProfile currentUser={currentUser}/> } />
+          <Route exact path='/' element={<Home projects={projects} setProjects={setProjects} currentUser={currentUser} setErrorMain={setErrorMain} posts={posts}/>}/>
+          <Route path='/profile' element={<UserProfile setCurrentUser={setCurrentUser} currentUser={currentUser} /> } />
           <Route path='/projects' element={<ProjectList />} />
           <Route path='/posts' element={<PostList />} />
-          <Route path='/projects-all' element={<AllProjects projects={projects}/>}/>
-          <Route path='/posts-all' element={<AllPosts posts={posts}/>}/>
+          <Route path='/projects-all' element={<AllProjects projects={projects} currentUser={currentUser}/>}/>
+          <Route path='/posts-all' element={<AllPosts post={posts} currentUser={currentUser}/>}/>
           <Route path='/projects/:id' element={<ProjectItem />} />
           <Route path='/project-create' element={<CreateProject setProjects={setProjects} projects={projects}/>} />
           <Route path='/login' element={<Login currentUser={currentUser} setCurrentUser={setCurrentUser} errorMain={errorMain} setErrorMain={setErrorMain}/>}/>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import PostList from './PostList'
 
-const PostMain = ({posts}) => {
+const PostMain = ({posts, currentUser}) => {
 
   // const [posts, setPosts] = useState([])
 
@@ -13,7 +13,7 @@ const PostMain = ({posts}) => {
 
     // console.log(posts)
 
-    const mapPosts = posts.map((post) => <PostList post={post} key={post.id}/>)
+    const mapPosts = posts.map((post) => <PostList post={post} key={post.id} currentUser={currentUser}/>)
 
   return (
     <div>
