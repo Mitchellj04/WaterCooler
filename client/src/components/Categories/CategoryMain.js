@@ -25,7 +25,7 @@ const CategoryMain = () => {
   }
 
   const buttonMap = categories.map((category) => {
-    return <Box style={{paddingTop:20}}>
+    return <Box style={{paddingTop:20}} key={category.id}>
     
         <Button id={category.id} value={category.code} variant="contained" onClick={handleClick}>{category.code}</Button>
      

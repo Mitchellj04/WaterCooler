@@ -78,6 +78,15 @@ function Sidenav({currentUser, setCurrentUser, setErrorMain}) {
     }
   }
 
+ const allProjects = () => {
+    navigate('/projects-all')
+  }
+
+  const allPosts = () => {
+    navigate('/posts-all')
+  }
+
+
   const handleLog = () => {
     if (currentUser === null) {
      return <ListItem key={'login'} disablePadding>
@@ -101,9 +110,6 @@ function Sidenav({currentUser, setCurrentUser, setErrorMain}) {
     }
   }
 
-  const allProjects = () => {
-    navigate('/projects-all')
-  }
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -137,19 +143,8 @@ function Sidenav({currentUser, setCurrentUser, setErrorMain}) {
         </DrawerHeader>
         <Divider />
         <List>
-          {/* {['Posts', 'Projects', 'Categories', 'Create'].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <FeedIcon /> : <DynamicFeedIcon onClick={allProjects}/> }
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
-            
-          ))} */}
           <ListItem>
-            <ListItemButton>
+            <ListItemButton onClick={allPosts}>
               <ListItemIcon>
                 <FeedIcon />
               </ListItemIcon>

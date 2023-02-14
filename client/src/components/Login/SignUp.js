@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 
 const SignUp = () => {
 
+  const [newProfile, setNewProfile] = useState([])
   const [username, setUsername] = useState('')
   const [fullname, setFullName] = useState('')
   const [age, setAge] = useState('')
@@ -19,13 +20,21 @@ const SignUp = () => {
 }
 
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault()
     const user = {
       username, 
       name: fullname,
       password,
       age
     }
+    fetch('/users', {
+      method: "POST",
+      headers: {"Content-Type": "Application/json"},
+      body: JSON.stringify(user)
+    })
+    .then((resp) => resp.json())
+    .then((newUser) => console.log(newUser))
   }
   return (
     <>
@@ -37,7 +46,7 @@ const SignUp = () => {
             <TextField 
               fullWidth 
               label="username"
-              value={password} 
+              value={username} 
               style={fieldStyle}
               onChange={(e) => setUsername(e.target.value)}/>
             <TextField 
@@ -48,13 +57,13 @@ const SignUp = () => {
               onChange={(e) => setFullName(e.target.value)}/>
             <TextField 
               fullWidth 
-              label="username"
-              value={password} 
+              label="age"
+              value={age} 
               style={fieldStyle}
               onChange={(e) => setAge(e.target.value)}/>
             <TextField 
               fullWidth 
-              label="username"
+              label="password"
               value={password} 
               style={fieldStyle}
               onChange={(e) => setPassword(e.target.value)}/>

@@ -12,6 +12,7 @@ import CategoryItem from './components/Categories/CategoryItem';
 import AllProjects from './components/Projects/AllProjects';
 import UserProfile from './components/Profile/UserProfile';
 import PostList from './components/Posts/PostList';
+import AllPosts from './components/Posts/AllPosts';
 
 function App() {   
   const [projects, setProjects] = useState([])
@@ -40,30 +41,30 @@ function App() {
     
   }, [])
 
-  // useEffect(() => {
-  //   fetch("/posts")
-  //   .then((resp) => resp.json())
-  //   .then((data) => setPosts(data))
-  // })
-
-
+    useEffect(() => {
+        fetch('/posts')
+        .then((resp) => resp.json())
+        .then((data) => setPosts(data))
+    }, [])
 
   
     // console.log(errorMain)
     // console.log(authenticate)
-    console.log(projects)
-    console.log(currentUser)
+    // console.log(projects) 
+    // console.log(currentUser)
+    // if (!currentUser) return <Home />;
   return (
     <>
       <Router>
         <Header currentUser={currentUser} setCurrentUser={setCurrentUser} setErrorMain={setErrorMain}/>
         <div className="App" style={{backgroundColor:"#9f9f9f"}}>
         <Routes>
-          <Route exact path='/' element={<Home projects={projects} currentUser={currentUser} setErrorMain={setErrorMain} />}/>
+          <Route exact path='/' element={<Home projects={projects} currentUser={currentUser} setErrorMain={setErrorMain} posts={posts}/>}/>
           <Route path='/profile' element={<UserProfile currentUser={currentUser}/> } />
           <Route path='/projects' element={<ProjectList />} />
           <Route path='/posts' element={<PostList />} />
           <Route path='/projects-all' element={<AllProjects projects={projects}/>}/>
+          <Route path='/posts-all' element={<AllPosts posts={posts}/>}/>
           <Route path='/projects/:id' element={<ProjectItem />} />
           <Route path='/project-create' element={<CreateProject setProjects={setProjects} projects={projects}/>} />
           <Route path='/login' element={<Login currentUser={currentUser} setCurrentUser={setCurrentUser} errorMain={errorMain} setErrorMain={setErrorMain}/>}/>

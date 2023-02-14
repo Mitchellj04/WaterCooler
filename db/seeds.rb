@@ -10,6 +10,8 @@ User.delete_all
 Project.delete_all
 Category.delete_all
 Tagging.delete_all
+Post.delete_all
+Tag.delete_all
 
 # USERS
 justin= User.create(username: "jmitchell04", name: "Justin Mitchell", password: "jmoney33", age: 24, experience: "React 1 year", bio: "new programmer", email: "mitchelljm@gmail.com", github: "mitchellj04/github.com")
@@ -33,6 +35,7 @@ c1 = Category.create(code: "React")
 c2 = Category.create(code: "Javascript")
 c3 = Category.create(code: "Ruby")
 c4 = Category.create(code: "C++")
+c5 = Category.create(code: "Rails")
 
 #TAGGING 
 tag1 = Tagging.create(project_id: p1.id, category_id: c1.id)
@@ -40,3 +43,10 @@ tag2 = Tagging.create(project_id: p1.id, category_id: c3.id)
 tag3 = Tagging.create(project_id: p2.id, category_id: c3.id)
 tag4 = Tagging.create(project_id: p2.id, category_id: c2.id)
 tag5 = Tagging.create(project_id: p2.id, category_id: c4.id)
+
+# POST TAGS
+tag1 = Tag.create(post_id: post.id, category_id: c1.id)
+tag2 = Tag.create(post_id: post2.id, category_id: c5.id)
+tag3 = Tag.create(post_id: post3.id, category_id: c2.id)
+tag4 = Tag.create(post_id: post4.id, category_id: c3.id)
+tag4 = Tag.create(post_id: post4.id, category_id: c1.id)

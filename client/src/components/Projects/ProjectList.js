@@ -16,7 +16,7 @@ const ProjectList = ({project, currentUser, setErrorMain}) => {
     // }
 
     const mapCategory = category.map((data) => {
-        return <Button variant='outlined' >{data.code}</Button>
+        return <Button variant='outlined' key={data.id}>{data.code}</Button>
     })
 
     const hanldeProject = () => {

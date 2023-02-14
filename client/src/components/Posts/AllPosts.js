@@ -1,24 +1,24 @@
 import { Box, Button, Grid, Typography } from '@mui/material'
 import React from 'react'
 
-const AllProjects = ({projects}) => {
+const AllPosts = ({posts}) => {
 
-    console.log(projects)
+    console.log(posts)
 
-    const displayAll = projects.map((data) => {
+    const displayAll = posts.map((data) => {
         return <Grid item xs={4} style={{marginTop: 20}} key={data.id}>
             <Box>
             <Typography variant='h6'>{data.title}</Typography>
             <Typography>{data.description}</Typography>
-            <Typography>Link: {data.github_link}</Typography>
+            <Typography>Link: {data.link}</Typography>
             <Typography>User: {data.user.username}</Typography>
             </Box>
-            <Button variant='contained' color="secondary" style={{marginTop: 10}}>Collaborate</Button>
+            <Button variant='contained' color="secondary" style={{marginTop: 10}}>Comment</Button>
         </Grid>
     })
   return (
     <>
-    <Typography variant="h4" style={{paddingTop: 100}}>Projects</Typography>
+    <Typography variant="h4" style={{paddingTop: 100}}>Posts</Typography>
     <Grid container style={{paddingTop: 50}}>
         
         <Grid item xs={3} >
@@ -33,4 +33,4 @@ const AllProjects = ({projects}) => {
   )
 }
 
-export default AllProjects
+export default AllPosts

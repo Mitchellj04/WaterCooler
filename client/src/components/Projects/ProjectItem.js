@@ -20,7 +20,7 @@ const ProjectItem = () => {
   }, [])
 
   const mapCategory = category.map((data) => {
-    return <Button>{data.code}</Button>
+    return <Button key={data.id}>{data.code}</Button>
 })
 
   const handleCollaboration = () => {

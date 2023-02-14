@@ -1,6 +1,7 @@
 import { Box, Grid, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
+import CategoryPost from './CategoryPost'
 import CategoryProject from './CategoryProject'
 
 const CategoryItem = () => {
@@ -18,15 +19,21 @@ const CategoryItem = () => {
     .then((data) => {
       setCategoryItem(data[0])
       setCategoryProject(data[0].projects)
-      setCategoryName(data[0].code)})
+      setCategoryName(data[0].code)
+      setCategoryPosts(data[0].posts)})
   },[type])
 
-  console.log(categoryItem.code)
+  console.log(categoryItem)
   console.log(categoryProject)
 
-  // const mapCategory = categoryItem.map((data) => console.log(data.projects))
-  // console.log(categoryProject)
+ 
   const mapProjects = categoryProject.map((projects) => <CategoryProject projects={projects} />)
+  const mapPosts = categoryPosts.map((post) => <CategoryPost post={post}/>)
+
+  const boxStyle ={
+    margin: 20
+  }
+
   return (
     <>
     <Grid container>
@@ -39,15 +46,16 @@ const CategoryItem = () => {
         
       </Box>
       </Grid>
-      <Grid item xs={5}>
-        <Box>
+      <Grid item xs={6}>
+        <Box style={boxStyle}>
           <Typography variant="h4">Projects</Typography>
           {mapProjects}
         </Box>
       </Grid>
-      <Grid item xs={5}>
-        <Box>
+      <Grid item xs={6}>
+        <Box style={boxStyle}>
           <Typography variant='h4'>Posts</Typography>
+          {mapPosts}
         </Box>
       </Grid>
  

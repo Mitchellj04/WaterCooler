@@ -3,18 +3,17 @@ import { Box, Button, Grid, Paper, Typography } from '@mui/material'
 
 const UserProfile = ({currentUser}) => {
     const [user, setUser] = useState(currentUser)
-    const [userPosts, setUserPosts] = useState([])
+    const [userPosts, setUserPosts] = useState(currentUser.posts)
     const [userProjects, setUserProjects] = useState(currentUser.projects)
-      console.log(currentUser)
 
      
     
 
-    console.log(currentUser.projects)
+    console.log(user)
 
     const listProjects = userProjects.map((project) => {
-        return <Box>
-            <Paper>
+        return <Box key={project.id}>
+            <Paper style={{backgroundColor: 'inherit', margin: 10}}>
                 <Typography>{project.title}</Typography>
                 <Typography>{project.description}</Typography>
                 <Typography>{project.github_link}</Typography>
@@ -22,6 +21,17 @@ const UserProfile = ({currentUser}) => {
             </Paper>
         </Box>
     })
+
+    const listPosts = userPosts.map((project) => {
+      return <Box key={project.id}>
+          <Paper style={{backgroundColor: 'inherit', margin: 10}}>
+              <Typography>{project.title}</Typography>
+              <Typography>{project.description}</Typography>
+              <Typography>{project.link}</Typography>
+              <Button variant="contained" color="secondary">comments</Button>
+          </Paper>
+      </Box>
+  })
   return (
     <>
     <Grid container>
@@ -29,10 +39,11 @@ const UserProfile = ({currentUser}) => {
      <Box elevation="20" style={{padding: 100}}>
          <Typography variant='h4'>Profile</Typography>
        <Paper>
-           <Typography>Username: {user.username}</Typography>
-          <Typography>Fullname: {user.name}</Typography>
-           <Typography>Age: {user.age}</Typography>
-          <Typography>Experience: {user.experience}</Typography>
+           <Typography variant='h6' style={{fontWeight: "Bold"}}>Username: </Typography>{user.username}
+          <Typography variant='h6' style={{fontWeight: "Bold"}}>Fullname: </Typography>{user.name}
+           <Typography variant='h6' style={{fontWeight: "Bold"}}>Age: </Typography>{user.age}
+          <Typography variant='h6' style={{fontWeight: "Bold"}}>Experience: </Typography>{user.experience}
+          <Typography variant='h6' style={{fontWeight: "Bold"}}>Bio: </Typography>{user.bio}
        </Paper>
        </Box>
         </Grid>
@@ -42,6 +53,7 @@ const UserProfile = ({currentUser}) => {
        </Grid>
        <Grid item xs={6}>
             <Typography variant="h4">Posts</Typography>
+            {listPosts}
        </Grid>
     </Grid>
     </>
