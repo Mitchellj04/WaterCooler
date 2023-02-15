@@ -6,7 +6,7 @@ import PostMain from './Posts/PostMain';
 import ProjectMain from './ProjectMain';
 import Sidenav from './Sidenav';
 
-const Home = ({projects, currentUser, setErrorMain, posts, setProjects}) => {
+const Home = ({projects, currentUser, setErrorMain, posts, setProjects, setPosts}) => {
 
   // console.log(currentUser)
   return (
@@ -22,7 +22,7 @@ const Home = ({projects, currentUser, setErrorMain, posts, setProjects}) => {
 
                 <Grid item xs={5}>
                     <Typography variant="h4">Posts</Typography>
-                    <PostMain posts={posts} currentUser={currentUser}/>
+                    <PostMain posts={posts} setPosts={setPosts} currentUser={currentUser}/>
                 </Grid>
 
     </Grid>

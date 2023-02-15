@@ -6,14 +6,14 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit'
 import ProjectEdit from './ProjectEdit';
 
-const ProjectList = ({project, setProjects currentUser, setErrorMain}) => {
+const ProjectList = ({project, projects, setProjects, currentUser, setErrorMain}) => {
     const [category, setCategory] = useState(project.categories)
     const [projectUser, setProjectUser] = useState(project.user.username)
     const [hideEditProject, setHideEditProject] = useState(false)
     const navigate = useNavigate()
 
     // console.log(currentUser)
-    // console.log(projectUser)
+    console.log(project)
 
     const handleProjectOpen = () => {setHideEditProject(true)}
 
@@ -31,11 +31,36 @@ const ProjectList = ({project, setProjects currentUser, setErrorMain}) => {
     }
     }
 
+    const handleDeleteProject = (deleted) => {
+        const filterDelete = projects.filter((projectItem) => {
+          if (projectItem.id !== deleted){
+            return projectItem
+          }
+          else {
+            return null
+          }
+        });
+        setProjects(filterDelete)
+    }
+
+    function handleDelete(){
+      fetch(`/projects/${project.id}`, {
+        method: "DELETE",
+        headers: {'Content-Type' : 'application/json'}
+      })
+      handleDeleteProject(project.id)
+    }
+
     function projectEdit(){
-        if(currentUser.username === projectUser){
+        if(currentUser === null){
+          return <>
+
+          </>
+        }
+        else if(currentUser.username === projectUser){
           return <>
           <Button startIcon={<EditIcon className='editButton' onClick={handleProjectOpen}/>}></Button>
-          <Button startIcon={<DeleteIcon color="secondary" className="deleteButton"/>}></Button>
+          <Button startIcon={<DeleteIcon color="secondary" className="deleteButton" onClick={handleDelete}/>}></Button>
           <ProjectEdit project={project} setProjects={setProjects} hideEditProject={hideEditProject} setHideEditProject={setHideEditProject}/>
           </>
         }

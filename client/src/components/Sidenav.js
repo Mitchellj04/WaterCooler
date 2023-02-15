@@ -86,6 +86,10 @@ function Sidenav({currentUser, setCurrentUser, setErrorMain}) {
     navigate('/posts-all')
   }
 
+  const createPage = () => {
+    navigate('/create')
+  }
+
 
   const handleLog = () => {
     if (currentUser === null) {
@@ -160,7 +164,7 @@ function Sidenav({currentUser, setCurrentUser, setErrorMain}) {
             </ListItemButton>
           </ListItem>         
           <ListItem>
-            <ListItemButton>
+            <ListItemButton >
               <ListItemIcon>
                 <FeedIcon />
               </ListItemIcon>
@@ -168,7 +172,7 @@ function Sidenav({currentUser, setCurrentUser, setErrorMain}) {
             </ListItemButton>
           </ListItem>
           <ListItem>
-            <ListItemButton>
+            <ListItemButton onClick={createPage}>
               <ListItemIcon>
                 <DynamicFeedIcon />
               </ListItemIcon>

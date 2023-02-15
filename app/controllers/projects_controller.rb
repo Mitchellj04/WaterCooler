@@ -14,13 +14,19 @@ skip_before_action :authorize, only: :index
 
     def create 
         project = Project.create!(project_params)
-        render json: project, status: 200
+        render json: project, status: :created
     end
 
     def update 
         project = find_project
         project.update(project_params)
         render json: project, status: 200
+    end
+
+    def destroy
+        project = find_project
+        project.delete
+        head :no_content
     end
 
     private 

@@ -13,6 +13,7 @@ import AllProjects from './components/Projects/AllProjects';
 import UserProfile from './components/Profile/UserProfile';
 import PostList from './components/Posts/PostList';
 import AllPosts from './components/Posts/AllPosts';
+import Create from './components/Create';
 
 function App() {   
   const [projects, setProjects] = useState([])
@@ -51,7 +52,7 @@ function App() {
     // console.log(errorMain)
     // console.log(authenticate)
     // console.log(projects) 
-    // console.log(currentUser)
+    console.log(currentUser)
     // if (!currentUser) return <Home />;
   return (
     <>
@@ -59,14 +60,15 @@ function App() {
         <Header currentUser={currentUser} setCurrentUser={setCurrentUser} setErrorMain={setErrorMain}/>
         <div className="App" style={{backgroundColor:"#9f9f9f"}}>
         <Routes>
-          <Route exact path='/' element={<Home projects={projects} setProjects={setProjects} currentUser={currentUser} setErrorMain={setErrorMain} posts={posts}/>}/>
+          <Route exact path='/' element={<Home projects={projects} setProjects={setProjects} currentUser={currentUser} setErrorMain={setErrorMain} posts={posts} setPosts={setPosts}/>}/>
           <Route path='/profile' element={<UserProfile setCurrentUser={setCurrentUser} currentUser={currentUser} /> } />
           <Route path='/projects' element={<ProjectList />} />
           <Route path='/posts' element={<PostList />} />
           <Route path='/projects-all' element={<AllProjects projects={projects} currentUser={currentUser}/>}/>
           <Route path='/posts-all' element={<AllPosts post={posts} currentUser={currentUser}/>}/>
           <Route path='/projects/:id' element={<ProjectItem />} />
-          <Route path='/project-create' element={<CreateProject setProjects={setProjects} projects={projects}/>} />
+          <Route path='/create' element={<Create currentUser={currentUser} setProjects={setProjects} setPosts={setPosts}/>}/>
+          {/* <Route path='/project-create' element={<CreateProject setProjects={setProjects} projects={projects}/>} /> */}
           <Route path='/login' element={<Login currentUser={currentUser} setCurrentUser={setCurrentUser} errorMain={errorMain} setErrorMain={setErrorMain}/>}/>
           <Route path='/categories/:type' element={<CategoryItem />} />
         </Routes>

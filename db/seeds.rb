@@ -12,6 +12,7 @@ Category.delete_all
 Tagging.delete_all
 Post.delete_all
 Tag.delete_all
+Comment.delete_all
 
 # USERS
 justin= User.create(username: "jmitchell04", name: "Justin Mitchell", password: "jmoney33", age: 24, experience: "React 1 year", bio: "new programmer", email: "mitchelljm@gmail.com", github: "mitchellj04/github.com")
@@ -26,8 +27,6 @@ post = Post.create(title: "Need help with a fetch function?", description: "I ha
 post2 = Post.create(title: "Need help with a controller?", description: "I have been trying to figure out how to fix my controller to remember my session id", link: "github.com/water-cooler/jmithell04", user_id: justin.id)
 post3 = Post.create(title: "Button or link?", description: "I need help with adding links to my website so that they are clickable links", link: "github.com/ski-buddy/tommyXioama", user_id: tommy.id)
 post4 = Post.create(title: "Trying to add images from my desktop on a post instead of from the web", description: "I need help to be able to figure out how to add an image to my project from my desktop instead of the web", link: "github.com/ski-buddy/tommyXioama", user_id: tommy.id)
-
-
 
 
 # CATEGORIES
@@ -50,3 +49,8 @@ tag2 = Tag.create(post_id: post2.id, category_id: c5.id)
 tag3 = Tag.create(post_id: post3.id, category_id: c2.id)
 tag4 = Tag.create(post_id: post4.id, category_id: c3.id)
 tag4 = Tag.create(post_id: post4.id, category_id: c1.id)
+
+# COMMENTS 
+
+comment = Comment.create(answer: "Have you tried using an arrow function instead. What is the problem with the function?",post_id: post.id, user_id: tommy.id)
+comment2 = Comment.create(answer: "To be able to have your controller remember your session you need to add the cookies gem", post_id: post2.id, user_id: justin.id)

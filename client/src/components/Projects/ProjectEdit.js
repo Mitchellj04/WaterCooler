@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material'
 
-const ProjectEdit = ({project, hideEditProject, setHideEditProject}) => {
+const ProjectEdit = ({project, setProjects, hideEditProject, setHideEditProject}) => {
 
   const [projectEdit, setProjectEdit] = useState(project)
   const handleProjectClose = () => {setHideEditProject(false)}
@@ -25,7 +25,7 @@ const ProjectEdit = ({project, hideEditProject, setHideEditProject}) => {
       body: JSON.stringify(newProject)
     })
     .then((resp) => console.log(resp))
-    .then((editedProject) => (editedProject))
+    .then((editedProject) => {setProjects((prevState) => [...prevState, editedProject])})
   }
 
   return (
