@@ -1,9 +1,22 @@
 import { Alert, Box, Button, Grid, Paper, TextField, Typography } from '@mui/material'
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { login } from '../../features/users/UserSlice'
 
 const LoginForm = ({setCurrentUser, setErrorMain, errorMain}) => {
+
+    //REDUX
+    const dispatch = useDispatch()
+    const user = useSelector((state) => state.user.users)
+    console.log(user)
+
+    //STATE
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+    const userData = {
+        username,
+        password
+    }
     // const [errors, setErrors] = useState([])
 
 
@@ -16,26 +29,31 @@ const LoginForm = ({setCurrentUser, setErrorMain, errorMain}) => {
         margin: '100px auto'
     }
 
-    const handleSubmit = (e) => {
+    // const handleSubmit = (e) => {
+    //     e.preventDefault()
+    //     const user = {
+    //         username, 
+    //         password
+    //     }
+    //     fetch('/login', {
+    //         method: "POST",
+    //         headers: {"Content-Type": "application/json"},
+    //         body: JSON.stringify(user)
+    //     })
+    //     .then((resp) => {
+    //         if(resp.ok){
+    //             resp.json()
+    //             .then((data) => setCurrentUser(data)) 
+    //         }
+    //         else{
+    //             resp.json().then((data) => setErrorMain(data.error))
+    //         }
+    //     })
+    // }
+
+    const handleSubmitRedux = (e) => {
         e.preventDefault()
-        const user = {
-            username, 
-            password
-        }
-        fetch('/login', {
-            method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(user)
-        })
-        .then((resp) => {
-            if(resp.ok){
-                resp.json()
-                .then((data) => setCurrentUser(data)) 
-            }
-            else{
-                resp.json().then((data) => setErrorMain(data.error))
-            }
-        })
+        dispatch(login(userData))
     }
 
 
@@ -45,7 +63,7 @@ const LoginForm = ({setCurrentUser, setErrorMain, errorMain}) => {
         <Grid>
             <Box>
                 <Paper elevation={20} style={paperStyle}>
-                    <form onSubmit={handleSubmit}>
+                    <form onSubmit={handleSubmitRedux}>
                         <Typography>Login</Typography>
                         <TextField 
                             fullWidth 

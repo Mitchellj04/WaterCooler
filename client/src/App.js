@@ -18,26 +18,32 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchProjects } from './features/projects/ProjectSlice';
 import { fetchPosts } from './features/posts/PostSlice';
 import { fetchCategory } from './features/category/CategorySlice';
+import { fetchUser } from './features/users/UserSlice';
 
 function App() {   
   const [projects, setProjects] = useState([])
   const [posts, setPosts] = useState([])
-  const [currentUser, setCurrentUser] = useState(null)
+  
   const [errorMain, setErrorMain] = useState([])
   const [authenticate, setAuthenticate] = useState([])
   const [categories, setCategory] = useState([])
     
   // REDUX PRACTICE 
+  const reduxCurrentUser = useSelector((state) => state.user.users)
   const reduxProjects = useSelector((state) => state)
+  const [currentUser, setCurrentUser] = useState(reduxCurrentUser)
   const dispatch = useDispatch()
 
   useEffect(() => {
+    dispatch(fetchUser())
     dispatch(fetchProjects())
     dispatch(fetchPosts())
     dispatch(fetchCategory())
   }, [])
 
   console.log(reduxProjects)
+  console.log(reduxCurrentUser)
+
   // END PRACTICE 
   
 
@@ -85,7 +91,7 @@ function App() {
         <Header currentUser={currentUser} setCurrentUser={setCurrentUser} setErrorMain={setErrorMain}/>
         <div className="App" style={{backgroundColor:"#9f9f9f"}}>
         <Routes>
-          <Route exact path='/' element={<Home categories={categories} projects={projects} setProjects={setProjects} currentUser={currentUser} setErrorMain={setErrorMain} posts={posts} setPosts={setPosts}/>}/>
+          <Route exact path='/' element={<Home categories={categories} currentUser={currentUser} setErrorMain={setErrorMain} posts={posts} setPosts={setPosts}/>}/>
           <Route path='/profile' element={<UserProfile setCurrentUser={setCurrentUser} currentUser={currentUser} /> } />
           <Route path='/projects' element={<ProjectList />} />
           <Route path='/posts' element={<PostList />} />
@@ -93,7 +99,6 @@ function App() {
           <Route path='/posts-all' element={<AllPosts post={posts} currentUser={currentUser}/>}/>
           <Route path='/projects/:id' element={<ProjectItem />} />
           <Route path='/create' element={<Create currentUser={currentUser} setProjects={setProjects} setPosts={setPosts} projects={projects} categories={categories}/>}/>
-          {/* <Route path='/project-create' element={<CreateProject setProjects={setProjects} projects={projects}/>} /> */}
           <Route path='/login' element={<Login currentUser={currentUser} setCurrentUser={setCurrentUser} errorMain={errorMain} setErrorMain={setErrorMain}/>}/>
           <Route path='/categories/:type' element={<CategoryItem />} />
         </Routes>

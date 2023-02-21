@@ -6,7 +6,7 @@ import PostMain from './Posts/PostMain';
 import ProjectMain from './ProjectMain';
 import Sidenav from './Sidenav';
 
-const Home = ({projects, currentUser, setErrorMain, posts, setProjects, setPosts, categories}) => {
+const Home = ({currentUser, setErrorMain, posts, setPosts, categories}) => {
 
   // console.log(projects)
 

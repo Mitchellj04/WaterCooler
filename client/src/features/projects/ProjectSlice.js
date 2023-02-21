@@ -6,6 +6,16 @@ export const fetchProjects = createAsyncThunk('project/fetchProjects', () => {
     .then((project) => project)
 })
 
+export const createProjects = createAsyncThunk('project/createProjects', ({newProject}) => {
+    return fetch('/projects',{
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({newProject})
+    })
+    .then((resp) => console.log(resp))
+    .then((data) => console.log(data))
+})
+
 const initialState = {
     projects: [],
     errors: null
@@ -19,6 +29,9 @@ const projectSlice = createSlice({
         builder
         .addCase(fetchProjects.fulfilled, (state, action) => {
             state.projects = action.payload
+        })
+        .addCase(createProjects.fulfilled, (state, action) => {
+            state.projects.push(action.payload)
         })
     }
 })

@@ -1,8 +1,15 @@
 import { Paper, Box, Grid, TextField, Button, Typography } from '@mui/material'
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
 const SignUp = () => {
 
+  // REDUX 
+  const dispatch = useDispatch()
+  const user = useSelector((state) => state.user.users)
+  console.log(user)
+
+  //STATE
   const [newProfile, setNewProfile] = useState([])
   const [username, setUsername] = useState('')
   const [fullname, setFullName] = useState('')
@@ -22,12 +29,12 @@ const SignUp = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    const user = {
-      username, 
-      name: fullname,
-      password,
-      age
-    }
+    // const user = {
+    //   username, 
+    //   name: fullname,
+    //   password,
+    //   age
+    // }
     fetch('/users', {
       method: "POST",
       headers: {"Content-Type": "Application/json"},
@@ -36,6 +43,12 @@ const SignUp = () => {
     .then((resp) => resp.json())
     .then((newUser) => console.log(newUser))
   }
+
+  const handleSubmitRedux = (e) => {
+    e.preventDefault()
+    dispatch()
+  }
+
   return (
     <>
     <Grid>

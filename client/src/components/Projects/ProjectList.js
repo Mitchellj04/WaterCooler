@@ -12,10 +12,8 @@ const ProjectList = ({project, projects, setProjects, currentUser, setErrorMain}
     const [projectUser, setProjectUser] = useState(project.user.username)
     const [hideEditProject, setHideEditProject] = useState(false)
     const navigate = useNavigate()
-    const reduxp = useSelector((state) => state.project.projects)
 
-    // console.log(currentUser)
-    // console.log(reduxp)
+    
 
     const handleProjectOpen = () => {setHideEditProject(true)}
 
