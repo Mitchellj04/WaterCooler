@@ -24,6 +24,7 @@ const CreatePost = ({currentUser, setPosts}) => {
             description, 
             link, 
             user_id: currentUser.id,
+            user: currentUser
 
         }
         fetch('/posts', {
@@ -32,6 +33,7 @@ const CreatePost = ({currentUser, setPosts}) => {
             body: JSON.stringify(newPost)
         })
         .then((resp) => console.log(resp))
+        .then((post) => console.log(post))
     }
     
   return (

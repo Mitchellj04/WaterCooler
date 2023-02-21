@@ -5,15 +5,17 @@ import { useNavigate } from "react-router-dom";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit'
 import ProjectEdit from './ProjectEdit';
+import { useSelector } from 'react-redux';
 
 const ProjectList = ({project, projects, setProjects, currentUser, setErrorMain}) => {
     const [category, setCategory] = useState(project.categories)
     const [projectUser, setProjectUser] = useState(project.user.username)
     const [hideEditProject, setHideEditProject] = useState(false)
     const navigate = useNavigate()
+    const reduxp = useSelector((state) => state.project.projects)
 
     // console.log(currentUser)
-    console.log(project)
+    // console.log(reduxp)
 
     const handleProjectOpen = () => {setHideEditProject(true)}
 

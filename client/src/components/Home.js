@@ -1,23 +1,29 @@
 import { Grid, Typography } from '@mui/material'
 
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import CategoryMain from './Categories/CategoryMain';
 import PostMain from './Posts/PostMain';
 import ProjectMain from './ProjectMain';
 import Sidenav from './Sidenav';
 
-const Home = ({projects, currentUser, setErrorMain, posts, setProjects, setPosts}) => {
+const Home = ({projects, currentUser, setErrorMain, posts, setProjects, setPosts, categories}) => {
 
-  // console.log(currentUser)
+  // console.log(projects)
+
+
+
+
+  
+
   return (
     <Grid container style={{paddingTop: 100}}> 
         <Grid item xs={2}>
             <Typography variant="h4">Categories</Typography>
-            <CategoryMain />
+            <CategoryMain categories={categories}/>
         </Grid>
                 <Grid item xs={5}>
                     <Typography variant="h4" style={{paddingBottom:25}}>Projects</Typography>
-                    <ProjectMain projects={projects} setProjects={setProjects} currentUser={currentUser} setErrorMain={setErrorMain} />
+                    <ProjectMain currentUser={currentUser} setErrorMain={setErrorMain} />
                 </Grid>
 
                 <Grid item xs={5}>

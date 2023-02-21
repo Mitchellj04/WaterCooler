@@ -3,20 +3,15 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from "react-router-dom";
 
 
-const CategoryMain = () => {
+const CategoryMain = ({categories}) => {
 
-  const [categories, setCategory] = useState([])
+
   const [selected, setSelected] = useState('')
   const navigate = useNavigate()
 
 
 
-  useEffect(() => {
-    fetch("/categories")
-    .then((resp) => resp.json())
-    .then((data) => setCategory(data))
-  }, [])  
-  
+
   
   const handleClick = (e) => {
     e.preventDefault()

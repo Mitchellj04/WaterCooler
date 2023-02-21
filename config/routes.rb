@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :projects, only: [:index, :create, :show, :destroy, :update]
   resources :users, only: [:create, :update]
 
+  post '/join', to: 'taggings#create'
   get "/user", to: "users#profile"
   get "/categories_filter/:type", to: "categories#select"
   post '/login', to: "sessions#create"

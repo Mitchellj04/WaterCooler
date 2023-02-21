@@ -15,7 +15,7 @@ const PostList = ({post, posts, currentUser, setPosts}) => {
 
   const handlePostOpen = () => {setHideEditPost(true)}
 
-  console.log(comments)
+  // console.log(comments)
 
   const mapComments = comments.map((comment) => <Comment post={post} postUser={postUser} comment={comment} currentUser={currentUser} setComments={setComments}/>)
   const mapCategory = category.map((data) => {
