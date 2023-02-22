@@ -28,14 +28,16 @@ export const deleteProject = createAsyncThunk('project/deleteProject', (id) => {
 })
 
 // UPDATE INDIVIDUAL PROJECT
-export const updateProject = createAsyncThunk('project/updateProject', (id, data) => {
-    return fetch(`/projects/${id}`, {
-        method: "PATCH", 
-        headers: {"Content-Type":"application/json"},
-        body: JSON.stringify({data})
-    })
-    .then((resp) => console.log(resp))
-    .then((data) => data)
+export const updateProject = createAsyncThunk('project/updateProject', ({id, newProject}) => {
+    fetch(`/projects/${id}`, {
+          method: "PATCH",
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify(newProject)
+        })
+    .then((resp) => resp.json())
+    .then(data => data)
+    return {id, newProject}
+
 })
 
 const initialState = {
@@ -57,11 +59,17 @@ const projectSlice = createSlice({
             state.projects.push(action.payload)
         })
         .addCase(deleteProject.fulfilled, (state, {payload}) => {
-            let index = state.projects.findIndex(({id}) => id === payload)
+            const index = state.projects.findIndex(({id}) => id === payload)
             state.projects.splice(index, 1)
         })
         .addCase(updateProject.fulfilled, (state, {payload}) => {
-
+            console.log(payload)
+            console.log(state.projects.findIndex((project) => project.id === payload.id))
+            const index = state.projects.findIndex((project) => project.id === payload.id)
+            state.projects[index] = {
+                ...state.projects[index],
+                ...payload.newProject
+            }
         })
     }
 })

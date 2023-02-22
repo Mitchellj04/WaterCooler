@@ -1,5 +1,7 @@
 import React, {useState} from 'react'
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material'
+import { useDispatch } from 'react-redux'
+import { updateProject } from '../../features/projects/ProjectSlice'
 
 const ProjectEdit = ({project, setProjects, hideEditProject, setHideEditProject}) => {
 
@@ -13,26 +15,31 @@ const ProjectEdit = ({project, setProjects, hideEditProject, setHideEditProject}
   const [projectEdit, setProjectEdit] = useState(project)
   const handleProjectClose = () => {setHideEditProject(false)}
   const handleChange = (e) => {setProjectEdit({...projectEdit, [e.target.name]: e.target.value})}
+  const dispatch = useDispatch()
 
 
   const fieldStyle = {
     margin: '5px auto'
-  }
-
-  const handleProjectEdit = (e) => {
-    e.preventDefault()
-    const newProject = {
+  }    
+  
+  const newProject = {
       title: projectEdit.title,
       description: projectEdit.description,
       github_link: projectEdit.github_link
     }
-    fetch(`/projects/${project.id}`, {
-      method: "PATCH",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify(newProject)
-    })
-    .then((resp) => console.log(resp))
-    .then((editedProject) => {setProjects((prevState) => [...prevState, editedProject])})
+
+  const handleProjectEdit = (e) => {
+    e.preventDefault()
+    let id = project.id
+    dispatch(updateProject({id, newProject}))
+    // fetch(`/projects/${project.id}`, {
+    //   method: "PATCH",
+    //   headers: {"Content-Type": "application/json"},
+    //   body: JSON.stringify(newProject)
+    // })
+    // .then((resp) => console.log(resp))
+    // .then((editedProject) => {setProjects((prevState) => [...prevState, editedProject])})
+    
   }
 
   return (
