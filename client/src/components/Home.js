@@ -28,7 +28,7 @@ const Home = ({currentUser, setErrorMain, posts, setPosts, categories}) => {
 
                 <Grid item xs={5}>
                     <Typography variant="h4">Posts</Typography>
-                    <PostMain posts={posts} setPosts={setPosts} currentUser={currentUser}/>
+                    <PostMain currentUser={currentUser}/>
                 </Grid>
 
     </Grid>

@@ -2,19 +2,28 @@ import React, {useState} from 'react'
 import { Box, Button, Grid, Paper, Typography } from '@mui/material'
 import EditIcon from '@mui/icons-material/Edit'
 import EditProfile from './EditProfile'
+import { useSelector } from 'react-redux'
 
-const UserProfile = ({currentUser, setCurrentUser}) => {
-    const [user, setUser] = useState(currentUser)
-    const [userPosts, setUserPosts] = useState(currentUser.posts)
-    const [userProjects, setUserProjects] = useState(currentUser.projects)
+const UserProfile = () => {
+    // const [user, setUser] = useState(currentUser)
+    // const [userPosts, setUserPosts] = useState(currentUser.posts)
+    // const [userProjects, setUserProjects] = useState(currentUser.projects)
     const [hideEditProfile, setHideEditProfile] = useState(false)
+
+    // REDUX 
+    const user = useSelector((state) => state.user.users)
+    const projects = useSelector((state) => state.user.users.projects)
+    const posts = useSelector((state) => state.user.users.posts)
+    // REDUX 
+    // FIX EDIT PROFILE USERSLICE
+    
 
     const handleProfileOpen = () => {setHideEditProfile(true)}
     
 
     console.log(user)
 
-    const listProjects = userProjects.map((project) => {
+    const listProjects = projects.map((project) => {
         return <Box key={project.id}>
             <Paper style={{backgroundColor: 'inherit', margin: 10}}>
                 <Typography>{project.title}</Typography>
@@ -25,7 +34,7 @@ const UserProfile = ({currentUser, setCurrentUser}) => {
         </Box>
     })
 
-    const listPosts = userPosts.map((project) => {
+    const listPosts = posts.map((project) => {
       return <Box key={project.id}>
           <Paper style={{backgroundColor: 'inherit', margin: 10}}>
               <Typography>{project.title}</Typography>
@@ -42,7 +51,7 @@ const UserProfile = ({currentUser, setCurrentUser}) => {
      <Box elevation="20" style={{padding: 100}}>
          <Typography variant='h4'>Profile</Typography>
          <Button className='task-button-edit' onClick={handleProfileOpen} startIcon={<EditIcon className='editButton'/>}></Button>
-         <EditProfile currentUser={currentUser} setCurrentUser={setCurrentUser} hideEditProfile={hideEditProfile} setHideEditProfile={setHideEditProfile}/>
+         {/* <EditProfile currentUser={currentUser} setCurrentUser={setCurrentUser} hideEditProfile={hideEditProfile} setHideEditProfile={setHideEditProfile}/> */}
        <Paper>
            <Typography variant='h6' style={{fontWeight: "Bold"}}>Username: </Typography>{user.username}
           <Typography variant='h6' style={{fontWeight: "Bold"}}>Fullname: </Typography>{user.name}

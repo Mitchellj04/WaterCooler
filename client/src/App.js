@@ -21,8 +21,8 @@ import { fetchCategory } from './features/category/CategorySlice';
 import { fetchUser } from './features/users/UserSlice';
 
 function App() {   
-  const [projects, setProjects] = useState([])
-  const [posts, setPosts] = useState([])
+  // const [projects, setProjects] = useState([])
+  // const [posts, setPosts] = useState([])
   
   const [errorMain, setErrorMain] = useState([])
   const [authenticate, setAuthenticate] = useState([])
@@ -47,30 +47,30 @@ function App() {
   // END PRACTICE 
   
 
-  useEffect(() => {
-    fetch('http://localhost:4000/user')
-    .then((resp) => {
-      if(resp.ok) {
-      resp.json().then((user) => setCurrentUser(user))
-      console.log(resp)}
-      else{
-        resp.json().then((error) => setAuthenticate(error))
-      }
-    })
-  }, [])
+  // useEffect(() => {
+  //   fetch('http://localhost:4000/user')
+  //   .then((resp) => {
+  //     if(resp.ok) {
+  //     resp.json().then((user) => setCurrentUser(user))
+  //     console.log(resp)}
+  //     else{
+  //       resp.json().then((error) => setAuthenticate(error))
+  //     }
+  //   })
+  // }, [])
 
-  useEffect(() => {
-    fetch("/projects")
-    .then((resp) => resp.json())
-    .then((data) => setProjects(data))
+  // useEffect(() => {
+  //   fetch("/projects")
+  //   .then((resp) => resp.json())
+  //   .then((data) => setProjects(data))
     
-  }, [])
+  // }, [])
 
-    useEffect(() => {
-        fetch('/posts')
-        .then((resp) => resp.json())
-        .then((data) => setPosts(data))
-    }, [])
+  //   useEffect(() => {
+  //       fetch('/posts')
+  //       .then((resp) => resp.json())
+  //       .then((data) => setPosts(data))
+  //   }, [])
 
     useEffect(() => {
       fetch("/categories")
@@ -91,14 +91,14 @@ function App() {
         <Header currentUser={currentUser} setCurrentUser={setCurrentUser} setErrorMain={setErrorMain}/>
         <div className="App" style={{backgroundColor:"#9f9f9f"}}>
         <Routes>
-          <Route exact path='/' element={<Home categories={categories} currentUser={currentUser} setErrorMain={setErrorMain} posts={posts} setPosts={setPosts}/>}/>
-          <Route path='/profile' element={<UserProfile setCurrentUser={setCurrentUser} currentUser={currentUser} /> } />
-          <Route path='/projects' element={<ProjectList />} />
-          <Route path='/posts' element={<PostList />} />
-          <Route path='/projects-all' element={<AllProjects projects={projects} currentUser={currentUser}/>}/>
-          <Route path='/posts-all' element={<AllPosts post={posts} currentUser={currentUser}/>}/>
+          <Route exact path='/' element={<Home categories={categories} currentUser={currentUser} setErrorMain={setErrorMain}/>}/>
+          <Route path='/profile' element={<UserProfile /> } />
+          <Route path='/projects' element={<ProjectList/>} />
+          <Route path='/posts' element={<PostList/>} />
+          <Route path='/projects-all' element={<AllProjects/>}/>
+          <Route path='/posts-all' element={<AllPosts currentUser={currentUser}/>}/>
           <Route path='/projects/:id' element={<ProjectItem />} />
-          <Route path='/create' element={<Create currentUser={currentUser} setProjects={setProjects} setPosts={setPosts} projects={projects} categories={categories}/>}/>
+          {/* <Route path='/create' element={<Create currentUser={currentUser} setProjects={setProjects} setPosts={setPosts} projects={projects} categories={categories}/>}/> */}
           <Route path='/login' element={<Login currentUser={currentUser} setCurrentUser={setCurrentUser} errorMain={errorMain} setErrorMain={setErrorMain}/>}/>
           <Route path='/categories/:type' element={<CategoryItem />} />
         </Routes>

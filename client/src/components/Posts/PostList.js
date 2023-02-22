@@ -5,17 +5,28 @@ import EditIcon from '@mui/icons-material/Edit'
 import PostEdit from './PostEdit';
 import Comment from '../Comment/Comment';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { useDispatch, useSelector } from 'react-redux';
+import { deletePost } from '../../features/posts/PostSlice';
 
-const PostList = ({post, posts, currentUser, setPosts}) => {
+const PostList = ({post}) => {
   const [postUser, setPostUser] = useState(post.user.username)
   const [category, setCategory] = useState(post.categories)
   const [comments, setComments] = useState(post.comments)
   const [hideEditPost, setHideEditPost] = useState(false)
-  // console.log(post)
+  const dispatch = useDispatch()
+
+  const currentUser = useSelector((state) => state.user.users)
+  
+  // REDUX 
+  const posts = useSelector((state) => state.post.posts)
+  // REDUX
+  // REPLACE SETPOSTS 
+  // FIX HANDLE DELETE POST 
+
 
   const handlePostOpen = () => {setHideEditPost(true)}
 
-  // console.log(comments)
+  
 
   const mapComments = comments.map((comment) => <Comment post={post} postUser={postUser} comment={comment} currentUser={currentUser} setComments={setComments}/>)
   const mapCategory = category.map((data) => {
@@ -33,24 +44,21 @@ function emptyComment (){
   }
 }
 
-const handleDeletePost = (deleted) => {
-  const filterDelete = posts.filter((postItem) => {
-    if (postItem.id !== deleted){
-      return postItem
-    }
-    else {
-      return null
-    }
-  });
-  setPosts(filterDelete)
-}
+// const handleDeletePost = (deleted) => {
+//   const filterDelete = posts.filter((postItem) => {
+//     if (postItem.id !== deleted){
+//       return postItem
+//     }
+//     else {
+//       return null
+//     }
+//   });
+//   // setPosts(filterDelete)
+// }
 
 function handleDelete(){
-fetch(`/posts/${post.id}`, {
-  method: "DELETE",
-  headers: {'Content-Type' : 'application/json'}
-})
-handleDeletePost(post.id)
+  console.log(post.id)
+  dispatch(deletePost(post.id))
 }
 
 function postEdit(){

@@ -21,6 +21,11 @@ tommy = User.create(username: "tommyling", name: "Tommy Xioma", password: "tommy
 # PROJECTS
 p1 = Project.create(title: "Ski-Buddy", description: "I am creating a project for north east skiers to be able to talk about mountains.", github_link: "ski-buddy/mitchellj04/github.com", user_id: justin.id)
 p2 = Project.create(title: "Gaming-AU", description: "This is a gaming website for Australia", github_link: "gaming-buddy/tommy/github.com", user_id: tommy.id)
+p3 = Project.create(title: "Ski-Buddy 1", description: "I am creating a project for north east skiers to be able to talk about mountains.", github_link: "ski-buddy/mitchellj04/github.com", user_id: justin.id)
+p4 = Project.create(title: "Ski-Buddy 2", description: "I am creating a project for north east skiers to be able to talk about mountains.", github_link: "ski-buddy/mitchellj04/github.com", user_id: justin.id)
+p5 = Project.create(title: "Ski-Buddy 3", description: "I am creating a project for north east skiers to be able to talk about mountains.", github_link: "ski-buddy/mitchellj04/github.com", user_id: justin.id)
+p6 = Project.create(title: "Ski-Buddy 4", description: "I am creating a project for north east skiers to be able to talk about mountains.", github_link: "ski-buddy/mitchellj04/github.com", user_id: justin.id)
+
 
 # POSTS 
 post = Post.create(title: "Need help with a fetch function?", description: "I have been trying to figure out how to fix my fetch function but I am unable to figure it out.", link: "github.com/ski-buddy/jmithell04", user_id: justin.id)

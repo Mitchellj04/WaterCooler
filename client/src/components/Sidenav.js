@@ -20,6 +20,8 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import FeedIcon from '@mui/icons-material/Feed';
 import DynamicFeedIcon from '@mui/icons-material/DynamicFeed';
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../features/users/UserSlice';
 
 const drawerWidth = 240;
 
@@ -33,10 +35,15 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
 
-function Sidenav({currentUser, setCurrentUser, setErrorMain}) {
+function Sidenav({ setErrorMain}) {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
   const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  const currentUser = useSelector((state) => state.user.users)
+
+  
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -47,15 +54,18 @@ function Sidenav({currentUser, setCurrentUser, setErrorMain}) {
   };
 
     //Delete currentUser (session/user)
-    function handleLogout (){
-      fetch('/logout', 
-       { method: "DELETE"})
-       .then((resp) => {
-        if (resp.ok){
-          setCurrentUser(null)
-        }
-       })
+    // function handleLogout (){
+    //   fetch('/logout', 
+    //    { method: "DELETE"})
+    //    .then((resp) => {
+    //     if (resp.ok){
+    //       setCurrentUser(null)
+    //     }
+    //    })
   
+    // }
+    function handleLogout(){
+      dispatch(logout())
     }
 
   const handleProfile = () => {

@@ -2,10 +2,12 @@ import { Box, Button, Grid, Typography } from '@mui/material'
 import React from 'react'
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit'
+import { useSelector } from 'react-redux';
 
-const AllProjects = ({projects, currentUser}) => {
+const AllProjects = () => {
 
-    console.log(projects)
+    const projects = useSelector((state) => state.project.projects)
+    const currentUser = useSelector((state) => state.user.users)
 
 
     function projectEdit(user){

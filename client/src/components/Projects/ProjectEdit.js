@@ -3,6 +3,13 @@ import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } 
 
 const ProjectEdit = ({project, setProjects, hideEditProject, setHideEditProject}) => {
 
+
+  //REPLACE SETPROJECTS
+
+
+
+
+
   const [projectEdit, setProjectEdit] = useState(project)
   const handleProjectClose = () => {setHideEditProject(false)}
   const handleChange = (e) => {setProjectEdit({...projectEdit, [e.target.name]: e.target.value})}

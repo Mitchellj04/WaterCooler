@@ -3,26 +3,29 @@ import React, {useState} from 'react'
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit'
 import PostEdit from './PostEdit';
+import { useSelector } from 'react-redux';
 
-const AllPosts = ({post, currentUser}) => {
+const AllPosts = ({currentUser}) => {
 
     const [hideEditPost, setHideEditPost] = useState(false)
+
+    const posts = useSelector((state) => state.post.posts)
    
   
     const handlePostOpen = () => {setHideEditPost(true)}
 
-    console.log(post)
+    
 
     function postEdit(user){
         if(currentUser.username === user){
           return <>
           <Button startIcon={<EditIcon className='editButton' onClick={handlePostOpen}/>}></Button>
           <Button startIcon={<DeleteIcon color="secondary" className="deleteButton"/>}></Button>
-          <PostEdit hideEditPost={hideEditPost} setHideEditPost={setHideEditPost} post={post}/>
+          <PostEdit hideEditPost={hideEditPost} setHideEditPost={setHideEditPost} posts={posts}/>
           </>
         }}
 
-    const displayAll = post.map((data) => {
+    const displayAll = posts.map((data) => {
         return <><Grid item xs={4} style={{marginTop: 20}} key={data.id}>
             <Box>
             <Typography variant='h6'>{data.title}</Typography>

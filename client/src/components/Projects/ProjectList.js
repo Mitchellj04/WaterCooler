@@ -5,15 +5,25 @@ import { useNavigate } from "react-router-dom";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit'
 import ProjectEdit from './ProjectEdit';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteProject } from '../../features/projects/ProjectSlice';
+import { del } from '../../features/projects/ProjectSlice';
 
-const ProjectList = ({project, projects, setProjects, currentUser, setErrorMain}) => {
+const ProjectList = ({project, setErrorMain}) => {
     const [category, setCategory] = useState(project.categories)
     const [projectUser, setProjectUser] = useState(project.user.username)
     const [hideEditProject, setHideEditProject] = useState(false)
     const navigate = useNavigate()
+    const dispatch = useDispatch()
 
-    
+    // REDUX 
+    const currentUser = useSelector((state) => state.user.users)
+    const projects = useSelector((state) => state.project.projects)
+    // REDUX
+    // REPLACE SET PROJECTS
+    // REPLACE PROJECTS 
+    // FIX PROJECT DELETE W/ SLICE
+
 
     const handleProjectOpen = () => {setHideEditProject(true)}
 
@@ -31,24 +41,8 @@ const ProjectList = ({project, projects, setProjects, currentUser, setErrorMain}
     }
     }
 
-    const handleDeleteProject = (deleted) => {
-        const filterDelete = projects.filter((projectItem) => {
-          if (projectItem.id !== deleted){
-            return projectItem
-          }
-          else {
-            return null
-          }
-        });
-        setProjects(filterDelete)
-    }
-
     function handleDelete(){
-      fetch(`/projects/${project.id}`, {
-        method: "DELETE",
-        headers: {'Content-Type' : 'application/json'}
-      })
-      handleDeleteProject(project.id)
+      dispatch(deleteProject(project.id))
     }
 
     function projectEdit(){
@@ -61,7 +55,7 @@ const ProjectList = ({project, projects, setProjects, currentUser, setErrorMain}
           return <>
           <Button startIcon={<EditIcon className='editButton' onClick={handleProjectOpen}/>}></Button>
           <Button startIcon={<DeleteIcon color="secondary" className="deleteButton" onClick={handleDelete}/>}></Button>
-          <ProjectEdit project={project} setProjects={setProjects} hideEditProject={hideEditProject} setHideEditProject={setHideEditProject}/>
+          <ProjectEdit project={project} hideEditProject={hideEditProject} setHideEditProject={setHideEditProject}/>
           </>
         }
     }

@@ -6,7 +6,7 @@ export const fetchPosts = createAsyncThunk('posts/fetchPosts', () => {
     .then((post) => post)
 })
 
-export const createPosts = createAsyncThunk('project/createPosts', ({newPost}) => {
+export const createPosts = createAsyncThunk('post/createPosts', ({newPost}) => {
     return fetch('/posts',{
         method: "POST",
         headers: {"Content-Type": "application/json"},
@@ -16,6 +16,14 @@ export const createPosts = createAsyncThunk('project/createPosts', ({newPost}) =
     .then((data) => console.log(data))
 })
 
+export const deletePost = createAsyncThunk('post/deletePost', (id) => {
+    fetch(`/posts/${id}`, {
+        method: "DELETE",
+        headers: {"Conent-Type": "application/json"}
+    })
+    return id
+})
+ 
 const initialState = {
     posts: [],
     errors: null
@@ -32,6 +40,10 @@ const postSlice = createSlice({
         })
         .addCase(createPosts.fulfilled, (state, action) => {
             state.posts.push(action.payload)
+        })
+        .addCase(deletePost.fulfilled, (state, {payload}) => {
+            let index = state.posts.findIndex(({id}) => id === payload)
+            state.posts.splice(index, 1)
         })
     }
 })

@@ -1,6 +1,7 @@
 import { Paper, Box, Grid, TextField, Button, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { signup } from '../../features/users/UserSlice'
 
 const SignUp = () => {
 
@@ -15,7 +16,12 @@ const SignUp = () => {
   const [fullname, setFullName] = useState('')
   const [age, setAge] = useState('')
   const [password, setPassword] = useState('')
-
+   const newUser = {
+      username, 
+      name: fullname,
+      password,
+      age
+    }
 
   const fieldStyle = {
     margin: '5px auto'
@@ -29,12 +35,7 @@ const SignUp = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    // const user = {
-    //   username, 
-    //   name: fullname,
-    //   password,
-    //   age
-    // }
+ 
     fetch('/users', {
       method: "POST",
       headers: {"Content-Type": "Application/json"},
@@ -46,7 +47,7 @@ const SignUp = () => {
 
   const handleSubmitRedux = (e) => {
     e.preventDefault()
-    dispatch()
+    dispatch(signup(newUser))
   }
 
   return (
@@ -55,7 +56,7 @@ const SignUp = () => {
       <Box>
         <Paper elevation={20} style={paperStyle}>
           <Typography>SignUp</Typography>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmitRedux}>
             <TextField 
               fullWidth 
               label="username"
