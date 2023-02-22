@@ -23,6 +23,17 @@ export const deletePost = createAsyncThunk('post/deletePost', (id) => {
     })
     return id
 })
+
+export const updatePost = createAsyncThunk('post/updatePost', ({id, newPost}) => {
+    fetch(`/posts/${id}`, {
+        method: "PATCH",
+        headers:{ "Content-Type":"application/json"},
+        body: JSON.stringify(newPost)
+    })
+    .then((resp) => resp.json)
+    .then((post) => post)
+    return {id, newPost}
+})
  
 const initialState = {
     posts: [],
@@ -44,6 +55,10 @@ const postSlice = createSlice({
         .addCase(deletePost.fulfilled, (state, {payload}) => {
             let index = state.posts.findIndex(({id}) => id === payload)
             state.posts.splice(index, 1)
+        })
+        .addCase(updatePost.fulfilled, (state, {payload}) => {
+            let index = state.posts.findIndex((post) => post.id === payload.id)
+            
         })
     }
 })

@@ -3,7 +3,7 @@ import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } 
 import { useDispatch } from 'react-redux'
 import { updateProject } from '../../features/projects/ProjectSlice'
 
-const ProjectEdit = ({project, setProjects, hideEditProject, setHideEditProject}) => {
+const ProjectEdit = ({project, hideEditProject, setHideEditProject}) => {
 
 
   //REPLACE SETPROJECTS
@@ -32,14 +32,7 @@ const ProjectEdit = ({project, setProjects, hideEditProject, setHideEditProject}
     e.preventDefault()
     let id = project.id
     dispatch(updateProject({id, newProject}))
-    // fetch(`/projects/${project.id}`, {
-    //   method: "PATCH",
-    //   headers: {"Content-Type": "application/json"},
-    //   body: JSON.stringify(newProject)
-    // })
-    // .then((resp) => console.log(resp))
-    // .then((editedProject) => {setProjects((prevState) => [...prevState, editedProject])})
-    
+    setHideEditProject(false)
   }
 
   return (

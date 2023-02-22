@@ -1,12 +1,14 @@
 import { Alert, Box, Button, Grid, Paper, TextField, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router'
 import { login } from '../../features/users/UserSlice'
 
 const LoginForm = ({setCurrentUser, setErrorMain, errorMain}) => {
 
     //REDUX
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const user = useSelector((state) => state.user.users)
     console.log(user)
 
@@ -54,6 +56,7 @@ const LoginForm = ({setCurrentUser, setErrorMain, errorMain}) => {
     const handleSubmitRedux = (e) => {
         e.preventDefault()
         dispatch(login(userData))
+        navigate('/')
     }
 
 
