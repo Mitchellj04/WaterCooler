@@ -1,12 +1,14 @@
 import { Box, Button, Grid, Paper } from '@mui/material'
 import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 
 
-const CategoryMain = ({categories}) => {
+const CategoryMain = () => {
 
 
   const [selected, setSelected] = useState('')
+  const categories = useSelector((state) => state.category.categories)
   const navigate = useNavigate()
 
 

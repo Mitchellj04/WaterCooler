@@ -23,12 +23,13 @@ const CategoryItem = () => {
       setCategoryPosts(data[0].posts)})
   },[type])
 
+  console.log(type)
   console.log(categoryItem)
   console.log(categoryProject)
 
  
-  const mapProjects = categoryProject.map((projects) => <CategoryProject projects={projects} />)
-  const mapPosts = categoryPosts.map((post) => <CategoryPost post={post}/>)
+  const mapProjects = categoryProject.map((projects) => <CategoryProject key={projects.id} projects={projects} />)
+  const mapPosts = categoryPosts.map((post) => <CategoryPost key={post.id} post={post}/>)
 
   const boxStyle ={
     margin: 20

@@ -15,6 +15,7 @@ skip_before_action :authorize, only: :index
     def create 
         project = Project.create!(project_params)
         render json: project, status: :created
+        tags = Tagging.create({tag_params, project_id: project.id})
     end
 
     def update 
@@ -39,7 +40,11 @@ skip_before_action :authorize, only: :index
         params.permit(:title, :description, :github_link, :user_id)
     end
 
+    def tag_params
+        params.permit(:category_id)
+    end
+
     def project_error
-        render json: {errors: "Could not create new project"}
+        render json: {errors: ["Could not create new project"]}
     end
 end

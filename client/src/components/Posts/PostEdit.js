@@ -1,32 +1,38 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material'
 import React, {useState} from 'react'
+import { useDispatch } from 'react-redux'
+import { updatePost } from '../../features/posts/PostSlice'
 
 const PostEdit =({post, hideEditPost, setHideEditPost}) => {
 
   const [postEdit, setPostEdit] = useState(post)
   const handlePostClose = () => {setHideEditPost(false)}
   const handleChange = (e) => {setPostEdit({...postEdit, [e.target.name]: e.target.value})}
+  const dispatch = useDispatch()
 
 
 
   const fieldStyle = {
     margin: '5px auto'
   }
-
-  const handlePostEdit = (e) => {
-    e.preventDefault()
-    const newPost = {
+    
+  const newPost = {
       title: postEdit.title,
       description: postEdit.description,
       github_link: postEdit.link
-    }
-    fetch(`/posts/${post.id}`, {
-      method: "PATCH",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify(newPost)
-    })
-    .then((resp) => console.log(resp))
-    .then((editedPost) => console.log(editedPost))
+  }
+  const handlePostEdit = (e) => {
+    e.preventDefault()
+    let id = post.id
+    dispatch(updatePost({id, newPost}))
+    setHideEditPost(false)
+    // fetch(`/posts/${post.id}`, {
+    //   method: "PATCH",
+    //   headers: {"Content-Type": "application/json"},
+    //   body: JSON.stringify(newPost)
+    // })
+    // .then((resp) => console.log(resp))
+    // .then((editedPost) => console.log(editedPost))
   }
 
   return (

@@ -8,14 +8,14 @@ export const fetchProjects = createAsyncThunk('project/fetchProjects', () => {
 })
 
 // CREATE NEW PROJECT
-export const createProjects = createAsyncThunk('project/createProjects', ({newProject}) => {
-    return fetch('/projects',{
+export const createProjects = createAsyncThunk('project/createProjects', ({title, description, github_link, user_id}, {category_id, project_id}) => {
+   return fetch('/projects',{
         method: "POST",
         headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({newProject})
+        body: JSON.stringify({title, description, github_link, user_id}, {category_id, project_id})
     })
-    .then((resp) => console.log(resp))
-    .then((data) => console.log(data))
+    .then((resp) => resp.json())
+    .then((data) => data)
 })
 
 // DELETE INDIVIDUAL PROJECT
@@ -32,7 +32,7 @@ export const updateProject = createAsyncThunk('project/updateProject', ({id, new
     fetch(`/projects/${id}`, {
           method: "PATCH",
           headers: {"Content-Type": "application/json"},
-          body: JSON.stringify(newProject)
+          body: JSON.stringify({newProject})
         })
     .then((resp) => resp.json())
     .then(data => data)
@@ -42,7 +42,7 @@ export const updateProject = createAsyncThunk('project/updateProject', ({id, new
 
 const initialState = {
     projects: [],
-    errors: null
+    errors: []
 }
 
 const projectSlice = createSlice({
@@ -53,10 +53,16 @@ const projectSlice = createSlice({
         builder
         .addCase(fetchProjects.fulfilled, (state, action) => {
             state.projects = action.payload
-           
         })
         .addCase(createProjects.fulfilled, (state, action) => {
-            state.projects.push(action.payload)
+            if(action.payload.errors){
+                console.log(state.errors)
+                state.errors = action.payload
+            }
+            else{
+              state.projects.push(action.payload)  
+            }
+            
         })
         .addCase(deleteProject.fulfilled, (state, {payload}) => {
             const index = state.projects.findIndex(({id}) => id === payload)

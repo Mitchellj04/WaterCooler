@@ -6,7 +6,7 @@ import PostMain from './Posts/PostMain';
 import ProjectMain from './ProjectMain';
 import Sidenav from './Sidenav';
 
-const Home = ({currentUser, setErrorMain, posts, setPosts, categories}) => {
+const Home = ({currentUser, setErrorMain, categories}) => {
 
   // console.log(projects)
 
@@ -19,7 +19,7 @@ const Home = ({currentUser, setErrorMain, posts, setPosts, categories}) => {
     <Grid container style={{paddingTop: 100}}> 
         <Grid item xs={2}>
             <Typography variant="h4">Categories</Typography>
-            <CategoryMain categories={categories}/>
+            <CategoryMain />
         </Grid>
                 <Grid item xs={5}>
                     <Typography variant="h4" style={{paddingBottom:25}}>Projects</Typography>

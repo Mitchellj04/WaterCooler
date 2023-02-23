@@ -1,12 +1,17 @@
 import { Box, Button, Grid, Paper, TextField, Typography } from '@mui/material'
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { createPosts } from '../../features/posts/PostSlice'
 
-const CreatePost = ({currentUser, setPosts}) => {
+const CreatePost = () => {
 
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const [link, setLink] = useState('')
-    const [userId, setUserId] = useState('')
+    // const [userId, setUserId] = useState('')
+    const currentUser = useSelector((state) => state.user.users)
+    const dispatch = useDispatch()
+
 
     const fieldStyle = {
         margin: '5px auto'
@@ -16,10 +21,8 @@ const CreatePost = ({currentUser, setPosts}) => {
         width: 400, 
         margin: '100px auto'
     }
-
-    const handlePostSubmit = (e) => {
-        e.preventDefault()
-        const newPost = {
+     
+    const newPost = {
             title,
             description, 
             link, 
@@ -27,13 +30,17 @@ const CreatePost = ({currentUser, setPosts}) => {
             user: currentUser
 
         }
-        fetch('/posts', {
-            method: "POST",
-            headers: {"Content-Type":"Application/json"},
-            body: JSON.stringify(newPost)
-        })
-        .then((resp) => console.log(resp))
-        .then((post) => console.log(post))
+
+    const handlePostSubmit = (e) => {
+        e.preventDefault()
+        dispatch(createPosts(newPost))
+        // fetch('/posts', {
+        //     method: "POST",
+        //     headers: {"Content-Type":"Application/json"},
+        //     body: JSON.stringify(newPost)
+        // })
+        // .then((resp) => console.log(resp))
+        // .then((post) => console.log(post))
     }
     
   return (

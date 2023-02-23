@@ -6,8 +6,14 @@ export const fetchCategory = createAsyncThunk('category/fetchCategory', () => {
     .then((category) => category)
 })
 
+export const fetchCategoryType = createAsyncThunk('category/fetchCategoryType', (type) => {
+    return fetch(`/categories/${type}`)
+    .then((resp) => resp.json())
+    .then((category) => category)
+})
+
 const initialState = {
-    category: null,
+    categories: [],
     errors: null
 }
 
@@ -18,7 +24,10 @@ const categorySlice = createSlice({
     extraReducers: (builder) => {
         builder
         .addCase(fetchCategory.fulfilled, (state, action) => {
-            state.category = action.payload
+            state.categories = action.payload
+        })
+        .addCase(fetchCategoryType.fulfilled, (state, {payload}) => {
+            state.categories.filter((category) => category.code === payload)
         })
     }
 })

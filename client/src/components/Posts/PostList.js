@@ -28,7 +28,7 @@ const PostList = ({post}) => {
 
   
 
-  const mapComments = comments.map((comment) => <Comment post={post} postUser={postUser} comment={comment} currentUser={currentUser} setComments={setComments}/>)
+  const mapComments = comments.map((comment) => <Comment key={comment.id} post={post} postUser={postUser} comment={comment} currentUser={currentUser} setComments={setComments}/>)
   const mapCategory = category.map((data) => {
     return <Button variant='outlined' key={data.id}>{data.code}</Button>
 })

@@ -6,14 +6,14 @@ export const fetchPosts = createAsyncThunk('posts/fetchPosts', () => {
     .then((post) => post)
 })
 
-export const createPosts = createAsyncThunk('post/createPosts', ({newPost}) => {
+export const createPosts = createAsyncThunk('post/createPosts', ({title, description, link, user_id}) => {
     return fetch('/posts',{
         method: "POST",
         headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({newPost})
+        body: JSON.stringify({title, description, link, user_id})
     })
-    .then((resp) => console.log(resp))
-    .then((data) => console.log(data))
+    .then((resp) => resp.json())
+    .then((data) => data)
 })
 
 export const deletePost = createAsyncThunk('post/deletePost', (id) => {
@@ -50,7 +50,15 @@ const postSlice = createSlice({
             state.posts = action.payload
         })
         .addCase(createPosts.fulfilled, (state, action) => {
-            state.posts.push(action.payload)
+            if(action.payload.errors){
+                console.log(action.payload)
+                state.errors = action.payload
+            }
+            else{
+                console.log(action.payload)
+                state.posts.push(action.payload)
+            }
+            
         })
         .addCase(deletePost.fulfilled, (state, {payload}) => {
             let index = state.posts.findIndex(({id}) => id === payload)
@@ -58,7 +66,10 @@ const postSlice = createSlice({
         })
         .addCase(updatePost.fulfilled, (state, {payload}) => {
             let index = state.posts.findIndex((post) => post.id === payload.id)
-            
+            state.posts[index] = {
+                ...state.posts[index],
+                ...payload.newPost
+            }
         })
     }
 })

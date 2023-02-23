@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+    rescue_from ActiveRecord::RecordInvalid, with: :post_error
     skip_before_action :authorize, only: :index
 
     def index
@@ -33,6 +34,10 @@ class PostsController < ApplicationController
 
     def find_post
         Post.find(params[:id])
+    end
+
+    def post_error
+        render json: {errors: ["Could not create new post"]}
     end
 
     def post_params

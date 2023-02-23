@@ -42,7 +42,6 @@ function App() {
   }, [])
 
   console.log(reduxProjects)
-  console.log(reduxCurrentUser)
 
   // END PRACTICE 
   
@@ -72,11 +71,11 @@ function App() {
   //       .then((data) => setPosts(data))
   //   }, [])
 
-    useEffect(() => {
-      fetch("/categories")
-      .then((resp) => resp.json())
-      .then((data) => setCategory(data))
-    }, [])  
+    // useEffect(() => {
+    //   fetch("/categories")
+    //   .then((resp) => resp.json())
+    //   .then((data) => setCategory(data))
+    // }, [])  
 
 
   
@@ -91,14 +90,14 @@ function App() {
         <Header currentUser={currentUser} setCurrentUser={setCurrentUser} setErrorMain={setErrorMain}/>
         <div className="App" style={{backgroundColor:"#9f9f9f"}}>
         <Routes>
-          <Route exact path='/' element={<Home categories={categories} currentUser={currentUser} setErrorMain={setErrorMain}/>}/>
+          <Route exact path='/' element={<Home currentUser={currentUser} setErrorMain={setErrorMain}/>}/>
           <Route path='/profile' element={<UserProfile /> } />
           <Route path='/projects' element={<ProjectList/>} />
           <Route path='/posts' element={<PostList/>} />
           <Route path='/projects-all' element={<AllProjects/>}/>
           <Route path='/posts-all' element={<AllPosts currentUser={currentUser}/>}/>
           <Route path='/projects/:id' element={<ProjectItem />} />
-          {/* <Route path='/create' element={<Create currentUser={currentUser} setProjects={setProjects} setPosts={setPosts} projects={projects} categories={categories}/>}/> */}
+          <Route path='/create' element={<Create currentUser={currentUser} categories={categories}/>}/>
           <Route path='/login' element={<Login currentUser={currentUser} setCurrentUser={setCurrentUser} errorMain={errorMain} setErrorMain={setErrorMain}/>}/>
           <Route path='/categories/:type' element={<CategoryItem />} />
         </Routes>
