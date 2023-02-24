@@ -10,6 +10,8 @@ const PostMain = ({currentUser}) => {
   // MAP POSTS TO HOME
   const mapPosts = postRedux.map((post) => <PostList post={post} key={post.id} currentUser={currentUser}/>)
 
+  const post = postRedux.filter((post) => post.id == 90)
+  // console.log(post[0].comments)
   return (
     <div>
       {mapPosts}

@@ -20,6 +20,7 @@ import { fetchPosts } from './features/posts/PostSlice';
 import { fetchCategory } from './features/category/CategorySlice';
 import { fetchUser } from './features/users/UserSlice';
 
+
 function App() {   
   // const [projects, setProjects] = useState([])
   // const [posts, setPosts] = useState([])
@@ -39,6 +40,7 @@ function App() {
     dispatch(fetchProjects())
     dispatch(fetchPosts())
     dispatch(fetchCategory())
+
   }, [])
 
   console.log(reduxProjects)

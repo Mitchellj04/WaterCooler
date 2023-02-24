@@ -1,29 +1,32 @@
 import React, {useState} from 'react'
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material'
+import { useDispatch, useSelector } from 'react-redux'
+// import { createComment } from '../../features/comment/CommentSlice'
+import { postComment } from '../../features/posts/PostSlice'
+import { createComment } from '../../features/comment/CommentSlice'
 
-const CreateComment = ({hideCommentPost, setHideCommentPost, post, currentUser, setComments}) => {
+const CreateComment = ({hideCommentPost, setHideCommentPost, post}) => {
+
 
   const [answer, setAnswer] = useState('')
   const handleCommentClose = () => {setHideCommentPost(false)}
-  // const handleChange = (e) => {setCommentCreate({...commentCreate, [e.target.name]: e.target.value})}
 
-
-  const handleCommentCreate = (e) => {
-    e.preventDefault()
+  // REDUX
+  const currentUser = useSelector((state) => state.user.users)
+  const dispatch = useDispatch()
+  
+  // FETCH PARAMS
     const comment = {
       post_id: post.id,
       user_id: currentUser.id,
       answer
-
     }
-    // fetch('/comments', {
-    //   method: "POST",
-    //   headers: {"Content-Type": "Application/json"},
-    //   body: JSON.stringify(comment)
-    // })
-    // .then((resp) => resp.json())
-    // .then((comment) => setComments((prevState) => [...prevState, comment]))
-    // setHideCommentPost(false)
+
+  // CREATE NEW COMMENT 
+  const handleCommentCreate = (e) => {
+    e.preventDefault()
+    console.log(comment)
+    dispatch(createComment(comment))
   }
 
   return (

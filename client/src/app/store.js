@@ -3,13 +3,15 @@ import UserSlice from "../features/users/UserSlice";
 import ProjectSlice from "../features/projects/ProjectSlice";
 import PostSlice from "../features/posts/PostSlice";
 import CategorySlice from "../features/category/CategorySlice";
+import CommentSlice from "../features/comment/CommentSlice";
 
 const store =  configureStore({
     reducer: {
         user: UserSlice,
         project: ProjectSlice,
         post: PostSlice,
-        category: CategorySlice
+        category: CategorySlice,
+        comment: CommentSlice
     }
 })
 

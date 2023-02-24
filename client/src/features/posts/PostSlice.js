@@ -34,6 +34,7 @@ export const updatePost = createAsyncThunk('post/updatePost', ({id, newPost}) =>
     .then((post) => post)
     return {id, newPost}
 })
+
  
 const initialState = {
     posts: [],
