@@ -1,6 +1,8 @@
 import { Box, Grid, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router'
+import { fetchCategoryType } from '../../features/category/CategorySlice'
 import CategoryPost from './CategoryPost'
 import CategoryProject from './CategoryProject'
 
@@ -11,16 +13,21 @@ const CategoryItem = () => {
   const [categoryPosts, setCategoryPosts] = useState([])
   const [categoryName, setCategoryName] = useState()
   const {type} = useParams()
+  const dispatch = useDispatch()
+  const categorys = useSelector((state) => state.category.categories)
 
+  console.log(categorys)
   // console.log(type)
   useEffect(() => {
-    fetch(`/categories_filter/${type}`)
-    .then((resp) => resp.json())
-    .then((data) => {
-      setCategoryItem(data[0])
-      setCategoryProject(data[0].projects)
-      setCategoryName(data[0].code)
-      setCategoryPosts(data[0].posts)})
+    console.log(type)
+    dispatch(fetchCategoryType(type))
+    // fetch(`/categories_filter/${type}`)
+    // .then((resp) => resp.json())
+    // .then((data) => {
+    //   setCategoryItem(data[0])
+    //   setCategoryProject(data[0].projects)
+    //   setCategoryName(data[0].code)
+    //   setCategoryPosts(data[0].posts)})
   },[type])
 
   console.log(type)

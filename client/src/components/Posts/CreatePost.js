@@ -8,7 +8,8 @@ const CreatePost = () => {
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const [link, setLink] = useState('')
-    // const [userId, setUserId] = useState('')
+
+    // REDUX
     const currentUser = useSelector((state) => state.user.users)
     const dispatch = useDispatch()
 
@@ -34,13 +35,6 @@ const CreatePost = () => {
     const handlePostSubmit = (e) => {
         e.preventDefault()
         dispatch(createPosts(newPost))
-        // fetch('/posts', {
-        //     method: "POST",
-        //     headers: {"Content-Type":"Application/json"},
-        //     body: JSON.stringify(newPost)
-        // })
-        // .then((resp) => console.log(resp))
-        // .then((post) => console.log(post))
     }
     
   return (

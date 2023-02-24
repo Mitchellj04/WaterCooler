@@ -21,18 +21,12 @@ const PostEdit =({post, hideEditPost, setHideEditPost}) => {
       description: postEdit.description,
       github_link: postEdit.link
   }
+  
   const handlePostEdit = (e) => {
     e.preventDefault()
     let id = post.id
     dispatch(updatePost({id, newPost}))
     setHideEditPost(false)
-    // fetch(`/posts/${post.id}`, {
-    //   method: "PATCH",
-    //   headers: {"Content-Type": "application/json"},
-    //   body: JSON.stringify(newPost)
-    // })
-    // .then((resp) => console.log(resp))
-    // .then((editedPost) => console.log(editedPost))
   }
 
   return (

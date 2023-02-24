@@ -3,6 +3,7 @@ import React from 'react'
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit'
 import { useSelector } from 'react-redux';
+import CategoryMain from '../Categories/CategoryMain';
 
 const AllProjects = () => {
 
@@ -39,9 +40,8 @@ const AllProjects = () => {
     <Grid container style={{paddingTop: 50}}>
         
         <Grid item xs={3} >
-            <Typography variant='h4'>
-                Categories
-            </Typography>
+        <Typography variant="h4">Categories</Typography>
+        <CategoryMain />
         </Grid>
         {displayAll}
     </Grid>

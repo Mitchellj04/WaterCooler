@@ -19,9 +19,6 @@ const PostList = ({post}) => {
   
   // REDUX 
   const posts = useSelector((state) => state.post.posts)
-  // REDUX
-  // REPLACE SETPOSTS 
-  // FIX HANDLE DELETE POST 
 
 
   const handlePostOpen = () => {setHideEditPost(true)}
@@ -43,18 +40,6 @@ function emptyComment (){
     return <Alert severity='info'>Please add a comment to answer</Alert>
   }
 }
-
-// const handleDeletePost = (deleted) => {
-//   const filterDelete = posts.filter((postItem) => {
-//     if (postItem.id !== deleted){
-//       return postItem
-//     }
-//     else {
-//       return null
-//     }
-//   });
-//   // setPosts(filterDelete)
-// }
 
 function handleDelete(){
   console.log(post.id)

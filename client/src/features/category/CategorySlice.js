@@ -7,7 +7,7 @@ export const fetchCategory = createAsyncThunk('category/fetchCategory', () => {
 })
 
 export const fetchCategoryType = createAsyncThunk('category/fetchCategoryType', (type) => {
-    return fetch(`/categories/${type}`)
+    return fetch(`/categories_filter/${type}`)
     .then((resp) => resp.json())
     .then((category) => category)
 })
@@ -27,7 +27,8 @@ const categorySlice = createSlice({
             state.categories = action.payload
         })
         .addCase(fetchCategoryType.fulfilled, (state, {payload}) => {
-            state.categories.filter((category) => category.code === payload)
+            console.log(payload)
+            return state.categories.filter((category) => category.code === payload[0].code)
         })
     }
 })

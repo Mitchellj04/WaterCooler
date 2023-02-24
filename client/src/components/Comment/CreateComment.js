@@ -16,14 +16,14 @@ const CreateComment = ({hideCommentPost, setHideCommentPost, post, currentUser, 
       answer
 
     }
-    fetch('/comments', {
-      method: "POST",
-      headers: {"Content-Type": "Application/json"},
-      body: JSON.stringify(comment)
-    })
-    .then((resp) => resp.json())
-    .then((comment) => setComments((prevState) => [...prevState, comment]))
-    setHideCommentPost(false)
+    // fetch('/comments', {
+    //   method: "POST",
+    //   headers: {"Content-Type": "Application/json"},
+    //   body: JSON.stringify(comment)
+    // })
+    // .then((resp) => resp.json())
+    // .then((comment) => setComments((prevState) => [...prevState, comment]))
+    // setHideCommentPost(false)
   }
 
   return (

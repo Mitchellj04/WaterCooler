@@ -1,5 +1,6 @@
 class ProjectsController < ApplicationController
 rescue_from ActiveRecord::RecordInvalid, with: :project_error
+wrap_parameters format: []
 skip_before_action :authorize, only: :index
 
     def index 
@@ -13,9 +14,10 @@ skip_before_action :authorize, only: :index
     end
 
     def create 
-        project = Project.create!(project_params)
+        project = Project.create!(project_params)    
+        tags = Tagging.create!(tag_params.merge(project_id: project.id))  
         render json: project, status: :created
-        tags = Tagging.create({tag_params, project_id: project.id})
+        # render json: tags, status: :created
     end
 
     def update 

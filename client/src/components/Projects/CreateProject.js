@@ -47,11 +47,14 @@ const newProject = {
         github_link: link,
         user_id: currentUser.id
     }
+const tagProject = {
+      category_id: categories
+}
 
   const handleProjectSubmit = (e) => {
-      console.log(newProject, categories)
+      console.log(tagProject)
       e.preventDefault()
-      dispatch(createProjects(newProject))
+      dispatch(createProjects(newProject, tagProject))
   }
 
   return (

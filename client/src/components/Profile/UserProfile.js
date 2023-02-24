@@ -1,27 +1,31 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import { Box, Button, Grid, Paper, Typography } from '@mui/material'
 import EditIcon from '@mui/icons-material/Edit'
 import EditProfile from './EditProfile'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchUser } from '../../features/users/UserSlice'
 
 const UserProfile = () => {
-    // const [user, setUser] = useState(currentUser)
-    // const [userPosts, setUserPosts] = useState(currentUser.posts)
-    // const [userProjects, setUserProjects] = useState(currentUser.projects)
+
     const [hideEditProfile, setHideEditProfile] = useState(false)
+    const dispatch = useDispatch()
 
     // REDUX 
     const user = useSelector((state) => state.user.users)
-    const projects = useSelector((state) => state.user.users.projects)
-    const posts = useSelector((state) => state.user.users.posts)
+    const [projects, setProjects] = useState(user.projects)
+    const [posts, setPosts] = useState(user.posts)
+    // const projects = useSelector((state) => state.user.users.projects)
+    // const posts = useSelector((state) => state.user.users.posts)
     // REDUX 
     // FIX EDIT PROFILE USERSLICE
     
-
+   
     const handleProfileOpen = () => {setHideEditProfile(true)}
     
 
     console.log(user)
+
+
 
     const listProjects = projects.map((project) => {
         return <Box key={project.id}>
@@ -51,7 +55,7 @@ const UserProfile = () => {
      <Box elevation="20" style={{padding: 100}}>
          <Typography variant='h4'>Profile</Typography>
          <Button className='task-button-edit' onClick={handleProfileOpen} startIcon={<EditIcon className='editButton'/>}></Button>
-         {/* <EditProfile currentUser={currentUser} setCurrentUser={setCurrentUser} hideEditProfile={hideEditProfile} setHideEditProfile={setHideEditProfile}/> */}
+         <EditProfile hideEditProfile={hideEditProfile} setHideEditProfile={setHideEditProfile}/>
        <Paper>
            <Typography variant='h6' style={{fontWeight: "Bold"}}>Username: </Typography>{user.username}
           <Typography variant='h6' style={{fontWeight: "Bold"}}>Fullname: </Typography>{user.name}

@@ -4,10 +4,11 @@ import PostList from './PostList'
 
 const PostMain = ({currentUser}) => {
 
+  // REDUX
   const postRedux = useSelector((state) => state.post.posts)
-  // console.log(postRedux)
 
-    const mapPosts = postRedux.map((post) => <PostList post={post} key={post.id} currentUser={currentUser}/>)
+  // MAP POSTS TO HOME
+  const mapPosts = postRedux.map((post) => <PostList post={post} key={post.id} currentUser={currentUser}/>)
 
   return (
     <div>
