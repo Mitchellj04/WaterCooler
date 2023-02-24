@@ -16,6 +16,14 @@ export const createComment = createAsyncThunk('comments/createComment', (comment
     .then((comments) => comments)
 })
 
+export const deleteComment = createAsyncThunk('comment/deleteComment', ({id}) => {
+    fetch(`/comments/${id}`, {
+        method: "DELETE",
+        headers: {"Conent-Type": "application/json"}
+    })
+    return id
+})
+
 
 const initialState = {
     comments: [],

@@ -2,10 +2,7 @@ import { Box, Button, Paper, Typography } from '@mui/material'
 import React, {useState} from 'react'
 import { useSelector } from 'react-redux';
 
-const Comment = ({comment, postUser, post, setComments}) => {
-
-
-  const currentUser = useSelector((state) => state.user.users)
+const Comment = ({comment, postUser, post}) => {
 
 
   function userComment (){

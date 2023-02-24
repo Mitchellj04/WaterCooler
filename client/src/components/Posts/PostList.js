@@ -13,15 +13,20 @@ import { fetchComment } from '../../features/comment/CommentSlice';
 
 
 const PostList = ({ post }) => {
+  
+  const dispatch = useDispatch()
   const [postUser, setPostUser] = useState(post.user.username)
   const [category, setCategory] = useState(post.categories)
   const [comments, setComments] = useState(post.comments)
-  const [hideEditPost, setHideEditPost] = useState(false)
-  const dispatch = useDispatch()
 
+  // HANDLE OPEN EDIT MENU 
+  const [hideEditPost, setHideEditPost] = useState(false)
+  const handlePostOpen = () => { setHideEditPost(true) }
   const [hideCommentPost, setHideCommentPost] = useState(false)
   const handleCommentOpen = () => { setHideCommentPost(true) }
 
+
+  // FETCH ALL COMMENTS
   useEffect(() => {
     dispatch(fetchComment())
   }, [])
@@ -32,17 +37,12 @@ const PostList = ({ post }) => {
   const comment = useSelector((state) => state.comment.comments)
 
 
-  console.log(comment)
-
-  const handlePostOpen = () => { setHideEditPost(true) }
-
-
-
+  // MAP COMMENTS TO POST
   const mapComments = comment.map((comment) => <Comment key={comment.id} post={post} postUser={postUser} comment={comment} currentUser={currentUser} setComments={setComments} />)
-  const mapCategory = category.map((data) => {
-    return <Button variant='outlined' key={data.id}>{data.code}</Button>
-  })
+  // MAP CATEGORY TO POST
+  const mapCategory = category.map((data) => { return <Button variant='outlined' key={data.id}>{data.code}</Button> })
 
+  // HANDLE EMPTY COMMENT ALERT
   function emptyComment() {
     if (comments.length > 0) {
       return <>
@@ -54,11 +54,13 @@ const PostList = ({ post }) => {
     }
   }
 
+  // POST DELETE 
   function handleDelete() {
     console.log(post.id)
     dispatch(deletePost(post.id))
   }
 
+  // HANDLE IF USER IS LOGGED IN ENABLE BUTTONS
   function postEdit() {
     if (currentUser === null) {
       return <>
@@ -74,7 +76,7 @@ const PostList = ({ post }) => {
     }
   }
 
-
+  // HANDLE IF USER IS LOGGED IN ENABLE BUTTONS
   function createComment() {
     if (currentUser === null) {
       return <></>
