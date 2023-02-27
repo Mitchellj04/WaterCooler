@@ -1,14 +1,18 @@
 import { Box, Button, Paper, Typography } from '@mui/material'
 import React, {useState} from 'react'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteComment } from '../../features/comment/CommentSlice';
 
 const Comment = ({comment, postUser, post}) => {
 
+  const dispatch = useDispatch()
+
+  const handleDelete = () => { dispatch(deleteComment(comment.id))}
 
   function userComment (){
     if(postUser === comment.user.username){
       return <><Button>Edit</Button>
-        <Button>Delete</Button>
+        <Button onClick={handleDelete}>Delete</Button>
       </>
     }
     else{

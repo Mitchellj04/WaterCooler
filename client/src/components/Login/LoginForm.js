@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
 import { login } from '../../features/users/UserSlice'
 
-const LoginForm = ({setCurrentUser, setErrorMain, errorMain}) => {
+const LoginForm = ({errorMain, setErrorMain}) => {
 
     //REDUX
     const dispatch = useDispatch()
@@ -19,9 +19,8 @@ const LoginForm = ({setCurrentUser, setErrorMain, errorMain}) => {
         username,
         password
     }
-    // const [errors, setErrors] = useState([])
 
-
+    // STYLE
     const fieldStyle = {
         margin: '5px auto'
       }
@@ -31,32 +30,16 @@ const LoginForm = ({setCurrentUser, setErrorMain, errorMain}) => {
         margin: '100px auto'
     }
 
-    // const handleSubmit = (e) => {
-    //     e.preventDefault()
-    //     const user = {
-    //         username, 
-    //         password
-    //     }
-    //     fetch('/login', {
-    //         method: "POST",
-    //         headers: {"Content-Type": "application/json"},
-    //         body: JSON.stringify(user)
-    //     })
-    //     .then((resp) => {
-    //         if(resp.ok){
-    //             resp.json()
-    //             .then((data) => setCurrentUser(data)) 
-    //         }
-    //         else{
-    //             resp.json().then((data) => setErrorMain(data.error))
-    //         }
-    //     })
-    // }
-
     const handleSubmitRedux = (e) => {
         e.preventDefault()
         dispatch(login(userData))
-        navigate('/')
+        if (user === null){
+            setErrorMain(["Please use a valid login"])
+        }else{
+            setErrorMain([])
+          navigate('/')  
+        }
+        
     }
 
 

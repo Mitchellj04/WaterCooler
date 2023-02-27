@@ -1,7 +1,7 @@
-import {Button, Typography } from '@mui/material'
+import {Button, Link, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import Box from '@mui/material/Box';
-import { useNavigate } from "react-router-dom";
+import {useNavigate } from "react-router-dom";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit'
 import ProjectEdit from './ProjectEdit';
@@ -60,13 +60,22 @@ const ProjectList = ({project, setErrorMain}) => {
         }
     }
 
+    function creator(){
+      if(currentUser.username === projectUser){
+        return <>{projectUser}</>
+      }
+      else{
+        return <Link href={`/profile/${projectUser}`}>{projectUser}</Link>
+      }
+    }
+
   return (
     <div>
         <Box style={{paddingTop: 25}}>
         <Typography>{project.title}</Typography>
         <Typography>{project.description}</Typography>
         <Typography>{project.github_link}</Typography>
-        <Typography>Creator: {projectUser}</Typography>
+        <Typography>Creator: {creator()}</Typography>
         {mapCategory}
         </Box>
         <Button variant='contained' color="secondary" onClick={hanldeProject} style={{marginTop: 15}}>Collaborate</Button>

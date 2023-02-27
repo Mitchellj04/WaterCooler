@@ -16,7 +16,8 @@ export const createComment = createAsyncThunk('comments/createComment', (comment
     .then((comments) => comments)
 })
 
-export const deleteComment = createAsyncThunk('comment/deleteComment', ({id}) => {
+export const deleteComment = createAsyncThunk('comment/deleteComment', (id) => {
+    console.log(id)
     fetch(`/comments/${id}`, {
         method: "DELETE",
         headers: {"Conent-Type": "application/json"}
@@ -41,6 +42,10 @@ const commentSlice = createSlice({
         })
         .addCase(createComment.fulfilled, (state, {payload}) => {
             state.comments.push(payload)
+        })
+        .addCase(deleteComment.fulfilled, (state, {payload}) => {
+            let index = state.comments.findIndex(({id}) => id === payload)
+            state.comments.splice(index, 1)
         })
    
     }

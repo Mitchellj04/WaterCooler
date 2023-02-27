@@ -43,30 +43,11 @@ function Sidenav({ setErrorMain}) {
 
   const currentUser = useSelector((state) => state.user.users)
 
-  
+  const handleDrawerOpen = () => { setOpen(true);};
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
+  const handleDrawerClose = () => { setOpen(false);};
 
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
-
-    //Delete currentUser (session/user)
-    // function handleLogout (){
-    //   fetch('/logout', 
-    //    { method: "DELETE"})
-    //    .then((resp) => {
-    //     if (resp.ok){
-    //       setCurrentUser(null)
-    //     }
-    //    })
-  
-    // }
-    function handleLogout(){
-      dispatch(logout())
-    }
+  function handleLogout(){ dispatch(logout())}
 
   const handleProfile = () => {
     if (currentUser === null){
@@ -89,16 +70,31 @@ function Sidenav({ setErrorMain}) {
   }
 
  const allProjects = () => {
+  if (currentUser === null){
+    navigate('/login')
+      setErrorMain(["Please login to see projects"])
+  }else{
     navigate('/projects-all')
+  }
+    
   }
 
   const allPosts = () => {
-    navigate('/posts-all')
-  }
+    if (currentUser === null){
+      navigate('/login')
+      setErrorMain(["Please login to see posts"])
+    }else{
+      navigate('/posts-all')
+    }}
 
   const createPage = () => {
-    navigate('/create')
-  }
+    if (currentUser === null){
+      navigate('/login')
+      setErrorMain(["Please login to create"])
+    }
+    else{
+      navigate('/create')
+    }}
 
 
   const handleLog = () => {

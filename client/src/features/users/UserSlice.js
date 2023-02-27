@@ -101,16 +101,12 @@ const userSlice = createSlice({
                     state.users = action.payload
                 }
             })
-            .addCase(logout.fulfilled, (state, action) => {
-                state.users = action.payload
+            .addCase(logout.fulfilled, (state) => {
+                state.users = null
             })
             .addCase(editUser.fulfilled, (state, { payload }) => {
-                console.log(payload)
-                // const index = state.users.findIndex((user) => user.id === payload.id)
-                // state.users[index] = {
-                //     ...state.users[index],
-                //     ...payload.updatedUser
-                // }
+            
+
             })
     }
 })

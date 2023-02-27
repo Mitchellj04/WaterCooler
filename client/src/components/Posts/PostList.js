@@ -1,4 +1,4 @@
-import { Accordion, AccordionDetails, AccordionSummary, Alert, Box, Button, Typography } from '@mui/material'
+import { Accordion, AccordionDetails, AccordionSummary, Alert, Box, Button, Link, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import DeleteIcon from '@mui/icons-material/Delete';
 import ReplyIcon from '@mui/icons-material/Reply';
@@ -12,8 +12,9 @@ import { deletePost } from '../../features/posts/PostSlice';
 import { fetchComment } from '../../features/comment/CommentSlice';
 
 
+
 const PostList = ({ post }) => {
-  
+
   const dispatch = useDispatch()
   const [postUser, setPostUser] = useState(post.user.username)
   const [category, setCategory] = useState(post.categories)
@@ -56,7 +57,6 @@ const PostList = ({ post }) => {
 
   // POST DELETE 
   function handleDelete() {
-    console.log(post.id)
     dispatch(deletePost(post.id))
   }
 
@@ -89,6 +89,16 @@ const PostList = ({ post }) => {
     }
   }
 
+  // LINK TO USER PROFILE
+  function creator(){
+    if(currentUser.username === postUser){
+      return <>{postUser}</>
+    }
+    else{
+      return <Link href={`/profile/${postUser}`}>{postUser}</Link>
+    }
+  }
+
   return (
     <>
       <div>
@@ -96,7 +106,7 @@ const PostList = ({ post }) => {
           <Typography>{post.title}</Typography>
           <Typography>{post.description}</Typography>
           <Typography>Link: {post.link}</Typography>
-          <Typography>Creator: {postUser}</Typography>
+          <Typography>Creator: {creator()}</Typography>
           {mapCategory}
         </Box>
       </div>

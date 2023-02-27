@@ -4,11 +4,31 @@ class UsersController < ApplicationController
     skip_before_action :authorize, only: [:create]
     rescue_from ActiveRecord::RecordInvalid, with: :user_error
 
-  
+    def index 
+        users = User.all
+        render json: users 
+    end
+
     def profile
       current_user = @current_user
       render json: current_user
     end
+
+    def select 
+        username = params[:username]
+        user = User.all
+        selected = user.select { |u| u.username == username}
+        if selected.length > 0 
+        render json: selected
+        else 
+        render json: {errors: "Could not find any profiles for #{username}"}
+        end
+    end
+
+    # def show 
+    #     user = find_user
+    #     render json: user
+    # end
 
     def create 
         user = User.create!(user_params)

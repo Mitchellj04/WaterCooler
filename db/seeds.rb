@@ -59,3 +59,5 @@ tag4 = Tag.create(post_id: post4.id, category_id: c1.id)
 
 comment = Comment.create(answer: "Have you tried using an arrow function instead. What is the problem with the function?",post_id: post.id, user_id: tommy.id)
 comment2 = Comment.create(answer: "To be able to have your controller remember your session you need to add the cookies gem", post_id: post2.id, user_id: justin.id)
+
+# COLLABORATIONS
