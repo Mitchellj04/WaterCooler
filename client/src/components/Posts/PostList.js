@@ -91,7 +91,7 @@ const PostList = ({ post }) => {
 
   // LINK TO USER PROFILE
   function creator(){
-    if(currentUser.username === postUser){
+    if(postUser !== currentUser.username){
       return <>{postUser}</>
     }
     else{
@@ -106,7 +106,7 @@ const PostList = ({ post }) => {
           <Typography>{post.title}</Typography>
           <Typography>{post.description}</Typography>
           <Typography>Link: {post.link}</Typography>
-          <Typography>Creator: {creator()}</Typography>
+          {/* <Typography>Creator: {creator()}</Typography> */}
           {mapCategory}
         </Box>
       </div>

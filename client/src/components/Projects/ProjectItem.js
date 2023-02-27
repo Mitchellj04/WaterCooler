@@ -1,33 +1,61 @@
-import { Box, Button, Paper, Typography } from '@mui/material'
+import { Box, Button, Link, Paper, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router'
+import { fetchProjects } from '../../features/projects/ProjectSlice'
 
-const ProjectItem = () => {
+const ProjectItem = ({currentUser}) => {
 
-  const [showProject, setShowProject] = useState([])
+  // const [showProject, setShowProject] = useState([])
   const [category, setCategory] = useState([])
-  const [projectUser, setProjectUser] = useState([])
-  const [collaborate, setCollaborate] = useState(false)
+  // const [projectUser, setProjectUser] = useState([])
+  // const [collaborate, setCollaborate] = useState([])
   const {id} = useParams()
+  const dispatch = useDispatch()
 
   console.log(id)
-  useEffect(() => {
-    fetch(`/projects/${id}`)
-    .then((resp) => resp.json())
-    .then((project) => {setShowProject(project)
-    setCategory(project.categories)
-    setProjectUser(project.user.username)})
-  }, [])
+
+
+  const project = useSelector((state) => state.project.projects)
+
+  const showProject = project.find((project) => project.id === parseInt(id))
 
   const mapCategory = category.map((data) => {
     return <Button key={data.id}>{data.code}</Button>
 })
 
-  const handleCollaboration = () => {
-    setCollaborate(true)
+  console.log(currentUser)
+
+  const handleCollab = () => {
+    dispatch()
   }
 
-  console.log(collaborate)
+  function Collaborators(){
+    if(showProject.collaborations.length > 0){
+      return showProject.collaborations.map((collab) => {
+        if(collab.user.username !== currentUser.username){
+          return <><Link href={`/profile/${collab.user.username}`}>{collab.user.username}</Link> want to collaborate with you</>
+        }else {
+          return <>You already asked to Collaborate</>
+        }
+        
+      })
+    }
+    else if (showProject.user.username === currentUser.username){
+      return <>See collaborations below</>
+    }
+    else if(showProject.collaborations.length > 0 && currentUser.username !== showProject.user.username) {
+      return <Button variant='contained' color='secondary'>Collaborate</Button>
+    }
+    else {
+      return <Button variant='contained' color='secondary'>Collaborate</Button>
+    }
+  }
+
+
+
+  
+  console.log(showProject)
 
   return (
     <>
@@ -36,12 +64,15 @@ const ProjectItem = () => {
           <Typography>{showProject.title}</Typography>
           <Typography>{showProject.description}</Typography>
           <Typography>{showProject.github_link}</Typography>
-          <Typography>Creator: {projectUser}</Typography>
+          <Typography>Creator: {showProject.user.username}</Typography>
           {mapCategory}
-          <Button variant='contained' color='secondary' onClick={handleCollaboration}>Collaborate</Button>
+          
+          
+        </Paper> 
+        <Paper style={{padding: 50}}>
+          {Collaborators()}
         </Paper>
       </Box>
-    
     </>
   )
 }

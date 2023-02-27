@@ -22,7 +22,7 @@ tommy = User.create(username: "tommyling", name: "Tommy Xioma", password: "tommy
 p1 = Project.create(title: "Ski-Buddy", description: "I am creating a project for north east skiers to be able to talk about mountains.", github_link: "ski-buddy/mitchellj04/github.com", user_id: justin.id)
 p2 = Project.create(title: "Gaming-AU", description: "This is a gaming website for Australia", github_link: "gaming-buddy/tommy/github.com", user_id: tommy.id)
 p3 = Project.create(title: "Ski-Buddy 1", description: "I am creating a project for north east skiers to be able to talk about mountains.", github_link: "ski-buddy/mitchellj04/github.com", user_id: justin.id)
-p4 = Project.create(title: "Ski-Buddy 2", description: "I am creating a project for north east skiers to be able to talk about mountains.", github_link: "ski-buddy/mitchellj04/github.com", user_id: justin.id)
+p4 = Project.create(title: "Movie Rating Website", description: "I am creating a website similar to IDMB where you can talk to other people about the movie and see their reviews.", github_link: "movie-ranked/tommyxioma/github.com", user_id: tommy.id)
 p5 = Project.create(title: "Ski-Buddy 3", description: "I am creating a project for north east skiers to be able to talk about mountains.", github_link: "ski-buddy/mitchellj04/github.com", user_id: justin.id)
 p6 = Project.create(title: "Ski-Buddy 4", description: "I am creating a project for north east skiers to be able to talk about mountains.", github_link: "ski-buddy/mitchellj04/github.com", user_id: justin.id)
 
@@ -61,3 +61,5 @@ comment = Comment.create(answer: "Have you tried using an arrow function instead
 comment2 = Comment.create(answer: "To be able to have your controller remember your session you need to add the cookies gem", post_id: post2.id, user_id: justin.id)
 
 # COLLABORATIONS
+
+collab = Collaboration.create(user_id: justin.id, project_id: p2.id, collaborate: true)

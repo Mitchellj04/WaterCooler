@@ -69,16 +69,25 @@ const ProjectList = ({project, setErrorMain}) => {
       }
     }
 
+    function collabs(){
+      if(currentUser.username === projectUser){
+        return<Button variant='contained' color="secondary" onClick={hanldeProject} style={{marginTop: 15}}>Collaborations</Button>
+      }
+      else{
+        return<Button variant='contained' color="secondary" onClick={hanldeProject} style={{marginTop: 15}}>Collaborate</Button>
+      }
+    }
+
   return (
     <div>
         <Box style={{paddingTop: 25}}>
         <Typography>{project.title}</Typography>
         <Typography>{project.description}</Typography>
         <Typography>{project.github_link}</Typography>
-        <Typography>Creator: {creator()}</Typography>
+        {/* <Typography>Creator: {creator()}</Typography> */}
         {mapCategory}
         </Box>
-        <Button variant='contained' color="secondary" onClick={hanldeProject} style={{marginTop: 15}}>Collaborate</Button>
+        {collabs()}
         <div>
         {projectEdit()}</div>
     </div>

@@ -40,6 +40,12 @@ export const updateProject = createAsyncThunk('project/updateProject', ({id, new
 
 })
 
+export const fetchProject = createAsyncThunk('project/fetchProject', (id) => {
+    return fetch(`/projects/${id}`)
+    .then((resp) => resp.json())
+    .then((data) => data)
+})
+
 const initialState = {
     projects: [],
     errors: []
@@ -76,6 +82,9 @@ const projectSlice = createSlice({
                 ...state.projects[index],
                 ...payload.newProject
             }
+        })
+        .addCase(fetchProject.fulfilled, (state, action) => {
+                state.projects = action.payload
         })
     }
 })

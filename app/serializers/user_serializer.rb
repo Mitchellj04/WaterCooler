@@ -3,4 +3,5 @@ class UserSerializer < ActiveModel::Serializer
   has_many :projects
   has_many :posts
   has_many :comments
+  # has_many :collaborations
 end

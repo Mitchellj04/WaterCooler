@@ -8,6 +8,7 @@ const ProjectMain = ({projects, setErrorMain}) => {
 
     const homeProjects = projectRedux.map((project) => <ProjectList project={project} projects={projects} setErrorMain={setErrorMain} key={project.id}/>)
     
+
   return (
     <>
     

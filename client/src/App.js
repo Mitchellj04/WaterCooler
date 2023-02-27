@@ -28,7 +28,7 @@ function App() {
 
   // REDUX
   const reduxCurrentUser = useSelector((state) => state.user.users)
-  const reduxProjects = useSelector((state) => state)
+  const reduxProjects = useSelector((state) => state.project.project)
   const [currentUser, setCurrentUser] = useState(reduxCurrentUser)
   const dispatch = useDispatch()
 
@@ -53,7 +53,7 @@ function App() {
             <Route path='/posts' element={<PostList />} />
             <Route path='/projects-all' element={<AllProjects />} />
             <Route path='/posts-all' element={<AllPosts currentUser={currentUser} />} />
-            <Route path='/projects/:id' element={<ProjectItem />} />
+            <Route path='/projects/:id' element={<ProjectItem currentUser={reduxCurrentUser}/>} />
             <Route path='/create' element={<Create currentUser={currentUser} categories={categories} />} />
             <Route path='/login' element={<Login currentUser={currentUser} setCurrentUser={setCurrentUser} errorMain={errorMain} setErrorMain={setErrorMain} />} />
             <Route path='/categories/:type' element={<CategoryItem />} />
