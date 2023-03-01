@@ -91,7 +91,10 @@ const PostList = ({ post }) => {
 
   // LINK TO USER PROFILE
   function creator(){
-    if(postUser !== currentUser.username){
+    if(currentUser === null){
+      return <>{postUser}</>
+    }
+    else if(postUser === currentUser.username){
       return <>{postUser}</>
     }
     else{

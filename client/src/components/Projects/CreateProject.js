@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Box, Button, Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel, Grid, Paper, Radio, RadioGroup, TextField, Typography } from '@mui/material'
+import { Alert, Box, Button, Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel, Grid, Paper, Radio, RadioGroup, TextField, Typography } from '@mui/material'
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { createProjects } from '../../features/projects/ProjectSlice';
@@ -7,6 +7,10 @@ import { createProjects } from '../../features/projects/ProjectSlice';
 
 const CreateProject = () => { 
   
+
+  const project = useSelector((state) => state.project)
+  console.log(project)
+
   // STYLE
   const fieldStyle = {
     margin: '5px auto'
@@ -27,7 +31,10 @@ const CreateProject = () => {
   // REDUX
   const dispatch = useDispatch()
   const currentUser = useSelector((state) => state.user.users)
+  const errors = useSelector((state) => state.project.errors)
   const category = useSelector((state) => state.category.categories)
+
+  console.log(errors.length)
 
   let number = []
  
@@ -54,19 +61,28 @@ const data = {
   tag : [154, 153]
 }
 
-const newProject = {
-        title,
-        description,
-        github_link: link,
-        user_id: currentUser.id,
-        categories: number
-    }
+// const newProject = {
+//         title,
+//         description,
+//         github_link: link,
+//         user_id: currentUser.id,
+//         categories: number
+//     }
 
+  function errorHandle(){
+    if(errors.length > 0 ){
+      return <>{errors.map((err) => <Alert key="id" severity='error'>{err}</Alert>)}</>
+    }
+    else{
+      return <></>
+    }
+  }
 
   const handleProjectSubmit = (e) => {
       e.preventDefault()
       dispatch(createProjects(data))
   }
+
 
   return (
     <>
@@ -101,13 +117,12 @@ const newProject = {
                   <FormLabel>Categories</FormLabel>
                   <FormGroup>
                     {mapCheckCategories}
-                  {/* <FormControlLabel  control={<Checkbox value={'React'}  onChange={handleCategoryChange}/>} label="React"/>
-                  <FormControlLabel  control={<Checkbox value={"JavaScript"}  onChange={handleCategoryChange}/>} label="javaScript"/>
-                  <FormControlLabel  control={<Checkbox value={"Ruby"} onChange={handleCategoryChange}/>} label="Ruby"/> */}
                   </FormGroup>         
                 </FormControl>
               <Button type="submit" variant='contained'>Submit</Button>
+              {errorHandle()}
               </form>
+              
             </Paper>
             
         </Box>

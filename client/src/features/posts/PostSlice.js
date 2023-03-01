@@ -6,11 +6,11 @@ export const fetchPosts = createAsyncThunk('posts/fetchPosts', () => {
     .then((post) => post)
 })
 
-export const createPosts = createAsyncThunk('post/createPosts', ({title, description, link, user_id}) => {
+export const createPosts = createAsyncThunk('post/createPosts', (data) => {
     return fetch('/posts',{
         method: "POST",
         headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({title, description, link, user_id})
+        body: JSON.stringify(data)
     })
     .then((resp) => resp.json())
     .then((data) => data)

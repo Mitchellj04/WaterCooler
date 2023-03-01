@@ -12,6 +12,7 @@ export const createCollab = createAsyncThunk('collab/createCollab', ({newCollab}
     return {newCollab}
 })
 
+
 const initialState = {
     collabs: [],
     errors: []

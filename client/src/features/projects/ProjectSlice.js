@@ -64,12 +64,15 @@ const projectSlice = createSlice({
         .addCase(createProjects.fulfilled, (state, action) => {
             if(action.payload.errors){
                 console.log(state.errors)
-                state.errors = action.payload
+                state.errors = action.payload.errors
             }
             else{
               state.projects.push(action.payload)  
+              state.errors = []
             }
-            
+        })    
+        .addCase(createProjects.rejected, (state, action) => {
+            console.log(action)
         })
         .addCase(deleteProject.fulfilled, (state, {payload}) => {
             const index = state.projects.findIndex(({id}) => id === payload)

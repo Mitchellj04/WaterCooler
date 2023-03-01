@@ -17,6 +17,8 @@ Comment.delete_all
 # USERS
 justin= User.create(username: "jmitchell04", name: "Justin Mitchell", password: "jmoney33", age: 24, experience: "React 1 year", bio: "new programmer", email: "mitchelljm@gmail.com", github: "mitchellj04/github.com")
 tommy = User.create(username: "tommyling", name: "Tommy Xioma", password: "tommy123", age: 20, experience: "Gaming coding", bio: "I have been coding games for years", email: "tommyxioma@gmail.com", github: "mitchellj04/github.com")
+greg = User.create(username: "gregthomas", name: "Greg Thomas", password: "greg123", age: 20, experience: "Software Engineer", bio: "I have been coding the technology behind the guidance system of subs", email: "gregt@gmail.com", github: "gregthomas/github.com")
+
 
 # PROJECTS
 p1 = Project.create(title: "Ski-Buddy", description: "I am creating a project for north east skiers to be able to talk about mountains.", github_link: "ski-buddy/mitchellj04/github.com", user_id: justin.id)
@@ -63,3 +65,4 @@ comment2 = Comment.create(answer: "To be able to have your controller remember y
 # COLLABORATIONS
 
 collab = Collaboration.create(user_id: justin.id, project_id: p2.id, collaborate: true)
+collab = Collaboration.create(user_id: greg.id, project_id: p2.id, collaborate: true)

@@ -61,7 +61,10 @@ const ProjectList = ({project, setErrorMain}) => {
     }
 
     function creator(){
-      if(currentUser.username === projectUser){
+      if(currentUser === null){
+        return <>{projectUser}</>
+      }
+      else if(currentUser.username === projectUser){
         return <>{projectUser}</>
       }
       else{
@@ -70,7 +73,10 @@ const ProjectList = ({project, setErrorMain}) => {
     }
 
     function collabs(){
-      if(currentUser.username === projectUser){
+      if (currentUser === null){
+        return<Button variant='contained' color="secondary" onClick={hanldeProject} style={{marginTop: 15}}>Collaborate</Button>
+      }
+      else if(currentUser.username === projectUser){
         return<Button variant='contained' color="secondary" onClick={hanldeProject} style={{marginTop: 15}}>Collaborations</Button>
       }
       else{

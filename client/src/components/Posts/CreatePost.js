@@ -22,6 +22,16 @@ const CreatePost = () => {
         width: 400, 
         margin: '100px auto'
     }
+
+    const data = {
+        post:{            
+            title,
+            description, 
+            link, 
+            user_id: currentUser.id,
+            },
+            tag: [154]
+        }
      
     const newPost = {
             title,
@@ -34,7 +44,7 @@ const CreatePost = () => {
 
     const handlePostSubmit = (e) => {
         e.preventDefault()
-        dispatch(createPosts(newPost))
+        dispatch(createPosts(data))
     }
     
   return (

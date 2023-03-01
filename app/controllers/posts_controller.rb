@@ -13,8 +13,13 @@ class PostsController < ApplicationController
     end
 
     def create 
-        post = Post.create!(post_params)
-        render json: post, status: :created
+        tag_params = params[:tag]
+        @post = Post.create!(post_params) 
+        category = Category.select { |cat| tag_params.include?(cat.id)}
+        tags = tag_params.map {|num| {category_id: num, post_id: @post.id}}
+        tags.each { |tag| Tag.new(tag)}
+        @post.categories << category
+        render json: @post, status: :created
     end
 
     def update 
@@ -41,6 +46,6 @@ class PostsController < ApplicationController
     end
 
     def post_params
-        params.permit(:title, :description, :link, :image, :user_id)
+        params.require(:post).permit(:title, :description, :link, :image, :user_id)
     end
 end
