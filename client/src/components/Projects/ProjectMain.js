@@ -1,10 +1,18 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
-import ProjectList from './Projects/ProjectList'
+import { useState, useEffect } from "react";
+import ProjectList from './ProjectList'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchProjects } from '../../features/projects/ProjectSlice';
 
 const ProjectMain = ({projects, setErrorMain}) => {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(fetchProjects())
+  }, [])
 
     const projectRedux = useSelector((state) => state.project.projects)
+    console.log(projectRedux)
 
     const homeProjects = projectRedux.map((project) => <ProjectList project={project} projects={projects} setErrorMain={setErrorMain} key={project.id}/>)
     

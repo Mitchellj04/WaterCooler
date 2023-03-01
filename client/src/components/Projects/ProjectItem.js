@@ -2,6 +2,7 @@ import { Box, Button, Link, Paper, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router'
+import { createCollab } from '../../features/Collaboration/CollabsSlice'
 import { fetchProjects } from '../../features/projects/ProjectSlice'
 
 const ProjectItem = ({currentUser}) => {
@@ -25,9 +26,15 @@ const ProjectItem = ({currentUser}) => {
 })
 
   console.log(currentUser)
+  const newCollab = {
+    user_id: currentUser.id,
+    project_id: showProject.id,
+    collaborate: true
+  }
 
   const handleCollab = () => {
-    dispatch()
+    console.log(newCollab)
+    dispatch(createCollab({newCollab}))
   }
 
   function Collaborators(){
@@ -45,10 +52,10 @@ const ProjectItem = ({currentUser}) => {
       return <>See collaborations below</>
     }
     else if(showProject.collaborations.length > 0 && currentUser.username !== showProject.user.username) {
-      return <Button variant='contained' color='secondary'>Collaborate</Button>
+      return <Button variant='contained' color='secondary' onClick={handleCollab}>Collaborate</Button>
     }
     else {
-      return <Button variant='contained' color='secondary'>Collaborate</Button>
+      return <Button variant='contained' color='secondary' onClick={handleCollab}>Collaborate</Button>
     }
   }
 

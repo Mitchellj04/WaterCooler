@@ -27,8 +27,7 @@ const categorySlice = createSlice({
             state.categories = action.payload
         })
         .addCase(fetchCategoryType.fulfilled, (state, {payload}) => {
-            console.log(payload)
-            return state.categories.filter((category) => category.code === payload[0].code)
+            state.categories = payload
         })
     }
 })

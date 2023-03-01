@@ -1,7 +1,7 @@
 class ProjectsController < ApplicationController
 rescue_from ActiveRecord::RecordInvalid, with: :project_error
 wrap_parameters format: []
-skip_before_action :authorize, only: :index
+skip_before_action :authorize, only: [:index, :create]
 
     def index 
         project = Project.all 
@@ -14,10 +14,15 @@ skip_before_action :authorize, only: :index
     end
 
     def create 
-        project = Project.create!(project_params)    
-        tags = Tagging.create!(tag_params.merge(project_id: project.id))  
-        render json: project, status: :created
-        # render json: tags, status: :created
+        # debugger
+        # project_params = params[:project]
+        tag_params = params[:tag]
+        @project = Project.create!(project_params) 
+        category = Category.select { |cat| tag_params.include?(cat.id)}
+        tags = tag_params.map {|num| {category_id: num, project_id: @project.id}}
+        tags.each { |tag| Tagging.new(tag)}
+        @project.categories << category
+        render json: @project, status: :created
     end
 
     def update 
@@ -39,12 +44,12 @@ skip_before_action :authorize, only: :index
     end
 
     def project_params
-        params.permit(:title, :description, :github_link, :user_id)
+        params.require(:project).permit(:title, :description, :github_link, :user_id)
     end
 
-    def tag_params
-        params.permit(:category_id)
-    end
+    # def tag_params
+    #     params.permit(:categories)
+    # end
 
     def project_error
         render json: {errors: ["Could not create new project"]}

@@ -15,15 +15,21 @@ class UsersController < ApplicationController
     end
 
     def select 
+        
         username = params[:username]
-        user = User.all
-        selected = user.select { |u| u.username == username}
-        if selected.length > 0 
-        render json: selected
-        else 
-        render json: {errors: "Could not find any profiles for #{username}"}
-        end
+        user = User.find_by(username: username)
+        render json: user
     end
+    # def select 
+    #     username = params[:username]
+    #     user = User.all
+    #     selected = user.select { |u| u.username == username}
+    #     if selected.length > 0 
+    #     render json: selected
+    #     else 
+    #     render json: {errors: "Could not find any profiles for #{username}"}
+    #     end
+    # end
 
     # def show 
     #     user = find_user

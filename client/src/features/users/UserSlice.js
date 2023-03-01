@@ -16,9 +16,6 @@ export const login = createAsyncThunk('user/login', ({ username, password }) => 
         body: JSON.stringify({ username, password })
     })
         .then((r) => r.json())
-        .catch((error) => {
-            console.log(isRejectedWithValue(error))
-        })
         .then((data) => data)
 
 })
@@ -72,7 +69,6 @@ const userSlice = createSlice({
                 state.errors = action.payload
             })
             .addCase(fetchUser.fulfilled, (state, action) => {
-
                 if (action.payload.errors) {
                     state.errors = action.payload
                     state.users = null

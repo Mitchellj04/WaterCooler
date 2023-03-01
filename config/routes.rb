@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :comments, only: [:index, :create, :destroy]
   resources :posts , only: [:index, :create, :show, :destroy, :update]
-  # resources :collaborations
+  resources :collaborations, only: [:create]
   resources :categories, only: [:index, :create, :show]
   resources :projects, only: [:index, :create, :show, :destroy, :update]
   resources :users, only: [:create, :update, :show, :index]

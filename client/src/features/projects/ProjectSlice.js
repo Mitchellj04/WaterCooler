@@ -8,11 +8,12 @@ export const fetchProjects = createAsyncThunk('project/fetchProjects', () => {
 })
 
 // CREATE NEW PROJECT
-export const createProjects = createAsyncThunk('project/createProjects', ({title, description, github_link, user_id}) => {
+export const createProjects = createAsyncThunk('project/createProjects', (data) => {
+    console.log(data)
    return fetch('/projects',{
         method: "POST",
         headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({title, description, github_link, user_id})
+        body: JSON.stringify(data)
     })
     .then((resp) => resp.json())
     .then((data) => data)

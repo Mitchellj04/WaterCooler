@@ -21,24 +21,30 @@ import UserProfile from './components/Profile/UserProfile';
 
 
 function App() {
+  // REDUX
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(fetchUser())
+    // dispatch(fetchProjects())
+    // dispatch(fetchPosts())
+    // dispatch(fetchCategory())
+  }, [])
+
+ const reduxCurrentUser = useSelector((state) => state.user.users)
+  const reduxProjects = useSelector((state) => state.project.projects)
+  const [currentUser, setCurrentUser] = useState(reduxCurrentUser)
+  
 
   const [errorMain, setErrorMain] = useState([])
   const [authenticate, setAuthenticate] = useState([])
   const [categories, setCategory] = useState([])
 
-  // REDUX
-  const reduxCurrentUser = useSelector((state) => state.user.users)
-  const reduxProjects = useSelector((state) => state.project.project)
-  const [currentUser, setCurrentUser] = useState(reduxCurrentUser)
-  const dispatch = useDispatch()
+  
+ 
 
-  useEffect(() => {
-    dispatch(fetchUser())
-    dispatch(fetchProjects())
-    dispatch(fetchPosts())
-    dispatch(fetchCategory())
+  console.log(reduxCurrentUser)
 
-  }, [])
 
 
   return (
@@ -48,7 +54,7 @@ function App() {
         <div className="App" style={{ backgroundColor: "#9f9f9f" }}>
           <Routes>
             <Route exact path='/' element={<Home currentUser={currentUser} setErrorMain={setErrorMain} />} />
-            <Route path='/profile' element={<Profile />} />
+            <Route path='/profile' element={<Profile currentUser={currentUser}/>} />
             <Route path='/projects' element={<ProjectList />} />
             <Route path='/posts' element={<PostList />} />
             <Route path='/projects-all' element={<AllProjects />} />

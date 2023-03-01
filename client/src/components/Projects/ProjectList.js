@@ -84,7 +84,7 @@ const ProjectList = ({project, setErrorMain}) => {
         <Typography>{project.title}</Typography>
         <Typography>{project.description}</Typography>
         <Typography>{project.github_link}</Typography>
-        {/* <Typography>Creator: {creator()}</Typography> */}
+        <Typography>Creator: {creator()}</Typography>
         {mapCategory}
         </Box>
         {collabs()}

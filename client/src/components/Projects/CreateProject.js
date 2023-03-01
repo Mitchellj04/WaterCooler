@@ -21,7 +21,7 @@ const CreateProject = () => {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [link, setLink] = useState('')
-  const [categories, setCategories] = useState('')
+  const [categories, setCategories] = useState([])
   const navigate = useNavigate()
 
   // REDUX
@@ -29,32 +29,43 @@ const CreateProject = () => {
   const currentUser = useSelector((state) => state.user.users)
   const category = useSelector((state) => state.category.categories)
 
-  console.log(category)
+  let number = []
  
 const handleCategoryChange = (e) => {
   // setCategory((prevState) => [...prevState, parseInt(e.target.id)])
-  setCategories(parseInt(e.target.id))
-  console.log(parseInt(e.target.id))
+  number.push(parseInt(e.target.id))
+  setCategories()
+  console.log(number)
 }
+
+console.log(category)
 
 const mapCheckCategories = category.map((category) => {
   return <FormControlLabel  control={<Checkbox value={category.code} id={category.id} onChange={handleCategoryChange}/>} label={category.code}/>
 })    
 
+const data = {
+  project : {
+    title,
+    description,
+    github_link: link,
+    user_id: currentUser.id
+  },
+  tag : [154, 153]
+}
+
 const newProject = {
         title,
         description,
         github_link: link,
-        user_id: currentUser.id
+        user_id: currentUser.id,
+        categories: number
     }
-const tagProject = {
-      category_id: categories
-}
+
 
   const handleProjectSubmit = (e) => {
-      console.log(tagProject)
       e.preventDefault()
-      dispatch(createProjects(newProject, tagProject))
+      dispatch(createProjects(data))
   }
 
   return (
