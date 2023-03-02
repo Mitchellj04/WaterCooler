@@ -1,4 +1,4 @@
-import {Button, Link, Typography } from '@mui/material'
+import {Button, Link, ThemeProvider, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import Box from '@mui/material/Box';
 import {useNavigate } from "react-router-dom";
@@ -19,16 +19,12 @@ const ProjectList = ({project, setErrorMain}) => {
     // REDUX 
     const currentUser = useSelector((state) => state.user.users)
     const projects = useSelector((state) => state.project.projects)
-    // REDUX
-    // REPLACE SET PROJECTS
-    // REPLACE PROJECTS 
-    // FIX PROJECT DELETE W/ SLICE
 
 
     const handleProjectOpen = () => {setHideEditProject(true)}
 
     const mapCategory = category.map((data) => {
-        return <Button variant='outlined' key={data.id}>{data.code}</Button>
+        return <Button variant='outlined' style={{marginTop: 15}} key={data.id}>{data.code}</Button>
     })
 
     const hanldeProject = () => {
@@ -36,66 +32,61 @@ const ProjectList = ({project, setErrorMain}) => {
         navigate('/login')
         setErrorMain(["Please login to collaborate"])
       }
-      else{
-      navigate(`/projects/${project.id}`)
-    }
-    }
+      else{ navigate(`/projects/${project.id}`)}}
 
     function handleDelete(){
       dispatch(deleteProject(project.id))
     }
 
     function projectEdit(){
-        if(currentUser === null){
-          return <>
-
-          </>
-        }
-        else if(currentUser.username === projectUser){
-          return <>
+        if(currentUser === null){ return <></> }
+        else if(currentUser.username === projectUser){ return <>
           <Button startIcon={<EditIcon className='editButton' onClick={handleProjectOpen}/>}></Button>
           <Button startIcon={<DeleteIcon color="secondary" className="deleteButton" onClick={handleDelete}/>}></Button>
           <ProjectEdit project={project} hideEditProject={hideEditProject} setHideEditProject={setHideEditProject}/>
-          </>
-        }
-    }
+          </>}}
 
     function creator(){
-      if(currentUser === null){
-        return <>{projectUser}</>
-      }
-      else if(currentUser.username === projectUser){
-        return <>{projectUser}</>
-      }
-      else{
-        return <Link href={`/profile/${projectUser}`}>{projectUser}</Link>
-      }
-    }
+      if(currentUser === null){ return <>{projectUser}</>}
+      else if(currentUser.username === projectUser){ return <>{projectUser}</>}
+      else { return <Link href={`/profile/${projectUser}`}>{projectUser}</Link>}}
 
     function collabs(){
       if (currentUser === null){
-        return<Button variant='contained' color="secondary" onClick={hanldeProject} style={{marginTop: 15}}>Collaborate</Button>
+        return<Button 
+                variant='contained' 
+                color="secondary" 
+                onClick={hanldeProject}  
+                sx={{backgroundColor: 'secondary.light'}} 
+                style={{marginTop: 15}}>Collaborate</Button>
       }
-      else if(currentUser.username === projectUser){
-        return<Button variant='contained' color="secondary" onClick={hanldeProject} style={{marginTop: 15}}>Collaborations</Button>
-      }
-      else{
-        return<Button variant='contained' color="secondary" onClick={hanldeProject} style={{marginTop: 15}}>Collaborate</Button>
-      }
-    }
+      else if(currentUser.username === projectUser)
+          {return<Button 
+                variant='contained' 
+                onClick={hanldeProject} 
+                sx={{backgroundColor: 'secondary.light'}} 
+                style={{marginTop: 15}}>Collaborations</Button>}
+      else {return <Button 
+                variant='contained' 
+                color="secondary" 
+                sx={{backgroundColor: 'secondary.light'}} 
+                onClick={hanldeProject} 
+                style={{marginTop: 15}}>Collaborate</Button>}}
 
   return (
     <div>
         <Box style={{paddingTop: 25}}>
-        <Typography>{project.title}</Typography>
-        <Typography>{project.description}</Typography>
-        <Typography>{project.github_link}</Typography>
-        <Typography>Creator: {creator()}</Typography>
+        <Typography variant='h6' style={{padding: 5, fontWeight: 'Bold'}}>{project.title}</Typography>
+        <Typography style={{marginTop:10}}>{project.description}</Typography>
+        <Typography>Link: <Link>{project.github_link}</Link></Typography>
+        <Typography style={{marginTop:10}}>Creator: {creator()}</Typography>
         {mapCategory}
-        </Box>
-        {collabs()}
         <div>
-        {projectEdit()}</div>
+        {collabs()}</div>
+        <div>
+        {projectEdit()}
+        </div>
+        </Box>
     </div>
   )
 }

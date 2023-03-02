@@ -1,28 +1,42 @@
 import React from 'react'
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/styles';
 import { AppBar, IconButton, Toolbar, Typography} from '@mui/material'
 import HomeIcon from '@mui/icons-material/Home';
 import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Sidenav from './Sidenav';
 import { useNavigate } from "react-router-dom";
+import { createTheme, ThemeProvider } from '@mui/material';
 
-const Header = ({currentUser, setCurrentUser, setErrorMain}) => {
-    
+// const useStyles = makeStyles({
+//   appBar: {
+//       backgroundColor: "#1d79a4"
+//     // backgroundImage: process.env.PUBLIC_URL + "/bubbles.jpg",
+//     // backgroundRepeat: 'no-repeat',
+//     // backgroundSize: 'cover',
+//   }
+// });
+
+
+ function Header({currentUser, setCurrentUser, setErrorMain}){
+
+  // const classes = useStyles();  
   const navigate = useNavigate()
 
   const handleHome = () => {
     navigate('/')
   }
 
-  const appStyle = {
-    backgroundColor:"#6c95e9",
 
-  }
+  // const appStyle = {
+  //   backgroundImage: process.env.PUBLIC_URL + "/bubbles.jpg"
+  //   // backgroundColor:"#6c95e9",
+
+  // }
   return (
     
     <div>
-        <AppBar style={appStyle}>
+        <AppBar >
             <Toolbar>
                 <Sidenav currentUser={currentUser} setCurrentUser={setCurrentUser} setErrorMain={setErrorMain}/>
                 <IconButton

@@ -78,9 +78,7 @@ const PostList = ({ post }) => {
 
   // HANDLE IF USER IS LOGGED IN ENABLE BUTTONS
   function createComment() {
-    if (currentUser === null) {
-      return <></>
-    }
+    if (currentUser === null) { return <></> }
     else {
       return <>
         <Button onClick={handleCommentOpen} startIcon={<ReplyIcon />} style={{ position: "left" }}></Button>
@@ -91,30 +89,23 @@ const PostList = ({ post }) => {
 
   // LINK TO USER PROFILE
   function creator(){
-    if(currentUser === null){
-      return <>{postUser}</>
-    }
-    else if(postUser === currentUser.username){
-      return <>{postUser}</>
-    }
-    else{
-      return <Link href={`/profile/${postUser}`}>{postUser}</Link>
-    }
-  }
+    if(currentUser === null) { return <>{postUser}</> }
+    else if(postUser === currentUser.username) { return <>{postUser}</> }
+    else { return <Link href={`/profile/${postUser}`}>{postUser}</Link> }}
 
   return (
     <>
       <div>
-        <Box style={{ paddingTop: 25 }}>
-          <Typography>{post.title}</Typography>
-          <Typography>{post.description}</Typography>
-          <Typography>Link: {post.link}</Typography>
-          <Typography>Creator: {creator()}</Typography>
+        <Box style={{paddingTop: 45}}>
+          <Typography variant='h6' style={{ padding: 5, fontWeight: 'Bold' }}>{post.title}</Typography>
+          <Typography variant='body1' style={{marginTop: 10}}>{post.description}</Typography>
+          <Typography variant='body1'>Link:<Link> {post.link}</Link></Typography>
+          <Typography variant='body1'>Creator: {creator()}</Typography>
           {mapCategory}
         </Box>
       </div>
       <Box>
-        <Accordion className="Accordion-side" style={{ width: "100%", color: "white", backgroundColor: "#5ea4ff" }}>
+        <Accordion className="Accordion-side" style={{ width: "100%", color: "white", backgroundColor: "#295b9d", marginTop: 10 }}>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1a-content"

@@ -4,48 +4,64 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit'
 import { useSelector } from 'react-redux';
 import CategoryMain from '../Categories/CategoryMain';
+import { useNavigate } from 'react-router-dom';
 
 const AllProjects = () => {
 
-    const projects = useSelector((state) => state.project.projects)
-    const currentUser = useSelector((state) => state.user.users)
+  const projects = useSelector((state) => state.project.projects)
+  const currentUser = useSelector((state) => state.user.users)
+  const categories = useSelector((state) => state.category.categories)
+
+  const navigate = useNavigate()
+
+  const handleClick = (e) => {
+    e.preventDefault()
+    // setSelected(e.target.value)
+    navigate(`/categories/${e.target.value}`)
+  }
+
+  console.log(categories)
 
 
-    function projectEdit(user){
-        if(currentUser.username === user){
-          return <>
-          <Button startIcon={<EditIcon className='editButton'/>}></Button>
-          <Button startIcon={<DeleteIcon color="secondary" className="deleteButton"/>}></Button></>
-        }
+  function projectEdit(user) {
+    if (currentUser.username === user) {
+      return <>
+        <Button startIcon={<EditIcon className='editButton' />}></Button>
+        <Button startIcon={<DeleteIcon color="secondary" className="deleteButton" />}></Button></>
     }
+  }
 
-    const displayAll = projects.map((data) => {
-        return <><Grid item xs={4} style={{marginTop: 20}} key={data.id}>
-            <Box>
-            <Typography variant='h6'>{data.title}</Typography>
-            <Typography>{data.description}</Typography>
-            <Typography>Link: {data.github_link}</Typography>
-            <Typography>User: {data.user.username}</Typography>
-            </Box>
-            <Button variant='contained' color="secondary" style={{marginTop: 10}}>Collaborate</Button>
-            <div>{projectEdit(data.user.username)}</div>
-        </Grid>
-        </>
-    })
+  const categoryButton = categories.map((category) => {
+    return <Grid item xs={2}><Box style={{ paddingTop: 20 }} key={category.id}>
+      <Button id={category.id} value={category.code} variant="contained" onClick={handleClick}>{category.code}</Button>
+    </Box></Grid>
+  })
+
+
+  const displayAll = projects.map((data) => {
+    return <><Grid item xs={4} >
+      <Box style={{ marginTop: 20 }} key={data.id}>
+        <Typography variant='h6' style={{ padding: 5, fontWeight: 'Bold' }}>{data.title}</Typography>
+        <Typography style={{ padding: 5 }}>{data.description}</Typography>
+        <Typography style={{ padding: 5 }}>Link: {data.github_link}</Typography>
+        <Typography style={{ padding: 5 }}>User: {data.user.username}</Typography>
+      </Box>
+      <Button variant='contained' color="secondary" sx={{ backgroundColor: 'secondary.light' }} style={{ marginTop: 10, }}>Collaborate</Button>
+      <div>{projectEdit(data.user.username)}</div>
+    </Grid>
+    </>
+  })
 
 
   return (
     <>
-    <Typography variant="h4" style={{paddingTop: 100}}>Projects</Typography>
-    <Grid container style={{paddingTop: 50}}>
-        
-        <Grid item xs={3} >
-        <Typography variant="h4">Categories</Typography>
-        <CategoryMain />
-        </Grid>
+      {/* <Grid item xs={3} style={{}} > </Grid> */}
+      <Grid container style={{ paddingTop: 100 }}>
+        <Grid item xs={12}> <Typography variant="h4">Categories</Typography> </Grid>
+        {categoryButton}
+        <Grid item xs={12} style={{ paddingTop: 25 }}> <Typography variant="h4">Projects</Typography> </Grid>
         {displayAll}
-    </Grid>
-    
+      </Grid>
     </>
   )
 }

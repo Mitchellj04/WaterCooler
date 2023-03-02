@@ -18,7 +18,42 @@ import { fetchPosts } from './features/posts/PostSlice';
 import { fetchCategory } from './features/category/CategorySlice';
 import { fetchUser } from './features/users/UserSlice';
 import UserProfile from './components/Profile/UserProfile';
+import { createTheme, ThemeProvider, colors } from '@mui/material';
 
+const theme = createTheme({
+  palette:{
+    primary:{
+      main: colors.blue[700]
+    },
+    secondary:{
+      main: colors.red[800],
+      light: colors.amber[500]
+    }
+  },
+  typography: {
+    h6 : {
+      fontFamily:[
+        'Golos Text', 
+        'sans-serif'
+      ].join(',')
+    },
+    body1 : {
+      fontFamily:[
+        'Golos Text', 
+        'sans-serif'
+      ].join(',')
+    },
+    button: {
+      fontFamily:[
+        'Golos Text', 
+        'sans-serif'
+      ]
+    },
+    fontFamily: [
+      'Gloock',
+      'serif',
+    ].join(','),
+  }});
 
 function App() {
   // REDUX
@@ -40,7 +75,7 @@ function App() {
   const [authenticate, setAuthenticate] = useState([])
   const [categories, setCategory] = useState([])
 
-  
+ 
  
 
   console.log(reduxCurrentUser)
@@ -49,9 +84,10 @@ function App() {
 
   return (
     <>
+      <ThemeProvider theme={theme}>
       <Router>
         <Header currentUser={currentUser} setCurrentUser={setCurrentUser} setErrorMain={setErrorMain} />
-        <div className="App" style={{ backgroundColor: "#9f9f9f" }}>
+        <div className="App" style={{ }}>
           <Routes>
             <Route exact path='/' element={<Home currentUser={currentUser} setErrorMain={setErrorMain} />} />
             <Route path='/profile' element={<Profile currentUser={currentUser}/>} />
@@ -68,7 +104,7 @@ function App() {
 
         </div>
       </Router>
-
+    </ThemeProvider>
 
     </>
   );

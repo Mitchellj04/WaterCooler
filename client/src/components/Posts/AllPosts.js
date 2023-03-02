@@ -5,16 +5,26 @@ import EditIcon from '@mui/icons-material/Edit'
 import PostEdit from './PostEdit';
 import { useSelector } from 'react-redux';
 import CategoryMain from '../Categories/CategoryMain';
+import { useNavigate } from 'react-router-dom';
 
 const AllPosts = ({ currentUser }) => {
 
     
 
-    const posts = useSelector((state) => state.post.posts)
+    const post = useSelector((state) => state.post.posts)
+    const categories = useSelector((state) => state.category.categories)
+    const navigate = useNavigate
 
     const [hideEditPost, setHideEditPost] = useState(false)
     const handlePostOpen = () => { setHideEditPost(true) }
-
+  
+    const handleClick = (e) => {
+      e.preventDefault()
+      // setSelected(e.target.value)
+      navigate(`/categories/${e.target.value}`)
+    }
+  
+    console.log(categories)
 
 
     function postEdit(user) {
@@ -22,12 +32,19 @@ const AllPosts = ({ currentUser }) => {
             return <>
                 <Button startIcon={<EditIcon className='editButton' onClick={handlePostOpen} />}></Button>
                 <Button startIcon={<DeleteIcon color="secondary" className="deleteButton" />}></Button>
-                <PostEdit hideEditPost={hideEditPost} setHideEditPost={setHideEditPost} posts={posts} />
+                <PostEdit hideEditPost={hideEditPost} setHideEditPost={setHideEditPost} post={post} />
             </>
         }
     }
 
-    const displayAll = posts.map((data) => {
+    const categoryButton = categories.map((category) => {
+        return <Grid item xs={2}><Box style={{ paddingTop: 20 }} key={category.id}>
+          <Button id={category.id} value={category.code} variant="contained" onClick={handleClick}>{category.code}</Button>
+        </Box></Grid>
+      })
+    
+
+    const displayAll = post.map((data) => {
         return <>
             <Grid item xs={4} style={{ marginTop: 20 }} key={data.id}>
                 <Box>
@@ -47,13 +64,11 @@ const AllPosts = ({ currentUser }) => {
 
     return (
         <>
-            <Typography variant="h4" style={{ paddingTop: 100 }}>Posts</Typography>
-            <Grid container style={{ paddingTop: 50 }}>
-
-                <Grid item xs={3} >
-                <Typography variant="h4">Categories</Typography>
-                <CategoryMain />
-                </Grid>
+            
+            <Grid container style={{ paddingTop: 100 }}>
+                <Grid item xs={12}><Typography variant="h4">Categories</Typography></Grid>
+                {categoryButton}
+                <Grid item xs={12}><Typography variant="h4" style={{ paddingTop: 50 }}>Posts</Typography></Grid>
                 {displayAll}
             </Grid>
 
