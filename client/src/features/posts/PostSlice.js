@@ -38,7 +38,7 @@ export const updatePost = createAsyncThunk('post/updatePost', ({id, newPost}) =>
  
 const initialState = {
     posts: [],
-    errors: null
+    errors: []
 }
 
 const postSlice = createSlice({
@@ -52,11 +52,10 @@ const postSlice = createSlice({
         })
         .addCase(createPosts.fulfilled, (state, action) => {
             if(action.payload.errors){
-                console.log(action.payload)
-                state.errors = action.payload
+                state.errors = action.payload.errors
             }
             else{
-                console.log(action.payload)
+                state.errors = []
                 state.posts.push(action.payload)
             }
             

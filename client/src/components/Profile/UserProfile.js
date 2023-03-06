@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchAllUsers, fetchUser } from '../../features/users/AllUserSlice'
-import { Box, Button, Grid, Paper, Typography } from '@mui/material'
+import { Box, Button, Grid, Link, Paper, Typography } from '@mui/material'
 import { useParams } from 'react-router-dom'
 import { fetchProjects } from '../../features/projects/ProjectSlice'
 import { fetchPosts } from '../../features/posts/PostSlice'
@@ -48,10 +48,10 @@ const UserProfile = () => {
       if(project.user.username === user.username){
                 return <Box key={project.id}>
             <Paper style={{backgroundColor: 'inherit', margin: 10}}>
-                <Typography>{project.title}</Typography>
+                <Typography variant='h6' style={{padding: 5, fontWeight: 'Bold'}}>{project.title}</Typography>
                 <Typography>{project.description}</Typography>
-                <Typography>{project.github_link}</Typography>
-                <Button variant="contained" color="secondary">Collaborate</Button>
+                <Typography>Link: <Link>{project.github_link}</Link></Typography>
+                <Button variant="contained" color="secondary" sx={{backgroundColor: 'secondary.light'}} style={{margin: 20}}>Collaborate</Button>
             </Paper>
         </Box>
       }
@@ -67,7 +67,7 @@ const UserProfile = () => {
           <Paper style={{backgroundColor: 'inherit', margin: 10}}>
               <Typography>{post.title}</Typography>
               <Typography>{post.description}</Typography>
-              <Typography>{post.link}</Typography>
+              <Typography>Link: <Link>{post.link}</Link></Typography>
               <Button variant="contained" color="secondary">comments</Button>
           </Paper>
       </Box>
@@ -80,27 +80,32 @@ const UserProfile = () => {
 
   return (
     <>
-    <Grid container>
-    <Grid item xs={12}>
-    <Box elevation="20" style={{padding: 100}}>
-      <Typography variant='h4'>{user.name} Profile</Typography>
-    <Paper>
-           <Typography variant='h6' style={{fontWeight: "Bold"}}>Username: </Typography>{user.username}
+    <Grid container style={{paddingTop: 100}}>
+    <Grid item xs={12} sx={{ borderBottom: 1}}><Typography variant='h4'>{user.name} Profile</Typography></Grid>
+    {/* <Box elevation="20" > */}
+    {/* <Paper> */}
+    <Grid item xs={2}><Typography variant='h6' style={{ fontWeight: "Bold", textAlign: 'left', marginLeft: 50 }}>Username:</Typography></Grid>
+    <Grid item xs={10} style={{ textAlign: 'left' }}>{user.username}</Grid>
+    <Grid item xs={2}><Typography variant='h6' style={{ fontWeight: "Bold", textAlign: 'left', marginLeft: 50 }}>Fullname: </Typography></Grid>
+    <Grid item xs={10} style={{ textAlign: 'left' }}>{user.name}</Grid>
+    <Grid item xs={2}><Typography variant='h6' style={{ fontWeight: "Bold", textAlign: 'left', marginLeft: 50 }}>Age: </Typography></Grid>
+    <Grid item xs={10} style={{ textAlign: 'left' }}>{user.age}</Grid>
+    <Grid item xs={2}><Typography variant='h6' style={{ fontWeight: "Bold", textAlign: 'left', marginLeft: 50 }}>Experience: </Typography></Grid>
+    <Grid item xs={10} style={{ textAlign: 'left' }}>{user.experience}</Grid>
+    <Grid item xs={2}><Typography variant='h6' style={{ fontWeight: "Bold", textAlign: 'left', marginLeft: 50 }}>Bio: </Typography></Grid>
+    <Grid item xs={10} style={{ textAlign: 'left' }}>{user.bio}</Grid>
+    <Grid item xs={12}></Grid>
+           {/* <Typography variant='h6' style={{fontWeight: "Bold"}}>Username: </Typography>{user.username}
           <Typography variant='h6' style={{fontWeight: "Bold"}}>Fullname: </Typography>{user.name}
            <Typography variant='h6' style={{fontWeight: "Bold"}}>Age: </Typography>{user.age}
           <Typography variant='h6' style={{fontWeight: "Bold"}}>Experience: </Typography>{user.experience}
-          <Typography variant='h6' style={{fontWeight: "Bold"}}>Bio: </Typography>{user.bio}
-       </Paper>
-    </Box>
-        </Grid>
-       <Grid item xs={6}>
-            <Typography variant="h4">Projects</Typography>
-           {listProjects}
-       </Grid>
-       <Grid item xs={6}>
-            <Typography variant="h4">Posts</Typography>
-            {listPosts}
-       </Grid>
+          <Typography variant='h6' style={{fontWeight: "Bold"}}>Bio: </Typography>{user.bio} */}
+       {/* </Paper> */}
+    {/* </Box> */}
+    <Grid item xs={6} style={{marginTop: 50}} sx={{ borderBottom: 1, borderRight: 1}}><Typography variant="h4">Projects</Typography></Grid>
+    <Grid item xs={6} style={{marginTop: 50}} sx={{ borderBottom: 1, borderRight: 1}}><Typography variant="h4">Posts</Typography></Grid>
+    <Grid item xs={6} sx={{ borderRight: 1}}> {listProjects}</Grid>
+    <Grid item xs={6}> {listPosts}</Grid>
     </Grid>
     </>
   )

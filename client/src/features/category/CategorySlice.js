@@ -12,9 +12,18 @@ export const fetchCategoryType = createAsyncThunk('category/fetchCategoryType', 
     .then((category) => category)
 })
 
+export const createCategory = createAsyncThunk('category/createCategory', (code) => {
+    return fetch('/categories', {
+        method: "POST", 
+        headers: {'Content-Type':"Application/json"},
+        body: JSON.stringify(code)
+    })
+    .then((resp) => resp.json())
+    .then((data) => data)
+})
 const initialState = {
     categories: [],
-    errors: null
+    errors: []
 }
 
 const categorySlice = createSlice({
@@ -28,6 +37,17 @@ const categorySlice = createSlice({
         })
         .addCase(fetchCategoryType.fulfilled, (state, {payload}) => {
             state.categories = payload
+        })
+        .addCase(createCategory.fulfilled, (state, action) => {
+            if(action.payload.errors){
+                console.log(action.payload)
+                state.errors = action.payload.errors
+            }
+            else{
+                console.log(action.payload)
+                state.categories.push(action.payload)
+                state.errors = []
+            }
         })
     }
 })

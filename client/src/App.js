@@ -21,31 +21,31 @@ import UserProfile from './components/Profile/UserProfile';
 import { createTheme, ThemeProvider, colors } from '@mui/material';
 
 const theme = createTheme({
-  palette:{
-    primary:{
+  palette: {
+    primary: {
       main: colors.blue[700]
     },
-    secondary:{
+    secondary: {
       main: colors.red[800],
       light: colors.amber[500]
     }
   },
   typography: {
-    h6 : {
-      fontFamily:[
-        'Golos Text', 
+    h6: {
+      fontFamily: [
+        'Golos Text',
         'sans-serif'
       ].join(',')
     },
-    body1 : {
-      fontFamily:[
-        'Golos Text', 
+    body1: {
+      fontFamily: [
+        'Golos Text',
         'sans-serif'
       ].join(',')
     },
     button: {
-      fontFamily:[
-        'Golos Text', 
+      fontFamily: [
+        'Golos Text',
         'sans-serif'
       ]
     },
@@ -53,9 +53,11 @@ const theme = createTheme({
       'Gloock',
       'serif',
     ].join(','),
-  }});
+  }
+});
 
 function App() {
+
   // REDUX
   const dispatch = useDispatch()
 
@@ -66,45 +68,41 @@ function App() {
     // dispatch(fetchCategory())
   }, [])
 
- const reduxCurrentUser = useSelector((state) => state.user.users)
+  // USER
+  const reduxCurrentUser = useSelector((state) => state.user.users)
+  // PROJECTS
   const reduxProjects = useSelector((state) => state.project.projects)
   const [currentUser, setCurrentUser] = useState(reduxCurrentUser)
-  
 
+  // ERRORS 
   const [errorMain, setErrorMain] = useState([])
-  const [authenticate, setAuthenticate] = useState([])
-  const [categories, setCategory] = useState([])
-
- 
- 
-
-  console.log(reduxCurrentUser)
+  // const [authenticate, setAuthenticate] = useState([])
 
 
 
   return (
     <>
       <ThemeProvider theme={theme}>
-      <Router>
-        <Header currentUser={currentUser} setCurrentUser={setCurrentUser} setErrorMain={setErrorMain} />
-        <div className="App" style={{ }}>
-          <Routes>
-            <Route exact path='/' element={<Home currentUser={currentUser} setErrorMain={setErrorMain} />} />
-            <Route path='/profile' element={<Profile currentUser={currentUser}/>} />
-            <Route path='/projects' element={<ProjectList />} />
-            <Route path='/posts' element={<PostList />} />
-            <Route path='/projects-all' element={<AllProjects />} />
-            <Route path='/posts-all' element={<AllPosts currentUser={currentUser} />} />
-            <Route path='/projects/:id' element={<ProjectItem currentUser={reduxCurrentUser}/>} />
-            <Route path='/create' element={<Create currentUser={currentUser} categories={categories} />} />
-            <Route path='/login' element={<Login currentUser={currentUser} setCurrentUser={setCurrentUser} errorMain={errorMain} setErrorMain={setErrorMain} />} />
-            <Route path='/categories/:type' element={<CategoryItem />} />
-            <Route path='/profile/:username' element={<UserProfile />} />
-          </Routes>
+        <Router>
+          <Header currentUser={currentUser} setCurrentUser={setCurrentUser} setErrorMain={setErrorMain} />
+          <div className="App" style={{}}>
+            <Routes>
+              <Route exact path='/' element={<Home currentUser={currentUser} setErrorMain={setErrorMain} />} />
+              <Route path='/profile' element={<Profile currentUser={currentUser} />} />
+              <Route path='/projects' element={<ProjectList />} />
+              <Route path='/posts' element={<PostList />} />
+              <Route path='/projects-all' element={<AllProjects />} />
+              <Route path='/posts-all' element={<AllPosts currentUser={currentUser} />} />
+              <Route path='/projects/:id' element={<ProjectItem currentUser={reduxCurrentUser} />} />
+              <Route path='/create' element={<Create currentUser={currentUser} />} />
+              <Route path='/login' element={<Login currentUser={currentUser} setCurrentUser={setCurrentUser} errorMain={errorMain} setErrorMain={setErrorMain} />} />
+              <Route path='/categories/:type' element={<CategoryItem />} />
+              <Route path='/profile/:username' element={<UserProfile />} />
+            </Routes>
 
-        </div>
-      </Router>
-    </ThemeProvider>
+          </div>
+        </Router>
+      </ThemeProvider>
 
     </>
   );

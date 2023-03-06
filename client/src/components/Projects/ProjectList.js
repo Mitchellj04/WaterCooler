@@ -9,35 +9,40 @@ import { useDispatch, useSelector } from 'react-redux';
 import { deleteProject } from '../../features/projects/ProjectSlice';
 import { del } from '../../features/projects/ProjectSlice';
 
-const ProjectList = ({project, setErrorMain}) => {
-    const [category, setCategory] = useState(project.categories)
-    const [projectUser, setProjectUser] = useState(project.user.username)
-    const [hideEditProject, setHideEditProject] = useState(false)
-    const navigate = useNavigate()
-    const dispatch = useDispatch()
-
+const ProjectList = ({project, setErrorMain}) => {  
+  
     // REDUX 
     const currentUser = useSelector((state) => state.user.users)
     const projects = useSelector((state) => state.project.projects)
+    const dispatch = useDispatch()
 
+    // STATE
+    const [category, setCategory] = useState(project.categories)
+    const [selected, setSelected] = useState('')
+    const [projectUser, setProjectUser] = useState(project.user.username)
+    const [hideEditProject, setHideEditProject] = useState(false)
+    const navigate = useNavigate()
+    
+    const handleCategory = (e) => {
+      e.preventDefault()
+      setSelected(e.target.value)
+      navigate(`/categories/${e.target.value}`)
+    }
 
+    // HANDLE EDIT WINDOW 
     const handleProjectOpen = () => {setHideEditProject(true)}
 
-    const mapCategory = category.map((data) => {
-        return <Button variant='outlined' style={{marginTop: 15}} key={data.id}>{data.code}</Button>
+    // CATERGORY BUTTONS 
+    const mapCategory = category.map((category) => {
+        return <Button variant='outlined' value={category.code} style={{margin: 5}} key={category.id} onClick={handleCategory}>{category.code}</Button>
     })
 
-    const hanldeProject = () => {
-      if (currentUser === null){
-        navigate('/login')
-        setErrorMain(["Please login to collaborate"])
-      }
-      else{ navigate(`/projects/${project.id}`)}}
-
+    // DELETE ACTION HANDLER 
     function handleDelete(){
       dispatch(deleteProject(project.id))
     }
 
+    // EDIT AND DELETE BUTTONS 
     function projectEdit(){
         if(currentUser === null){ return <></> }
         else if(currentUser.username === projectUser){ return <>
@@ -46,11 +51,21 @@ const ProjectList = ({project, setErrorMain}) => {
           <ProjectEdit project={project} hideEditProject={hideEditProject} setHideEditProject={setHideEditProject}/>
           </>}}
 
+    // HANDLE PROJECT CREATOR LINK
     function creator(){
       if(currentUser === null){ return <>{projectUser}</>}
       else if(currentUser.username === projectUser){ return <>{projectUser}</>}
       else { return <Link href={`/profile/${projectUser}`}>{projectUser}</Link>}}
 
+    // PROJECT COLLAB NAVIGATE 
+    const hanldeProject = () => {
+      if (currentUser === null){
+        navigate('/login')
+        setErrorMain(["Please login to collaborate"])
+      }
+      else{ navigate(`/projects/${project.id}`)}}
+
+    // HANDLE PROJECT COLLAB BUTTON
     function collabs(){
       if (currentUser === null){
         return<Button 
@@ -72,6 +87,7 @@ const ProjectList = ({project, setErrorMain}) => {
                 sx={{backgroundColor: 'secondary.light'}} 
                 onClick={hanldeProject} 
                 style={{marginTop: 15}}>Collaborate</Button>}}
+
 
   return (
     <div>

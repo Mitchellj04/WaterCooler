@@ -4,24 +4,28 @@ import { useDispatch } from 'react-redux'
 import { updatePost } from '../../features/posts/PostSlice'
 
 const PostEdit = ({ post, hideEditPost, setHideEditPost }) => {
+  // REDUX 
+  const dispatch = useDispatch()
 
+  // REACT STATE 
   const [postEdit, setPostEdit] = useState(post)
   const handlePostClose = () => { setHideEditPost(false) }
   const handleChange = (e) => { setPostEdit({ ...postEdit, [e.target.name]: e.target.value }) }
-  const dispatch = useDispatch()
+  
 
-  console.log(post)
-
+  // STYLE 
   const fieldStyle = {
     margin: '5px auto'
   }
 
+  // PARAMS FOR EDIT 
   const newPost = {
     title: postEdit.title,
     description: postEdit.description,
     github_link: postEdit.link
   }
 
+  // HANDLE EDIT 
   const handlePostEdit = (e) => {
     e.preventDefault()
     let id = post.id

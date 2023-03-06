@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import CreatePost from './Posts/CreatePost'
 import CreateProject from './Projects/CreateProject'
 
-const Create = ({currentUser, categories}) => {
+const Create = ({currentUser}) => {
 
     const [projectCreate, setProjectCreate] = useState(true)
 
@@ -22,14 +22,12 @@ const Create = ({currentUser, categories}) => {
     <Grid container>
     { projectCreate ? (
     <>
-        <CreateProject currentUser={currentUser} categories={categories}/>
+        <CreateProject currentUser={currentUser}/>
     </>): (
     <>
         <CreatePost currentUser={currentUser} />
     
     </>)}
-
-
     
     </Grid>
     </>

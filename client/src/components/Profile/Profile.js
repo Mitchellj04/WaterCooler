@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react'
-import { Box, Button, Grid, Paper, Typography } from '@mui/material'
+import React, { useEffect, useState } from 'react'
+import { Box, Button, Grid, Link, Paper, Typography } from '@mui/material'
 import EditIcon from '@mui/icons-material/Edit'
 import EditProfile from './EditProfile'
 import { useDispatch, useSelector } from 'react-redux'
@@ -7,107 +7,89 @@ import { fetchUser } from '../../features/users/UserSlice'
 import { fetchProjects } from '../../features/projects/ProjectSlice'
 import { fetchPosts } from '../../features/posts/PostSlice'
 
-const Profile = ({currentUser}) => {
+const Profile = ({ currentUser }) => {
 
     const [hideEditProfile, setHideEditProfile] = useState(false)
     const dispatch = useDispatch()
 
-    // REDUX 
+    // FETCH TO REDUX SLICE
     useEffect(() => {
         dispatch(fetchUser())
         dispatch(fetchProjects())
         dispatch(fetchPosts())
     }, [])
 
+    // REDUX 
     const user = useSelector((state) => state.user.users)
     const projects = useSelector((state) => state.project.projects)
     const posts = useSelector((state) => state.post.posts)
 
-    
-   
-    const handleProfileOpen = () => {setHideEditProfile(true)}
-    
+    // HANDLE EDIT MENU 
+    const handleProfileOpen = () => { setHideEditProfile(true) }
 
-    console.log(user.username)
-    console.log(projects)
-
-    // function listProjects(){
-    //     if(projects.user.username  === user.username){
-    //         projects.map((project) => {
-    //                     return <Box key={project.id}>
-    //                         <Paper style={{backgroundColor: 'inherit', margin: 10}}>
-    //                             <Typography>{project.title}</Typography>
-    //                             <Typography>{project.description}</Typography>
-    //                             <Typography>{project.github_link}</Typography>
-    //                             <Button variant="contained" color="secondary">Collaborations</Button>
-    //                         </Paper>
-    //                     </Box>
-    //                 })
-    //     }
-    //     else{
-    //         return <>No projects available</>
-    //     }
-    // }
-
-
-
+    // USER PROJECTS 
     const listProjects = projects.map((project) => {
-        if(project.user.username === user.username){
-        return <Box key={project.id}>
-            <Paper style={{backgroundColor: 'inherit', margin: 10}}>
-                <Typography>{project.title}</Typography>
-                <Typography>{project.description}</Typography>
-                <Typography>{project.github_link}</Typography>
-                <Button variant="contained" color="secondary">Collaborations</Button>
-            </Paper>
-        </Box>}
-        else{
+        if (project.user.username === user.username) {
+            return <Box key={project.id}>
+                <Paper style={{ backgroundColor: 'inherit', margin: 10 }}>
+                    <Typography variant='h6' style={{padding: 5, fontWeight: 'Bold'}}>{project.title}</Typography>
+                    <Typography>{project.description}</Typography>
+                    <Typography>Link: <Link>{project.github_link}</Link></Typography>
+                    <Button variant="contained" color="secondary" sx={{backgroundColor: 'secondary.light'}} style={{margin: 20}}>Collaborations</Button>
+                </Paper>
+            </Box>
+        }
+        else {
             return <></>
         }
     })
 
+    // USER POSTS 
     const listPosts = posts.map((post) => {
-        if(post.user.username === user.username){
-      return <Box key={post.id}>
-          <Paper style={{backgroundColor: 'inherit', margin: 10}}>
-              <Typography>{post.title}</Typography>
-              <Typography>{post.description}</Typography>
-              <Typography>{post.link}</Typography>
-              <Button variant="contained" color="secondary">comments</Button>
-          </Paper>
-      </Box>}
-      else{
-        return <></>
-      }
-  })
-  return (
-    <>
-    <Grid container>
-    <Grid item xs={12}>
-     <Box elevation="20" style={{padding: 100}}>
-         <Typography variant='h4'>Profile</Typography>
-         <Button className='task-button-edit' onClick={handleProfileOpen} startIcon={<EditIcon className='editButton'/>}></Button>
-         <EditProfile hideEditProfile={hideEditProfile} setHideEditProfile={setHideEditProfile}/>
-       <Paper>
-           <Typography variant='h6' style={{fontWeight: "Bold"}}>Username: </Typography>{user.username}
-          <Typography variant='h6' style={{fontWeight: "Bold"}}>Fullname: </Typography>{user.name}
-           <Typography variant='h6' style={{fontWeight: "Bold"}}>Age: </Typography>{user.age}
-          <Typography variant='h6' style={{fontWeight: "Bold"}}>Experience: </Typography>{user.experience}
-          <Typography variant='h6' style={{fontWeight: "Bold"}}>Bio: </Typography>{user.bio}
-       </Paper>
-       </Box>
-        </Grid>
-       <Grid item xs={6}>
-            <Typography variant="h4">Projects</Typography>
-           {listProjects}
-       </Grid>
-       <Grid item xs={6}>
-            <Typography variant="h4">Posts</Typography>
-            {listPosts}
-       </Grid>
-    </Grid>
-    </>
-  )
+        if (post.user.username === user.username) {
+            return <Box key={post.id}>
+                <Paper style={{ backgroundColor: 'inherit', margin: 10 }}>
+                    <Typography variant='h6' style={{padding: 5, fontWeight: 'Bold'}}>{post.title}</Typography>
+                    <Typography>{post.description}</Typography>
+                    <Typography>Link: <Link>{post.link}</Link></Typography>
+                    <Button variant="contained" color="secondary" sx={{backgroundColor: 'secondary.light'}} style={{margin: 20}}>comments</Button>
+                </Paper>
+            </Box>
+        }
+        else {
+            return <></>
+        }
+    })
+
+    return (
+        <>
+            <Grid container style={{ paddingTop: 100 }}>
+                <Grid item xs={10} sx={{ borderBottom: 1}}><Typography variant='h4'>Profile</Typography></Grid>
+                <Grid item xs={2} sx={{ borderBottom: 1}}>
+                    <Button className='task-button-edit' onClick={handleProfileOpen} startIcon={<EditIcon className='editButton' />}></Button>
+                    <EditProfile hideEditProfile={hideEditProfile} setHideEditProfile={setHideEditProfile} />
+                </Grid>
+                <Grid item xs={2}><Typography variant='h6' style={{ fontWeight: "Bold", textAlign: 'left', marginLeft: 50 }}>Username:</Typography></Grid>
+                <Grid item xs={10} style={{ textAlign: 'left' }}>{user.username}</Grid>
+                <Grid item xs={2}><Typography variant='h6' style={{ fontWeight: "Bold", textAlign: 'left', marginLeft: 50 }}>Fullname: </Typography></Grid>
+                <Grid item xs={10} style={{ textAlign: 'left' }}>{user.name}</Grid>
+                <Grid item xs={2}><Typography variant='h6' style={{ fontWeight: "Bold", textAlign: 'left', marginLeft: 50 }}>Age: </Typography></Grid>
+                <Grid item xs={10} style={{ textAlign: 'left' }}>{user.age}</Grid>
+                <Grid item xs={2}><Typography variant='h6' style={{ fontWeight: "Bold", textAlign: 'left', marginLeft: 50 }}>Experience: </Typography></Grid>
+                <Grid item xs={10} style={{ textAlign: 'left' }}>{user.experience}</Grid>
+                <Grid item xs={2}><Typography variant='h6' style={{ fontWeight: "Bold", textAlign: 'left', marginLeft: 50 }}>Bio: </Typography></Grid>
+                <Grid item xs={10} style={{ textAlign: 'left' }}>{user.bio}</Grid>
+                <Grid item xs={12}></Grid>
+
+                <Grid item xs={6} style={{marginTop: 50}} sx={{ borderBottom: 1, borderRight: 1}}> <Typography variant="h4">Projects</Typography> </Grid>
+                <Grid item xs={6} style={{marginTop: 50}} sx={{ borderBottom: 1}}> <Typography variant="h4">Posts</Typography>  </Grid>
+                <Grid item xs={6} sx={{ borderRight: 1}}> {listProjects}</Grid>
+                <Grid item xs={6}> {listPosts}</Grid>
+                
+                
+            </Grid>
+        </>
+    )
 }
 
 export default Profile

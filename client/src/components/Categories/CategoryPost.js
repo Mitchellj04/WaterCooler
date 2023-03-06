@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Button, Paper, Typography } from '@mui/material'
+import { Box, Button, Link, Paper, Typography } from '@mui/material'
 
 const CategoryPost = ({post}) => {
   return (
@@ -7,7 +7,7 @@ const CategoryPost = ({post}) => {
         <Paper>
         <Typography>{post.title}</Typography>
           <Typography>{post.description}</Typography>
-          <Typography>{post.github_link}</Typography>
+          <Typography>Link: <Link>{post.link}</Link></Typography>
           {/* <Typography>Creator: {projectUser}</Typography> */}
           {/* {mapCategory} */}
           <Button variant='contained' color='secondary'>Comments

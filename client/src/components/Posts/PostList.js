@@ -45,15 +45,8 @@ const PostList = ({ post }) => {
 
   // HANDLE EMPTY COMMENT ALERT
   function emptyComment() {
-    if (comments.length > 0) {
-      return <>
-        {mapComments}
-      </>
-    }
-    else {
-      return <Alert severity='info'>Please add a comment to answer</Alert>
-    }
-  }
+    if (comments.length > 0) { return <> {mapComments} </> }
+    else { return <Alert severity='info'>Please add a comment to answer</Alert>}}
 
   // POST DELETE 
   function handleDelete() {
@@ -62,30 +55,20 @@ const PostList = ({ post }) => {
 
   // HANDLE IF USER IS LOGGED IN ENABLE BUTTONS
   function postEdit() {
-    if (currentUser === null) {
-      return <>
-
-      </>
-    }
-    else if (currentUser.username === postUser) {
-      return <>
+    if (currentUser === null) { return <></> }
+    else if (currentUser.username === postUser) { return <>
         <Button startIcon={<EditIcon className='editButton' onClick={handlePostOpen} />}></Button>
         <Button startIcon={<DeleteIcon color="secondary" className="deleteButton" onClick={handleDelete} />}></Button>
         <PostEdit post={post} hideEditPost={hideEditPost} setHideEditPost={setHideEditPost} />
-      </>
-    }
-  }
+      </>}}
 
   // HANDLE IF USER IS LOGGED IN ENABLE BUTTONS
   function createComment() {
     if (currentUser === null) { return <></> }
-    else {
-      return <>
+    else { return <>
         <Button onClick={handleCommentOpen} startIcon={<ReplyIcon />} style={{ position: "left" }}></Button>
         <CreateComment setHideCommentPost={setHideCommentPost} hideCommentPost={hideCommentPost} post={post} setComments={setComments} />
-      </>
-    }
-  }
+      </>}}
 
   // LINK TO USER PROFILE
   function creator(){
@@ -99,7 +82,7 @@ const PostList = ({ post }) => {
         <Box style={{paddingTop: 45}}>
           <Typography variant='h6' style={{ padding: 5, fontWeight: 'Bold' }}>{post.title}</Typography>
           <Typography variant='body1' style={{marginTop: 10}}>{post.description}</Typography>
-          <Typography variant='body1'>Link:<Link> {post.link}</Link></Typography>
+          <Typography variant='body1'>Link:<Link href={'http://www.google.com'}> {post.link}</Link></Typography>
           <Typography variant='body1'>Creator: {creator()}</Typography>
           {mapCategory}
         </Box>

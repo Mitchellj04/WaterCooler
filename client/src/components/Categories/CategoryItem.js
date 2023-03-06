@@ -30,7 +30,6 @@ const CategoryItem = () => {
       return <><Grid item xs={12}>
         <Typography variant='h2' style={{ paddingTop: 100 }}>{cat.code}</Typography>
         <Box style={{ padding: 25 }}>
-
         </Box>
       </Grid>
         <Grid item xs={6}>

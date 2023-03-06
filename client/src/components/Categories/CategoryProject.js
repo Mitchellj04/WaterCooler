@@ -1,4 +1,4 @@
-import { Box, Button, Paper, Typography } from '@mui/material'
+import { Box, Button, Link, Paper, Typography } from '@mui/material'
 import React from 'react'
 
 const CategoryProject = ({projects}) => {
@@ -12,7 +12,7 @@ const CategoryProject = ({projects}) => {
         <Paper>
         <Typography>{projects.title}</Typography>
           <Typography>{projects.description}</Typography>
-          <Typography>{projects.github_link}</Typography>
+          <Typography>Link: <Link>{projects.github_link}</Link></Typography>
           {/* <Typography>Creator: {projectUser}</Typography> */}
           {/* {mapCategory} */}
           <Button variant='contained' color='secondary'>Collaborate</Button>

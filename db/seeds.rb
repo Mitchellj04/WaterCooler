@@ -21,12 +21,12 @@ greg = User.create(username: "gregthomas", name: "Greg Thomas", password: "greg1
 
 
 # PROJECTS
-p1 = Project.create(title: "Ski-Buddy", description: "I am creating a project for north east skiers to be able to talk about mountains.", github_link: "ski-buddy/mitchellj04/github.com", user_id: justin.id)
-p2 = Project.create(title: "Gaming-AU", description: "This is a gaming website for Australia", github_link: "gaming-buddy/tommy/github.com", user_id: tommy.id)
-p3 = Project.create(title: "Ski-Buddy 1", description: "I am creating a project for north east skiers to be able to talk about mountains.", github_link: "ski-buddy/mitchellj04/github.com", user_id: justin.id)
-p4 = Project.create(title: "Movie Rating Website", description: "I am creating a website similar to IDMB where you can talk to other people about the movie and see their reviews.", github_link: "movie-ranked/tommyxioma/github.com", user_id: tommy.id)
-p5 = Project.create(title: "Ski-Buddy 3", description: "I am creating a project for north east skiers to be able to talk about mountains.", github_link: "ski-buddy/mitchellj04/github.com", user_id: justin.id)
-p6 = Project.create(title: "Ski-Buddy 4", description: "I am creating a project for north east skiers to be able to talk about mountains.", github_link: "ski-buddy/mitchellj04/github.com", user_id: justin.id)
+p1 = Project.create(title: "Ski-Buddy", description: "I am creating a project for north east skiers to be able to talk about mountains.", github_link: "https://github.com/Mitchellj04/ski-buddy", user_id: justin.id)
+p2 = Project.create(title: "Adeventure-Blog", description: "This is a blog website that I made from my travels in Australia", github_link: "https://github.com/Mitchellj04/adventureblog", user_id: tommy.id)
+p3 = Project.create(title: "Ski-Buddy 1", description: "I am creating a project for north east skiers to be able to talk about mountains.", github_link: "https://github.com/Mitchellj04/ski-buddy", user_id: justin.id)
+p4 = Project.create(title: "Movie Rating Website", description: "I am creating a website similar to IDMB where you can talk to other people about the movie and see their reviews.", github_link: "https://github.com/Mitchellj04/phase-1-project-", user_id: tommy.id)
+p5 = Project.create(title: "Ski-Buddy 3", description: "I am creating a project for north east skiers to be able to talk about mountains.", github_link: "https://github.com/Mitchellj04/ski-buddy", user_id: justin.id)
+p6 = Project.create(title: "Ski-Buddy 4", description: "I am creating a project for north east skiers to be able to talk about mountains.", github_link: "https://github.com/Mitchellj04/ski-buddy", user_id: justin.id)
 
 
 # POSTS 

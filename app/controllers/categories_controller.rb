@@ -1,5 +1,7 @@
 class CategoriesController < ApplicationController
     skip_before_action :authorize, only: :index
+    rescue_from ActiveRecord::RecordInvalid, with: :category_errors
+
 
     def index 
         category = Category.all
@@ -12,7 +14,7 @@ class CategoriesController < ApplicationController
     end
 
     def create 
-        category = Category.create(category_params)
+        category = Category.create!(category_params)
         render json: category, status: :created
     end
 
@@ -31,6 +33,10 @@ class CategoriesController < ApplicationController
 
     def category_params
         params.permit(:code)
+    end
+
+    def category_errors 
+        render json: {errors:["This language already exists"]}
     end
 
     def category_find

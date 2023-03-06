@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchCategory } from '../../features/category/CategorySlice';
+import CreateCategory from './CreateCategory';
 
 
 const CategoryMain = () => {
@@ -14,6 +15,8 @@ const CategoryMain = () => {
   }, [])
 
   const [selected, setSelected] = useState('')
+  const [hideNewCategory, setHideNewCategory] = useState(false)
+  const handleCategoryOpen = () => { setHideNewCategory(true) }
   const categories = useSelector((state) => state.category.categories)
   const navigate = useNavigate()
 
@@ -36,10 +39,13 @@ const CategoryMain = () => {
 
   
    return (
-    <>
-    <Grid>   
+    <><div style={{height:100}}>
+    <Grid>
+      
       {buttonMap}
-    </Grid> 
+      <Button onClick={handleCategoryOpen}>+ Add New</Button>
+      <CreateCategory setHideNewCategory={setHideNewCategory} hideNewCategory={hideNewCategory}/>
+    </Grid> </div> 
     </>
   )
 }
