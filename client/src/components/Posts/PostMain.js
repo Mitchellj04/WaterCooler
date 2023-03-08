@@ -13,9 +13,6 @@ const PostMain = ({currentUser}) => {
 
   // REDUX
   const postRedux = useSelector((state) => state.post.posts)
-  console.log(postRedux)
-
-
   
   // MAP POSTS TO HOME
   const mapPosts = postRedux.map((post) => <PostList post={post} comments={post.comments} key={post.id} currentUser={currentUser}/>)

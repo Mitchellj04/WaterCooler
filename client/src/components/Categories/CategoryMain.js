@@ -6,46 +6,47 @@ import { fetchCategory } from '../../Redux/category/CategorySlice';
 import CreateCategory from './CreateCategory';
 
 
-const CategoryMain = () => {
-
+const CategoryMain = ({setErrorMain}) => {
+  
+  const navigate = useNavigate()
   const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(fetchCategory())
   }, [])
 
-  const [selected, setSelected] = useState('')
+  // REACT STATE 
   const [hideNewCategory, setHideNewCategory] = useState(false)
+
+  // OPEN CATEGORY CREATE
   const handleCategoryOpen = () => { setHideNewCategory(true) }
+
+  // REDUX
+  const currentUser = useSelector((state) => state.user.users)
   const categories = useSelector((state) => state.category.categories)
-  const navigate = useNavigate()
 
-
-
-
-  
+  // BUTTON CLICK HANDLER
   const handleClick = (e) => {
     e.preventDefault()
-    setSelected(e.target.value)
-    navigate(`/categories/${e.target.value}`)
-  }
+    if(currentUser === null){
+      setErrorMain(['Please login first'])
+      navigate('/login')
+    }
+    else { navigate(`/categories/${e.target.value}`) }}
 
+  // ALL CATEGORY BUTTONS
   const buttonMap = categories.map((category) => {
-    return <Box style={{paddingTop:20}} key={category.id}>
-        <Button id={category.id} value={category.code} variant="contained" onClick={handleClick}>{category.code}</Button>
-    </Box>
+    return <Box style={{ paddingTop: 20 }} key={category.id}> <Button id={category.id} value={category.code} variant="contained" onClick={handleClick}>{category.code}</Button> </Box>
   })
 
 
-  
-   return (
-    <><div style={{height:100}}>
-    <Grid>
-      
-      {buttonMap}
-      <Button onClick={handleCategoryOpen}>+ Add New</Button>
-      <CreateCategory setHideNewCategory={setHideNewCategory} hideNewCategory={hideNewCategory}/>
-    </Grid> </div> 
+  return (
+    <><div style={{ height: 100 }}>
+      <Grid>
+        {buttonMap}
+        <Button onClick={handleCategoryOpen}>+ Add New</Button>
+        <CreateCategory setHideNewCategory={setHideNewCategory} hideNewCategory={hideNewCategory} />
+      </Grid> </div>
     </>
   )
 }

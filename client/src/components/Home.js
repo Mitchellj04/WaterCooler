@@ -12,7 +12,7 @@ const Home = ({currentUser, setErrorMain, categories}) => {
     <Grid container style={{paddingTop: 100}}> 
         <Grid item xs={2}>
             <Typography variant="h4">Categories</Typography>
-            <CategoryMain />
+            <CategoryMain setErrorMain={setErrorMain}/>
         </Grid>
                 <Grid item xs={5}>
                     <Typography variant="h4" style={{paddingBottom:25}}>Projects</Typography>
