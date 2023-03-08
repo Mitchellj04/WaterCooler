@@ -1,11 +1,15 @@
 import { Alert, Button } from '@mui/material'
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import LoginForm from './LoginForm'
 import SignUp from './SignUp'
 
 const Login = ({currentUser, setCurrentUser}) => {
 
   const [loggedIn, setLoggedIn] = useState(true)
+  const userLoggedIn = useSelector((state) => state.user.loggedIn)
+  const navigate = useNavigate()
 
   const backgroundStyle = {
     backgroundColor: "#6c95e9",
@@ -17,7 +21,7 @@ const Login = ({currentUser, setCurrentUser}) => {
   }
 
 
-
+  if(userLoggedIn === true){ navigate('/')}
   return (
     <div style={backgroundStyle}>
     { loggedIn ? (

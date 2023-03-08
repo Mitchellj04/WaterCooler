@@ -33,10 +33,11 @@ export const signup = createAsyncThunk('user/singup', ({ username, password, age
 
 // DELETE SESSION
 export const logout = createAsyncThunk('user/logout', () => {
-    return fetch('/logout', {
+        fetch('/logout', {
         method: "DELETE"
     })
         .then((resp) => resp.json())
+        .then((data) => data)
 })
 
 // EDIT USER 
@@ -102,7 +103,9 @@ const userSlice = createSlice({
                     state.loggedIn = true
                 }
             })
-            .addCase(logout.fulfilled, (state) => {
+            .addCase(logout.fulfilled, (state, {payload}) => {
+                console.log('loggedOut')
+                console.log({payload})
                 state.users = null
                 state.loggedIn = false
             })

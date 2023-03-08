@@ -35,7 +35,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
 
-function Sidenav({ setErrorMain}) {
+function Sidenav({ setErrorMain }) {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
   const navigate = useNavigate()
@@ -43,14 +43,21 @@ function Sidenav({ setErrorMain}) {
 
   const currentUser = useSelector((state) => state.user.users)
 
-  const handleDrawerOpen = () => { setOpen(true);};
+  const handleDrawerOpen = () => { setOpen(true); };
 
-  const handleDrawerClose = () => { setOpen(false);};
+  const handleDrawerClose = () => { setOpen(false); };
 
-  function handleLogout(){ dispatch(logout())}
+  // function handleLogout() {  }
+
+  const handleLogout = (e) => {
+    console.log(e.target.value)
+    console.log("Logged Out!")
+    dispatch(logout())
+    navigate('/')
+  }
 
   const handleProfile = () => {
-    if (currentUser === null){
+    if (currentUser === null) {
       navigate('/login')
       setErrorMain(["Please login to see profile"])
     }
@@ -60,7 +67,7 @@ function Sidenav({ setErrorMain}) {
   }
 
   const handleLogin = () => {
-    if (currentUser === null){
+    if (currentUser === null) {
       navigate('/login')
       setErrorMain([])
     }
@@ -69,72 +76,74 @@ function Sidenav({ setErrorMain}) {
     }
   }
 
- const allProjects = () => {
-  if (currentUser === null){
-    navigate('/login')
+  const allProjects = () => {
+    if (currentUser === null) {
+      navigate('/login')
       setErrorMain(["Please login to see projects"])
-  }else{
-    navigate('/projects-all')
-  }
-    
+    } else {
+      navigate('/projects-all')
+    }
+
   }
 
   const allPosts = () => {
-    if (currentUser === null){
+    if (currentUser === null) {
       navigate('/login')
       setErrorMain(["Please login to see posts"])
-    }else{
+    } else {
       navigate('/posts-all')
-    }}
+    }
+  }
 
   const createPage = () => {
-    if (currentUser === null){
+    if (currentUser === null) {
       navigate('/login')
       setErrorMain(["Please login to create"])
     }
-    else{
+    else {
       navigate('/create')
-    }}
+    }
+  }
 
 
   const handleLog = () => {
     if (currentUser === null) {
-     return <ListItem key={'login'} disablePadding>
-      <ListItemButton onClick={handleLogin}>
-        <ListItemIcon>
-                  <LoginIcon />
-                </ListItemIcon>
-                <ListItemText primary={'login'} />
-              </ListItemButton>
-            </ListItem>
+      return <ListItem key={'login'} disablePadding>
+        <ListItemButton onClick={handleLogin}>
+          <ListItemIcon>
+            <LoginIcon />
+          </ListItemIcon>
+          <ListItemText primary={'login'} />
+        </ListItemButton>
+      </ListItem>
     }
-    else{
+    else {
       return <ListItem key={'logout'} disablePadding>
-      <ListItemButton onClick={handleLogout}>
-        <ListItemIcon>
-                  <LogoutIcon />
-                </ListItemIcon>
-                <ListItemText primary={'logout'} />
-              </ListItemButton>
-            </ListItem>
+        <ListItemButton onClick={handleLogout}>
+          <ListItemIcon>
+            <LogoutIcon />
+          </ListItemIcon>
+          <ListItemText primary={'logout'} />
+        </ListItemButton>
+      </ListItem>
     }
   }
 
 
   return (
     <Box sx={{ display: 'flex' }}>
-              <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            sx={{ mr: 2, ...(open && { display: 'none' }) }}
-          >
-            <MenuIcon />
-          </IconButton>
-        </Toolbar>
-             <Drawer
+      <Toolbar>
+        <IconButton
+          color="inherit"
+          aria-label="open drawer"
+          onClick={handleDrawerOpen}
+          edge="start"
+          sx={{ mr: 2, ...(open && { display: 'none' }) }}
+        >
+          <MenuIcon />
+        </IconButton>
+      </Toolbar>
+      <Drawer
         sx={{
           flexShrink: 0,
           '& .MuiDrawer-paper': {
@@ -158,7 +167,7 @@ function Sidenav({ setErrorMain}) {
               <ListItemIcon>
                 <FeedIcon />
               </ListItemIcon>
-              <ListItemText primary="Posts"/>
+              <ListItemText primary="Posts" />
             </ListItemButton>
           </ListItem>
           <ListItem>
@@ -166,15 +175,15 @@ function Sidenav({ setErrorMain}) {
               <ListItemIcon>
                 <DynamicFeedIcon />
               </ListItemIcon>
-              <ListItemText primary="Projects"/>
+              <ListItemText primary="Projects" />
             </ListItemButton>
-          </ListItem>         
+          </ListItem>
           <ListItem>
             <ListItemButton >
               <ListItemIcon>
                 <FeedIcon />
               </ListItemIcon>
-              <ListItemText primary="Categories"/>
+              <ListItemText primary="Categories" />
             </ListItemButton>
           </ListItem>
           <ListItem>
@@ -182,21 +191,21 @@ function Sidenav({ setErrorMain}) {
               <ListItemIcon>
                 <DynamicFeedIcon />
               </ListItemIcon>
-              <ListItemText primary="Create"/>
+              <ListItemText primary="Create" />
             </ListItemButton>
           </ListItem>
         </List>
         <Divider />
         <List>
-            <ListItem key={'profile'} disablePadding>
-              <ListItemButton onClick={handleProfile}>
-                <ListItemIcon>
-                  <AccountCircleIcon />
-                </ListItemIcon>
-                <ListItemText primary={'profile'} />
-              </ListItemButton>
-            </ListItem>
-            {handleLog()}
+          <ListItem key={'profile'} disablePadding>
+            <ListItemButton onClick={handleProfile}>
+              <ListItemIcon>
+                <AccountCircleIcon />
+              </ListItemIcon>
+              <ListItemText primary={'profile'} />
+            </ListItemButton>
+          </ListItem>
+          {handleLog()}
         </List>
       </Drawer>
     </Box>

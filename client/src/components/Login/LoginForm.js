@@ -1,20 +1,19 @@
 import { Alert, Box, Button, Grid, Paper, TextField, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router'
 import { login } from '../../Redux/users/UserSlice'
 
 const LoginForm = () => {
 
     //REDUX
     const dispatch = useDispatch()
-    const navigate = useNavigate()
+
     const user = useSelector((state) => state.user.users)
     const errors = useSelector((state) => state.user.errors)
-    const loggedIn = useSelector((state) => state.user.loggedIn)
+
     console.log(user)
     console.log(errors)
-    console.log(loggedIn)
+
 
     //REACT STATE
     const [username, setUsername] = useState('')
@@ -34,24 +33,10 @@ const LoginForm = () => {
         margin: '100px auto'
     }
 
-    const handleSubmit = () => {
-       console.log(loggedIn)
-    }
-
 
     const handleSubmitRedux = (e) => {
-        console.log(loggedIn)
-        console.log(user)
         e.preventDefault()
-        dispatch(login(userData))
-        if (loggedIn === true){
-            navigate('/login') 
-
-        }else{
-           navigate('/login')
-
-        }
-        
+        dispatch(login(userData))  
     }
 
   return (
@@ -79,7 +64,7 @@ const LoginForm = () => {
                             value={password} 
                             style={fieldStyle}
                             onChange={(e) => setPassword(e.target.value)}/>
-                        <Button type="submit" variant='contained' onClick={handleSubmit}>Submit</Button>
+                        <Button type="submit" variant='contained'>Submit</Button>
                         {errors.map((err) => <Alert key="id" severity='error'>{err}</Alert>)}
                     </form>
                 </Paper>

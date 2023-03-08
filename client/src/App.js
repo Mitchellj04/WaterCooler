@@ -1,6 +1,6 @@
 import './App.css';
 import { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import Header from './components/Header';
 import Home from './components/Home';
 import ProjectList from './components/Projects/ProjectList';
@@ -72,13 +72,14 @@ function App() {
   const reduxCurrentUser = useSelector((state) => state.user.users)
   // PROJECTS
   const reduxProjects = useSelector((state) => state.project.projects)
+  const loggedIn = useSelector((state) => state.user.loggedIn)
   const [currentUser, setCurrentUser] = useState(reduxCurrentUser)
 
   // ERRORS 
   const [errorMain, setErrorMain] = useState([])
   // const [authenticate, setAuthenticate] = useState([])
 
-
+  // const navigate = useNavigate()
 
   return (
     <>
