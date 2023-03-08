@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import UserSlice from "../features/users/UserSlice";
-import ProjectSlice from "../features/projects/ProjectSlice";
-import PostSlice from "../features/posts/PostSlice";
-import CategorySlice from "../features/category/CategorySlice";
-import CommentSlice from "../features/comment/CommentSlice";
-import AllUserSlice from "../features/users/AllUserSlice";
+import UserSlice from "../Redux/users/UserSlice";
+import ProjectSlice from "../Redux/projects/ProjectSlice";
+import PostSlice from "../Redux/posts/PostSlice";
+import CategorySlice from "../Redux/category/CategorySlice";
+import CommentSlice from "../Redux/comment/CommentSlice";
+import AllUserSlice from "../Redux/users/AllUserSlice";
 
 const store =  configureStore({
     reducer: {

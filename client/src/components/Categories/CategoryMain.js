@@ -2,7 +2,7 @@ import { Box, Button, Grid, Paper } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchCategory } from '../../features/category/CategorySlice';
+import { fetchCategory } from '../../Redux/category/CategorySlice';
 import CreateCategory from './CreateCategory';
 
 

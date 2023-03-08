@@ -1,7 +1,7 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material'
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { updatePost } from '../../features/posts/PostSlice'
+import { updatePost } from '../../Redux/posts/PostSlice'
 
 const PostEdit = ({ post, hideEditPost, setHideEditPost }) => {
   // REDUX 

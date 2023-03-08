@@ -47,6 +47,27 @@ export const fetchProject = createAsyncThunk('project/fetchProject', (id) => {
     .then((data) => data)
 })
 
+export const addProjectCollab = createAsyncThunk('project/addProjectCollab', (data) => {
+    return fetch('/projects_collab', {
+        method: "POST",
+        headers: {"Content-Type": "Application/json"},
+        body: JSON.stringify(data)
+    })
+    .then((resp) => resp.json())
+    .then((data) => data)
+})
+
+export const acceptedCollab = createAsyncThunk('project/acceptedCollab', (data) => {
+    return fetch('/update_collab', {
+        method: "PATCH",
+        headers: {"Content-Type": "Application/json"},
+        body: JSON.stringify(data)
+    })
+    .then((resp) => resp.json())
+    .then((data) => data)
+    
+})
+
 const initialState = {
     projects: [],
     errors: []
@@ -88,7 +109,24 @@ const projectSlice = createSlice({
             }
         })
         .addCase(fetchProject.fulfilled, (state, action) => {
-                state.projects = action.payload
+                console.log(action.payload)
+                state.projects.filter()
+        })
+        .addCase(addProjectCollab.fulfilled, (state, {payload}) => {
+            console.log(payload)
+            const index = state.projects.findIndex((project) => project.id === payload.id)
+            state.projects[index] = {
+                ...state.projects[index],
+                ...payload
+            }
+        })
+        .addCase(acceptedCollab.fulfilled, (state, {payload}) => {
+            console.log(payload.id)
+            const index = state.projects.findIndex((project) => project.id === payload.id)
+            state.projects[index] = {
+                ...state.projects[index],
+                ...payload
+            }
         })
     }
 })

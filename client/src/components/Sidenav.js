@@ -21,7 +21,7 @@ import FeedIcon from '@mui/icons-material/Feed';
 import DynamicFeedIcon from '@mui/icons-material/DynamicFeed';
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
-import { logout } from '../features/users/UserSlice';
+import { logout } from '../Redux/users/UserSlice';
 
 const drawerWidth = 240;
 

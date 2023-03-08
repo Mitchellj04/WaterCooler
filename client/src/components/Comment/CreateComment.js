@@ -2,8 +2,8 @@ import React, {useState} from 'react'
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 // import { createComment } from '../../features/comment/CommentSlice'
-import { postComment } from '../../features/posts/PostSlice'
-import { createComment } from '../../features/comment/CommentSlice'
+import { createPostComment, postComment } from '../../Redux/posts/PostSlice'
+import { createComment } from '../../Redux/comment/CommentSlice'
 
 const CreateComment = ({hideCommentPost, setHideCommentPost, post}) => {
 
@@ -16,17 +16,19 @@ const CreateComment = ({hideCommentPost, setHideCommentPost, post}) => {
   const dispatch = useDispatch()
   
   // FETCH PARAMS
-    const comment = {
+    const data ={
+    id: post.id,
+    comment:{
       post_id: post.id,
       user_id: currentUser.id,
       answer
-    }
+    }}
 
   // CREATE NEW COMMENT 
   const handleCommentCreate = (e) => {
     e.preventDefault()
-    console.log(comment)
-    dispatch(createComment(comment))
+    console.log(data)
+    dispatch(createPostComment(data))
   }
 
   return (

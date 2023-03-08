@@ -35,6 +35,24 @@ export const updatePost = createAsyncThunk('post/updatePost', ({id, newPost}) =>
     return {id, newPost}
 })
 
+export const createPostComment = createAsyncThunk('post/crearePostComment', (data) => {
+    console.log(data)
+    return fetch('/postComment', {
+        method: "POST",
+        headers: {"Content-Type": "Application/json"},
+        body: JSON.stringify(data)
+    })
+    .then((resp) => resp.json())
+    .then((data) => data) 
+})
+
+export const deletePostComment = createAsyncThunk('post/deletePostComment', (id) => {
+    fetch(`/comment_delete/${id}`, {
+        method: "DELETE",
+        headers: {"Conent-Type": "application/json"}
+    })
+    return id
+})
  
 const initialState = {
     posts: [],
@@ -70,6 +88,17 @@ const postSlice = createSlice({
                 ...state.posts[index],
                 ...payload.newPost
             }
+        })
+        .addCase(createPostComment.fulfilled, (state, action) => {
+            console.log(state.comments)
+            let index = state.posts.findIndex((post) => post.id === action.payload.id)
+            state.posts[index] = {
+                ...state.posts[index],
+                ...action.payload
+            }
+        })
+        .addCase(deletePostComment.fulfilled, (state,action) => {
+
         })
     }
 })

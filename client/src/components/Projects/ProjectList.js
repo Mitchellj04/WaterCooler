@@ -6,8 +6,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit'
 import ProjectEdit from './ProjectEdit';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteProject } from '../../features/projects/ProjectSlice';
-import { del } from '../../features/projects/ProjectSlice';
+import { deleteProject } from '../../Redux/projects/ProjectSlice';
+import { del } from '../../Redux/projects/ProjectSlice';
 
 const ProjectList = ({project, setErrorMain}) => {  
   
@@ -94,7 +94,7 @@ const ProjectList = ({project, setErrorMain}) => {
         <Box style={{paddingTop: 25}}>
         <Typography variant='h6' style={{padding: 5, fontWeight: 'Bold'}}>{project.title}</Typography>
         <Typography style={{marginTop:10}}>{project.description}</Typography>
-        <Typography>Link: <Link>{project.github_link}</Link></Typography>
+        <Typography>Link: <Link href={project.github_link}>{project.github_link}</Link></Typography>
         <Typography style={{marginTop:10}}>Creator: {creator()}</Typography>
         {mapCategory}
         <div>

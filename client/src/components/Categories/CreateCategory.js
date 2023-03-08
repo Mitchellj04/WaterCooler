@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
-import { createCategory } from '../../features/category/CategorySlice'
+import { createCategory } from '../../Redux/category/CategorySlice'
 
 const CreateCategory = ({ setHideNewCategory, hideNewCategory }) => {
 
@@ -11,7 +11,6 @@ const CreateCategory = ({ setHideNewCategory, hideNewCategory }) => {
     const handleCategoryClose = () => { setHideNewCategory(false) }
     const error = useSelector((state) => state.category.errors)
 
-    console.log(error)
 
     const code = {
         code: language

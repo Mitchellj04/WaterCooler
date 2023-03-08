@@ -3,9 +3,9 @@ import { Box, Button, Grid, Link, Paper, Typography } from '@mui/material'
 import EditIcon from '@mui/icons-material/Edit'
 import EditProfile from './EditProfile'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchUser } from '../../features/users/UserSlice'
-import { fetchProjects } from '../../features/projects/ProjectSlice'
-import { fetchPosts } from '../../features/posts/PostSlice'
+import { fetchUser } from '../../Redux/users/UserSlice'
+import { fetchProjects } from '../../Redux/projects/ProjectSlice'
+import { fetchPosts } from '../../Redux/posts/PostSlice'
 
 const Profile = ({ currentUser }) => {
 

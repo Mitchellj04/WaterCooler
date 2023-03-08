@@ -27,11 +27,26 @@ class PostsController < ApplicationController
         post.update(post_params)
         render json: post, status: 200
     end
+    
+    def updateComment 
+        post = find_post
+        comment = Comment.create!(comment_params)
+        find_post.comments << comment 
+        render json: find_post
+    end
+
 
     def destroy
         post = find_post
         post.delete
         head :no_content
+    end
+
+    def commentDelete
+        comment = find_comment
+        comment.delete 
+        post = find_post
+        post.comments.splice(0)
     end
 
 
@@ -48,4 +63,9 @@ class PostsController < ApplicationController
     def post_params
         params.require(:post).permit(:title, :description, :link, :image, :user_id)
     end
+
+    def comment_params
+        params.require(:comment).permit(:answer, :user_id, :post_id)
+    end
+
 end

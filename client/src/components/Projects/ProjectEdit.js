@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material'
 import { useDispatch } from 'react-redux'
-import { updateProject } from '../../features/projects/ProjectSlice'
+import { updateProject } from '../../Redux/projects/ProjectSlice'
 
 const ProjectEdit = ({project, hideEditProject, setHideEditProject}) => {
 

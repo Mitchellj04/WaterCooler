@@ -2,7 +2,7 @@ import { Box, Grid, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router'
-import { fetchCategoryType } from '../../features/category/CategorySlice'
+import { fetchCategoryType } from '../../Redux/category/CategorySlice'
 import CategoryPost from './CategoryPost'
 import CategoryProject from './CategoryProject'
 

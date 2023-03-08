@@ -1,7 +1,7 @@
 import { Box, Button, Grid, Paper, TextField, Typography, Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel, Alert, } from '@mui/material'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { createPosts } from '../../features/posts/PostSlice'
+import { createPosts } from '../../Redux/posts/PostSlice'
 
 const CreatePost = () => {
 

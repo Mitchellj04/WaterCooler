@@ -2,7 +2,7 @@ import React from 'react'
 import { useState, useEffect } from "react";
 import ProjectList from './ProjectList'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchProjects } from '../../features/projects/ProjectSlice';
+import { fetchProjects } from '../../Redux/projects/ProjectSlice';
 
 const ProjectMain = ({projects, setErrorMain}) => {
   const dispatch = useDispatch()

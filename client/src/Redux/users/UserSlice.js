@@ -56,7 +56,8 @@ export const editUser = createAsyncThunk('user/editUSer', ({ id, updatedUser }) 
 
 const initialState = {
     users: [],
-    errors: null
+    loggedIn: false,
+    errors: []
 }
 
 const userSlice = createSlice({
@@ -70,22 +71,25 @@ const userSlice = createSlice({
             })
             .addCase(fetchUser.fulfilled, (state, action) => {
                 if (action.payload.errors) {
-                    state.errors = action.payload
                     state.users = null
                 }
                 else {
                     state.users = action.payload
-                    state.errors = null
+                    state.errors = []
                 }
             })
 
             .addCase(login.fulfilled, (state, action) => {
                 if (action.payload.errors) {
-                    state.errors = action.payload
+                    console.log(action.payload)
+                    state.errors = action.payload.errors
+                    state.loggedIn = false
                     state.users = null
                 }
                 else {
+                    state.loggedIn = true
                     state.users = action.payload
+                    state.errors = []
                 }
 
             })
@@ -95,13 +99,15 @@ const userSlice = createSlice({
                 }
                 else {
                     state.users = action.payload
+                    state.loggedIn = true
                 }
             })
             .addCase(logout.fulfilled, (state) => {
                 state.users = null
+                state.loggedIn = false
             })
             .addCase(editUser.fulfilled, (state, { payload }) => {
-            
+                state.users = payload
 
             })
     }

@@ -37,6 +37,21 @@ skip_before_action :authorize, only: [:index, :create]
         head :no_content
     end
 
+    def addCollab 
+        @project = find_project
+        collab = Collaboration.create!(collab_params)
+        @project.collaborations << collab
+        render json: @project, status: 200
+    end
+
+    def collabAcceptance
+        collab = find_collab
+        collab.update(collab_params)
+        @project = find_project
+        render json: @project 
+    end
+
+    
     private 
 
     def find_project
@@ -47,11 +62,16 @@ skip_before_action :authorize, only: [:index, :create]
         params.require(:project).permit(:title, :description, :github_link, :user_id)
     end
 
-    # def tag_params
-    #     params.permit(:categories)
-    # end
-
     def project_error
         render json: {errors: ["Could not create new project"]}
     end
+
+    def collab_params
+        params.require(:collab).permit(:user_id, :project_id, :collaborate, :acceptance)
+    end
+
+    def find_collab
+        Collaboration.find(params[:collab_id])
+    end
+
 end

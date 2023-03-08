@@ -8,17 +8,17 @@ import PostEdit from './PostEdit';
 import Comment from '../Comment/Comment';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useDispatch, useSelector } from 'react-redux';
-import { deletePost } from '../../features/posts/PostSlice';
-import { fetchComment } from '../../features/comment/CommentSlice';
+import { deletePost } from '../../Redux/posts/PostSlice';
+import { fetchComment } from '../../Redux/comment/CommentSlice';
 
 
 
-const PostList = ({ post }) => {
+const PostList = ({ post, comments}) => {
 
   const dispatch = useDispatch()
   const [postUser, setPostUser] = useState(post.user.username)
   const [category, setCategory] = useState(post.categories)
-  const [comments, setComments] = useState(post.comments)
+  // const [comments, setComments] = useState(post.comments)
 
   // HANDLE OPEN EDIT MENU 
   const [hideEditPost, setHideEditPost] = useState(false)
@@ -36,12 +36,17 @@ const PostList = ({ post }) => {
   const posts = useSelector((state) => state.post.posts)
   const currentUser = useSelector((state) => state.user.users)
   const comment = useSelector((state) => state.comment.comments)
+  const postComment = useSelector((state) => state.post.posts.comments)
 
+
+  console.log(comment)
 
   // MAP COMMENTS TO POST
-  const mapComments = comment.map((comment) => <Comment key={comment.id} post={post} postUser={postUser} comment={comment} currentUser={currentUser} setComments={setComments} />)
+  const mapComments = comments.map((comment) => <Comment key={comment.id} post={post} postUser={postUser} comment={comment} currentUser={currentUser}/>)
+  
   // MAP CATEGORY TO POST
   const mapCategory = category.map((data) => { return <Button variant='outlined' key={data.id}>{data.code}</Button> })
+
 
   // HANDLE EMPTY COMMENT ALERT
   function emptyComment() {
@@ -62,13 +67,15 @@ const PostList = ({ post }) => {
         <PostEdit post={post} hideEditPost={hideEditPost} setHideEditPost={setHideEditPost} />
       </>}}
 
+
   // HANDLE IF USER IS LOGGED IN ENABLE BUTTONS
   function createComment() {
     if (currentUser === null) { return <></> }
     else { return <>
         <Button onClick={handleCommentOpen} startIcon={<ReplyIcon />} style={{ position: "left" }}></Button>
-        <CreateComment setHideCommentPost={setHideCommentPost} hideCommentPost={hideCommentPost} post={post} setComments={setComments} />
+        <CreateComment setHideCommentPost={setHideCommentPost} hideCommentPost={hideCommentPost} post={post} />
       </>}}
+
 
   // LINK TO USER PROFILE
   function creator(){
@@ -103,6 +110,7 @@ const PostList = ({ post }) => {
       </Box>
       <div>
         {postEdit()}
+
       </div>
     </>
   )

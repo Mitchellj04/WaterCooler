@@ -1,7 +1,7 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { editUser } from '../../features/users/UserSlice'
+import { editUser } from '../../Redux/users/UserSlice'
 
 const EditProfile = ({ hideEditProfile, setHideEditProfile }) => {
 

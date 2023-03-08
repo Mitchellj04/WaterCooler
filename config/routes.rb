@@ -12,6 +12,10 @@ Rails.application.routes.draw do
   get "/categories_filter/:type", to: "categories#select"
   post '/login', to: "sessions#create"
   delete '/logout', to: "sessions#destroy"
+  post '/postComment', to: "posts#updateComment"
+  delete '/comment_delete', to: "posts#commentDelete"
+  post '/projects_collab', to: 'projects#addCollab'
+  patch '/update_collab', to: 'projects#collabAcceptance'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Alert, Box, Button, Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel, Grid, Paper, Radio, RadioGroup, TextField, Typography } from '@mui/material'
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
-import { createProjects } from '../../features/projects/ProjectSlice';
+import { createProjects } from '../../Redux/projects/ProjectSlice';
 
 
 const CreateProject = () => {
