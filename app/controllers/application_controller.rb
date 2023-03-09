@@ -8,9 +8,8 @@ class ApplicationController < ActionController::API
         return render json: {errors: ["Not Authorized"]}, status: :unauthorized unless @current_user
     end
 
-    def index 
-        # React app index page
-        render file: 'public/index.html'
-    end
+   def index 
+    render file: "public/index.html"
+   end 
     
 end
