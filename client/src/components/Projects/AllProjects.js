@@ -1,10 +1,12 @@
 import { Box, Button, Grid, Link, Typography } from '@mui/material'
-import React from 'react'
+import React, { useEffect } from 'react'
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import CategoryMain from '../Categories/CategoryMain';
 import { useNavigate } from 'react-router-dom';
+import { fetchProjects } from '../../Redux/projects/ProjectSlice';
+import { fetchCategory } from '../../Redux/category/CategorySlice';
 
 const AllProjects = () => {
 
@@ -13,6 +15,12 @@ const AllProjects = () => {
   const categories = useSelector((state) => state.category.categories)
 
   const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(fetchProjects())
+    dispatch(fetchCategory())
+  })
 
   const handleClick = (e) => {
     e.preventDefault()
@@ -25,9 +33,6 @@ const AllProjects = () => {
     // setSelected(e.target.value)
     navigate(`/categories/${e.target.value}`)
   }
-
-  console.log(projects)
-  console.log(categories)
 
 
   function projectEdit(user) {
@@ -44,17 +49,21 @@ const AllProjects = () => {
     </Box></Grid>
   })
 
+  function creator(projectUser){
+    if(currentUser === null){ return <>{projectUser}</>}
+    else if(currentUser.username === projectUser){ return <>{projectUser}</>}
+    else { return <Link href={`/profile/${projectUser}`}>{projectUser}</Link>}}
+
 
   const displayAll = projects.map((data) => {
-    console.log(data)
     return <><Grid item xs={4} >
       <Box style={{ marginTop: 20 }} key={data.id}>
         <Typography variant='h6' style={{ padding: 5, fontWeight: 'Bold' }}>{data.title}</Typography>
         <Typography style={{ padding: 5 }}>{data.description}</Typography>
         <Typography style={{ padding: 5 }}>Link: <Link href={data.github_link}>{data.github_link}</Link></Typography>
-        <Typography style={{ padding: 5 }}>User: {data.user.username}</Typography>
+        <Typography style={{ padding: 5 }}>User: {creator(data.user.username)}</Typography>
       </Box>
-      {data.categories.map((category) => { return <Button variant='outlined' value={category.code} style={{margin: 5}} key={category.id} onClick={handleCategory}>{category.code}</Button>})}
+      {data.categories.map((category) => { return <Button variant='outlined' value={category.code} style={{ margin: 5 }} key={category.id} onClick={handleCategory}>{category.code}</Button> })}
       <div><Button variant='contained' color="secondary" sx={{ backgroundColor: 'secondary.light' }} style={{ marginTop: 10, }}>Collaborate</Button></div>
       <div>{projectEdit(data.user.username)}</div>
     </Grid>

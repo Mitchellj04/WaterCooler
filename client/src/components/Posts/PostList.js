@@ -13,7 +13,7 @@ import { fetchComment } from '../../Redux/comment/CommentSlice';
 
 
 
-const PostList = ({ post, comments}) => {
+const PostList = ({ post, comments }) => {
 
   const dispatch = useDispatch()
   const [postUser, setPostUser] = useState(post.user.username)
@@ -40,8 +40,8 @@ const PostList = ({ post, comments}) => {
 
 
   // MAP COMMENTS TO POST
-  const mapComments = comments.map((comment) => <Comment key={comment.id} post={post} postUser={postUser} comment={comment} currentUser={currentUser}/>)
-  
+  const mapComments = comments.map((comment) => <Comment key={comment.id} post={post} postUser={postUser} comment={comment} currentUser={currentUser} />)
+
   // MAP CATEGORY TO POST
   const mapCategory = category.map((data) => { return <Button variant='outlined' key={data.id}>{data.code}</Button> })
 
@@ -49,7 +49,8 @@ const PostList = ({ post, comments}) => {
   // HANDLE EMPTY COMMENT ALERT
   function emptyComment() {
     if (comments.length > 0) { return <> {mapComments} </> }
-    else { return <Alert severity='info'>Please add a comment to answer</Alert>}}
+    else { return <Alert severity='info'>Please add a comment to answer</Alert> }
+  }
 
   // POST DELETE 
   function handleDelete() {
@@ -59,34 +60,41 @@ const PostList = ({ post, comments}) => {
   // HANDLE IF USER IS LOGGED IN ENABLE BUTTONS
   function postEdit() {
     if (currentUser === null) { return <></> }
-    else if (currentUser.username === postUser) { return <>
+    else if (currentUser.username === postUser) {
+      return <>
         <Button startIcon={<EditIcon className='editButton' onClick={handlePostOpen} />}></Button>
         <Button startIcon={<DeleteIcon color="secondary" className="deleteButton" onClick={handleDelete} />}></Button>
         <PostEdit post={post} hideEditPost={hideEditPost} setHideEditPost={setHideEditPost} />
-      </>}}
+      </>
+    }
+  }
 
 
   // HANDLE IF USER IS LOGGED IN ENABLE BUTTONS
   function createComment() {
     if (currentUser === null) { return <></> }
-    else { return <>
+    else {
+      return <>
         <Button onClick={handleCommentOpen} startIcon={<ReplyIcon />} style={{ position: "left" }}></Button>
         <CreateComment setHideCommentPost={setHideCommentPost} hideCommentPost={hideCommentPost} post={post} />
-      </>}}
+      </>
+    }
+  }
 
 
   // LINK TO USER PROFILE
-  function creator(){
-    if(currentUser === null) { return <>{postUser}</> }
-    else if(postUser === currentUser.username) { return <>{postUser}</> }
-    else { return <Link href={`/profile/${postUser}`}>{postUser}</Link> }}
+  function creator() {
+    if (currentUser === null) { return <>{postUser}</> }
+    else if (postUser === currentUser.username) { return <>{postUser}</> }
+    else { return <Link href={`/profile/${postUser}`}>{postUser}</Link> }
+  }
 
   return (
     <>
       <div>
-        <Box style={{paddingTop: 45}}>
+        <Box style={{ paddingTop: 45 }}>
           <Typography variant='h6' style={{ padding: 5, fontWeight: 'Bold' }}>{post.title}</Typography>
-          <Typography variant='body1' style={{marginTop: 10}}>{post.description}</Typography>
+          <Typography variant='body1' style={{ marginTop: 10 }}>{post.description}</Typography>
           <Typography variant='body1'>Link:<Link href={'http://www.google.com'}> {post.link}</Link></Typography>
           <Typography variant='body1'>Creator: {creator()}</Typography>
           {mapCategory}

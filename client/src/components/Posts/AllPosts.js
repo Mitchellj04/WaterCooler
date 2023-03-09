@@ -1,4 +1,4 @@
-import { Box, Button, Grid, Typography } from '@mui/material'
+import { Box, Button, Grid, Link, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit'
@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 
 const AllPosts = ({ currentUser }) => {
 
-    
+
 
     const post = useSelector((state) => state.post.posts)
     const categories = useSelector((state) => state.category.categories)
@@ -17,14 +17,13 @@ const AllPosts = ({ currentUser }) => {
 
     const [hideEditPost, setHideEditPost] = useState(false)
     const handlePostOpen = () => { setHideEditPost(true) }
-  
+
     const handleClick = (e) => {
-      e.preventDefault()
-      // setSelected(e.target.value)
-      navigate(`/categories/${e.target.value}`)
+        console.log(e.target.value)
+        e.preventDefault()
+        // setSelected(e.target.value)
+        navigate(`/categories/${e.target.value}`)
     }
-  
-    console.log(categories)
 
 
     function postEdit(user) {
@@ -39,19 +38,19 @@ const AllPosts = ({ currentUser }) => {
 
     const categoryButton = categories.map((category) => {
         return <Grid item xs={2}><Box style={{ paddingTop: 20 }} key={category.id}>
-          <Button id={category.id} value={category.code} variant="contained" onClick={handleClick}>{category.code}</Button>
+            <Button id={category.id} value={category.code} variant="contained" onClick={handleClick}>{category.code}</Button>
         </Box></Grid>
-      })
-    
+    })
+
 
     const displayAll = post.map((data) => {
         return <>
             <Grid item xs={4} style={{ marginTop: 20 }} key={data.id}>
                 <Box>
-                    <Typography variant='h6'>{data.title}</Typography>
-                    <Typography>{data.description}</Typography>
-                    <Typography>Link: {data.link}</Typography>
-                    <Typography>User: {data.user.username}</Typography>
+                    <Typography variant='h6' style={{ padding: 5, fontWeight: 'Bold' }}>{data.title}</Typography>
+                    <Typography variant='body1' style={{ marginTop: 10 }}>{data.description}</Typography>
+                    <Typography variant='body1' style={{ marginTop: 10 }}> Link:<Link href={data.link}> {data.link}</Link></Typography>
+                    <Typography variant='body1'>User: {data.user.username}</Typography>
                 </Box>
                 <Button variant='contained' color="secondary" style={{ marginTop: 10 }}>Comment</Button>
                 <div>{postEdit(data.user.username)}</div>
@@ -64,7 +63,7 @@ const AllPosts = ({ currentUser }) => {
 
     return (
         <>
-            
+
             <Grid container style={{ paddingTop: 100 }}>
                 <Grid item xs={12}><Typography variant="h4">Categories</Typography></Grid>
                 {categoryButton}

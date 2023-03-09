@@ -8,11 +8,11 @@ const CategoryProject = ({projects}) => {
     //     return <Button>{data.code}</Button>
     // })
   return (
-    <Box>
+    <Box style={{paddingTop: 25}}>
         <Paper>
-        <Typography>{projects.title}</Typography>
+        <Typography variant='h6' style={{padding: 5, fontWeight: 'Bold'}}>{projects.title}</Typography>
           <Typography>{projects.description}</Typography>
-          <Typography>Link: <Link>{projects.github_link}</Link></Typography>
+          <Typography>Link: <Link href={projects.github_link}>{projects.github_link}</Link></Typography>
           {/* <Typography>Creator: {projectUser}</Typography> */}
           {/* {mapCategory} */}
           <Button variant='contained' color='secondary'>Collaborate</Button>

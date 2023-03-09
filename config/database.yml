@@ -79,8 +79,13 @@ test:
 # Read https://guides.rubyonrails.org/configuring.html#configuring-a-database
 # for a full overview on how database connection configuration can be specified.
 #
+
 production:
   <<: *default
-  database: waterCooler_production
-  username: waterCooler
-  password: <%= ENV["WATERCOOLER_DATABASE_PASSWORD"] %>
+  url: <%= ENV['DATABASE_URL'] %>
+
+# production:
+#   <<: *default
+#   database: waterCooler_production
+#   username: waterCooler
+#   password: <%= ENV["WATERCOOLER_DATABASE_PASSWORD"] %>

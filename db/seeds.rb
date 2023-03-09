@@ -30,9 +30,9 @@ p6 = Project.create(title: "Ski-Buddy 4", description: "I am creating a project 
 
 
 # POSTS 
-post = Post.create(title: "Need help with a fetch function?", description: "I have been trying to figure out how to fix my fetch function but I am unable to figure it out.", link: "github.com/ski-buddy/jmithell04", user_id: justin.id)
-post2 = Post.create(title: "Need help with a controller?", description: "I have been trying to figure out how to fix my controller to remember my session id", link: "github.com/water-cooler/jmithell04", user_id: justin.id)
-post3 = Post.create(title: "Button or link?", description: "I need help with adding links to my website so that they are clickable links", link: "github.com/ski-buddy/tommyXioama", user_id: tommy.id)
+post = Post.create(title: "Need help with a fetch function?", description: "I have been trying to figure out how to fix my fetch function but I am unable to figure it out.", link: "https://github.com/Mitchellj04/ski-buddy/blob/main/client/src/components/MountainCard.js", user_id: justin.id)
+post2 = Post.create(title: "Need help with a controller?", description: "I have been trying to figure out how to fix my controller to remember my session id", link: "https://github.com/Mitchellj04/WaterCooler/blob/main/app/controllers/projects_controller.rb", user_id: justin.id)
+post3 = Post.create(title: "Button or link?", description: "I need help with adding links to my website so that they are clickable links", link: "https://github.com/Mitchellj04/WaterCooler/blob/main/client/src/components/Projects/ProjectList.js", user_id: tommy.id)
 post4 = Post.create(title: "Trying to add images from my desktop on a post instead of from the web", description: "I need help to be able to figure out how to add an image to my project from my desktop instead of the web", link: "github.com/ski-buddy/tommyXioama", user_id: tommy.id)
 
 

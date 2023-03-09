@@ -46,14 +46,7 @@ const ProjectItem = ({ currentUser }) => {
     })}</>
   })
 
-  console.log(currentUser)
-
-
-
   const userCollabs = projects.map((collab) => <CollabMain collab={collab} currentUser={currentUser} />)
-
-
-
 
 
 
