@@ -16,7 +16,7 @@ Comment.delete_all
 
 # USERS
 justin= User.create(username: "jmitchell04", name: "Justin Mitchell", password: "jmoney33", age: 24, experience: "React 1 year", bio: "new programmer", email: "mitchelljm@gmail.com", github: "mitchellj04/github.com")
-tommy = User.create(username: "tommyling", name: "Tommy Xioma", password: "tommy123", age: 20, experience: "Gaming coding", bio: "I have been coding games for years", email: "tommyxioma@gmail.com", github: "mitchellj04/github.com")
+tommy = User.create(username: "tommyxioma", name: "Tommy Xioma", password: "tommy123", age: 20, experience: "Gaming coding", bio: "I have been coding games for years", email: "tommyxioma@gmail.com", github: "mitchellj04/github.com")
 greg = User.create(username: "gregthomas", name: "Greg Thomas", password: "greg123", age: 20, experience: "Software Engineer", bio: "I have been coding the technology behind the guidance system of subs", email: "gregt@gmail.com", github: "gregthomas/github.com")
 
 
