@@ -50,7 +50,7 @@ const UserProfile = () => {
             <Paper style={{backgroundColor: 'inherit', margin: 10}}>
                 <Typography variant='h6' style={{padding: 5, fontWeight: 'Bold'}}>{project.title}</Typography>
                 <Typography>{project.description}</Typography>
-                <Typography>Link: <Link>{project.github_link}</Link></Typography>
+                <Typography>Link: <Link href={project.github_link}>{project.github_link}</Link></Typography>
                 <Button variant="contained" color="secondary" sx={{backgroundColor: 'secondary.light'}} style={{margin: 20}}>Collaborate</Button>
             </Paper>
         </Box>
@@ -67,7 +67,7 @@ const UserProfile = () => {
           <Paper style={{backgroundColor: 'inherit', margin: 10}}>
               <Typography>{post.title}</Typography>
               <Typography>{post.description}</Typography>
-              <Typography>Link: <Link>{post.link}</Link></Typography>
+              <Typography>Link: <Link href={post.link}>{post.link}</Link></Typography>
               <Button variant="contained" color="secondary">comments</Button>
           </Paper>
       </Box>
