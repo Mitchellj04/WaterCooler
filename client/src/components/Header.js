@@ -7,6 +7,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Sidenav from './Sidenav';
 import { useNavigate } from "react-router-dom";
 import { createTheme, ThemeProvider } from '@mui/material';
+import bubblesBackground from '../bubbles.png'
 
 // const useStyles = makeStyles({
 //   appBar: {
@@ -28,15 +29,15 @@ import { createTheme, ThemeProvider } from '@mui/material';
   }
 
 
-  // const appStyle = {
-  //   backgroundImage: process.env.PUBLIC_URL + "/bubbles.jpg"
-  //   // backgroundColor:"#6c95e9",
-
-  // }
+  const appStyle = {
+    // backgroundImage: process.env.PUBLIC_URL + "/bubbles.jpg"
+    backgroundColor:"#6c95e9",
+        backgroundImage: `url(${bubblesBackground})`
+  }
   return (
     
     <div>
-        <AppBar >
+        <AppBar style={appStyle}>
             <Toolbar>
                 <Sidenav currentUser={currentUser} setCurrentUser={setCurrentUser} setErrorMain={setErrorMain}/>
                 <IconButton
