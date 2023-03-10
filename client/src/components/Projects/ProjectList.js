@@ -7,7 +7,6 @@ import EditIcon from '@mui/icons-material/Edit'
 import ProjectEdit from './ProjectEdit';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteProject } from '../../Redux/projects/ProjectSlice';
-import { del } from '../../Redux/projects/ProjectSlice';
 
 const ProjectList = ({project, setErrorMain}) => {  
   

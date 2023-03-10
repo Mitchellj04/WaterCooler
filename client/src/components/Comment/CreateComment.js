@@ -1,9 +1,8 @@
 import React, {useState} from 'react'
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
-// import { createComment } from '../../features/comment/CommentSlice'
-import { createPostComment, postComment } from '../../Redux/posts/PostSlice'
-import { createComment } from '../../Redux/comment/CommentSlice'
+import { createPostComment } from '../../Redux/posts/PostSlice'
+
 
 const CreateComment = ({hideCommentPost, setHideCommentPost, post}) => {
 

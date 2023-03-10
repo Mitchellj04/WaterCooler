@@ -1,12 +1,9 @@
 import React from 'react'
-import { makeStyles } from '@material-ui/styles';
 import { AppBar, IconButton, Toolbar, Typography} from '@mui/material'
 import HomeIcon from '@mui/icons-material/Home';
-import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Sidenav from './Sidenav';
 import { useNavigate } from "react-router-dom";
-import { createTheme, ThemeProvider } from '@mui/material';
 import bubblesBackground from '../bubbles.png'
 
 // const useStyles = makeStyles({

@@ -1,10 +1,9 @@
 import { Grid, Typography } from '@mui/material'
-
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import CategoryMain from './Categories/CategoryMain';
 import PostMain from './Posts/PostMain';
 import ProjectMain from './Projects/ProjectMain';
-import Sidenav from './Sidenav';
+
 
 const Home = ({ currentUser, setErrorMain, categories }) => {
 

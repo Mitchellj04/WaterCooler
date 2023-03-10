@@ -4,7 +4,6 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit'
 import PostEdit from './PostEdit';
 import { useSelector } from 'react-redux';
-import CategoryMain from '../Categories/CategoryMain';
 import { useNavigate } from 'react-router-dom';
 
 const AllPosts = ({ currentUser }) => {

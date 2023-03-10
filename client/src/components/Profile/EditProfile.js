@@ -4,9 +4,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { editUser } from '../../Redux/users/UserSlice'
 
 const EditProfile = ({ hideEditProfile, setHideEditProfile }) => {
-
-  const currentUser = useSelector((state) => state.user.users)
+ 
   const dispatch = useDispatch()
+  const currentUser = useSelector((state) => state.user.users)
+ 
 
   const [profile, setProfile] = useState(currentUser)
 

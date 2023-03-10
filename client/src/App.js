@@ -13,9 +13,6 @@ import PostList from './components/Posts/PostList';
 import AllPosts from './components/Posts/AllPosts';
 import Create from './components/Create';
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchProjects } from './Redux/projects/ProjectSlice';
-import { fetchPosts } from './Redux/posts/PostSlice';
-import { fetchCategory } from './Redux/category/CategorySlice';
 import { fetchUser } from './Redux/users/UserSlice';
 import UserProfile from './components/Profile/UserProfile';
 import { createTheme, ThemeProvider, colors } from '@mui/material';

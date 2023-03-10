@@ -3,7 +3,6 @@ import React, { useEffect } from 'react'
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit'
 import { useDispatch, useSelector } from 'react-redux';
-import CategoryMain from '../Categories/CategoryMain';
 import { useNavigate } from 'react-router-dom';
 import { fetchProjects } from '../../Redux/projects/ProjectSlice';
 import { fetchCategory } from '../../Redux/category/CategorySlice';

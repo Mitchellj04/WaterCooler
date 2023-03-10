@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchAllUsers, fetchUser } from '../../Redux/users/AllUserSlice'
+import { fetchUser } from '../../Redux/users/AllUserSlice'
 import { Box, Button, Grid, Link, Paper, Typography } from '@mui/material'
 import { useParams } from 'react-router-dom'
 import { fetchProjects } from '../../Redux/projects/ProjectSlice'
