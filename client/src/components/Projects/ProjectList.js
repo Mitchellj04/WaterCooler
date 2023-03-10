@@ -15,7 +15,7 @@ const ProjectList = ({project, setErrorMain}) => {
     const projects = useSelector((state) => state.project.projects)
     const dispatch = useDispatch()
 
-    // STATE
+    // REACT STATE
     const [category, setCategory] = useState(project.categories)
     const [selected, setSelected] = useState('')
     const [projectUser, setProjectUser] = useState(project.user.username)
@@ -25,7 +25,14 @@ const ProjectList = ({project, setErrorMain}) => {
     const handleCategory = (e) => {
       e.preventDefault()
       setSelected(e.target.value)
-      navigate(`/categories/${e.target.value}`)
+      if(currentUser === null){
+        setErrorMain(['Please login first'])
+        navigate('/login')
+      }
+      else {
+        navigate(`/categories/${e.target.value}`)
+      }
+      
     }
 
     // HANDLE EDIT WINDOW 
