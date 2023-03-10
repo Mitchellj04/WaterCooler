@@ -8,20 +8,13 @@ import { fetchProjects } from '../../Redux/projects/ProjectSlice'
 import CollabMain from '../Collaboration/CollabMain'
 
 const ProjectItem = ({ currentUser }) => {
+  const { id } = useParams()
+  const dispatch = useDispatch()
+
 
   useEffect(() => {
     dispatch(fetchProjects())
   }, [])
-
-
-  // const [showProject, setShowProject] = useState([])
-  // const [category, setCategory] = useState([])
-  // const [projectUser, setProjectUser] = useState([])
-  // const [collaborate, setCollaborate] = useState([])
-
-  // const [project, setProject] = useState(projects)
-  const { id } = useParams()
-  const dispatch = useDispatch()
 
   console.log(id)
 

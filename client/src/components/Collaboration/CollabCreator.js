@@ -23,7 +23,6 @@ const CollabCreator = ({collab}) => {
     }
 
     const handleAccept = () => {
-        
         dispatch(acceptedCollab(data))
     }
 
