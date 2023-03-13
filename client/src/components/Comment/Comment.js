@@ -24,7 +24,6 @@ const Comment = ({ comment, postUser, post }) => {
     
   }
 
-
   function filterComment() {
     if (comment.post_id === post.id) {
       return <>

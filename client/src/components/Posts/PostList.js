@@ -38,7 +38,6 @@ const PostList = ({ post, comments }) => {
   const comment = useSelector((state) => state.comment.comments)
   const postComment = useSelector((state) => state.post.posts.comments)
 
-
   // MAP COMMENTS TO POST
   const mapComments = comments.map((comment) => <Comment key={comment.id} post={post} postUser={postUser} comment={comment} currentUser={currentUser} />)
 

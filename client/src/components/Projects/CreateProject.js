@@ -1,15 +1,19 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Alert, Box, Button, Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel, Grid, Paper, Radio, RadioGroup, TextField, Typography } from '@mui/material'
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { createProjects } from '../../Redux/projects/ProjectSlice';
+import { fetchCategory } from '../../Redux/category/CategorySlice';
 
 
 const CreateProject = () => {
 
+  const dispatch = useDispatch()
 
-  const project = useSelector((state) => state.project)
-  console.log(project)
+  useEffect(() => {
+    dispatch(fetchCategory())
+  }, {})
+  
 
   // STYLE
   const fieldStyle = {
@@ -26,31 +30,37 @@ const CreateProject = () => {
   const [description, setDescription] = useState('')
   const [link, setLink] = useState('')
   const [categories, setCategories] = useState([])
+  const [categoryInfo, setCategoryInfo] = useState([])
   const navigate = useNavigate()
 
   // REDUX
-  const dispatch = useDispatch()
+  const project = useSelector((state) => state.project)
   const currentUser = useSelector((state) => state.user.users)
   const errors = useSelector((state) => state.project.errors)
   const category = useSelector((state) => state.category.categories)
 
   console.log(errors.length)
+  console.log(project)
 
-  let number = []
-
+  // HANLDE CHECK BOX 
   const handleCategoryChange = (e) => {
-    // setCategory((prevState) => [...prevState, parseInt(e.target.id)])
-    number.push(parseInt(e.target.id))
-    setCategories()
-    console.log(number)
+    const { value, checked } = e.target;
+    console.log(`${value} is ${checked}`)
+    if(checked) {
+      setCategoryInfo([...categoryInfo, parseInt(value)])
+    }
+    else {
+      setCategoryInfo(categoryInfo.filter((e) => e !== parseInt(value)))
+    }
   }
 
-  console.log(category)
 
+  // DISPLAY CATEGORIES 
   const mapCheckCategories = category.map((category) => {
-    return <FormControlLabel control={<Checkbox value={category.code} id={category.id} onChange={handleCategoryChange} />} label={category.code} />
+    return <FormControlLabel control={<Checkbox value={category.id} id={category.id} onChange={handleCategoryChange} />} label={category.code} />
   })
 
+  // DATA FOR FETCH SUBMIT 
   const data = {
     project: {
       title,
@@ -58,22 +68,17 @@ const CreateProject = () => {
       github_link: link,
       user_id: currentUser.id
     },
-    tag: [154, 153]
+    tag: categoryInfo
   }
 
-  // const newProject = {
-  //         title,
-  //         description,
-  //         github_link: link,
-  //         user_id: currentUser.id,
-  //         categories: number
-  //     }
 
+  // HANDLE ERROR FOR SUBMIT
   function errorHandle() {
     if (errors.length > 0) { return <> {errors.map((err) => <Alert key="id" severity='error'>{err}</Alert>)} </> }
     else { return <></> }
   }
 
+  // SUBMIT NEW PROJECT 
   const handleProjectSubmit = (e) => {
     e.preventDefault()
     dispatch(createProjects(data))

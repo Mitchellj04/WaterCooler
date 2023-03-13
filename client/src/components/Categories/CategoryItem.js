@@ -11,6 +11,8 @@ const CategoryItem = () => {
   const dispatch = useDispatch()
   const { type } = useParams()
 
+  console.log(type)
+
   // FETCH CATEGORIES
   useEffect(() => {
     console.log(type)
@@ -63,12 +65,13 @@ const CategoryItem = () => {
       <Box style={{ padding: 25 }}>
       </Box>
     </Grid>
-      <Grid item xs={6}>
+      <Grid item xs={12}>
         <Box style={boxStyle}>
           <Typography variant="h4">Projects</Typography>
-          {cat.projects.map((projects) => <CategoryProject key={projects.id} projects={projects} />)}
+          
         </Box>
       </Grid>
+      {cat.projects.map((projects) => <CategoryProject key={projects.id} projects={projects} />)}
     </>
   })
 

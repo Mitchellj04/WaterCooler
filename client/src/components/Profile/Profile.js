@@ -6,11 +6,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchUser } from '../../Redux/users/UserSlice'
 import { fetchProjects } from '../../Redux/projects/ProjectSlice'
 import { fetchPosts } from '../../Redux/posts/PostSlice'
+import { useNavigate } from 'react-router-dom'
 
 const Profile = ({ currentUser }) => {
 
     const [hideEditProfile, setHideEditProfile] = useState(false)
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     // FETCH TO REDUX SLICE
     useEffect(() => {
@@ -35,7 +37,7 @@ const Profile = ({ currentUser }) => {
                     <Typography variant='h6' style={{padding: 5, fontWeight: 'Bold'}}>{project.title}</Typography>
                     <Typography>{project.description}</Typography>
                     <Typography>Link: <Link href={project.github_link}>{project.github_link}</Link></Typography>
-                    <Button variant="contained" color="secondary" sx={{backgroundColor: 'secondary.light'}} style={{margin: 20}}>Collaborations</Button>
+                    <Button variant="contained" color="secondary" sx={{backgroundColor: 'secondary.light'}} onClick={() => navigate(`/projects/${project.id}`)} style={{margin: 20}}>Collaborations</Button>
                 </Paper>
             </Box>
         }

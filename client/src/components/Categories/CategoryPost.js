@@ -1,7 +1,12 @@
 import React from 'react'
 import { Box, Button, Link, Paper, Typography } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
 
 const CategoryPost = ({post}) => {
+
+  const navigate = useNavigate()
+
+
   return (
     <Box style={{paddingTop: 25}}>
         <Paper>
@@ -10,7 +15,7 @@ const CategoryPost = ({post}) => {
           <Typography>Link: <Link href={post.link}>{post.link}</Link></Typography>
           {/* <Typography>Creator: {projectUser}</Typography> */}
           {/* {mapCategory} */}
-          <Button variant='contained' color='secondary'>Comments
+          <Button variant='contained' color='secondary' onClick={() => navigate(`/posts/${post.id}`)}>Comments
           </Button>
         </Paper>
     </Box>
