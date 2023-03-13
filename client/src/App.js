@@ -1,6 +1,6 @@
 import './App.css';
 import { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
+import { Routes, Route} from "react-router-dom";
 import Header from './components/Header';
 import Home from './components/Home';
 import ProjectList from './components/Projects/ProjectList';
@@ -81,7 +81,6 @@ function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <Router>
           <Header currentUser={currentUser} setCurrentUser={setCurrentUser} setErrorMain={setErrorMain} />
           <div className="App" style={{}}>
             <Routes>
@@ -97,9 +96,7 @@ function App() {
               <Route path='/categories/:type' element={<CategoryItem />} />
               <Route path='/userprofile/:username' element={<UserProfile />} />
             </Routes>
-
           </div>
-        </Router>
       </ThemeProvider>
 
     </>
