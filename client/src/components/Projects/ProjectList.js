@@ -1,4 +1,4 @@
-import {Button, Grid, Link, ThemeProvider, Typography } from '@mui/material'
+import {Button, Link, ThemeProvider, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import Box from '@mui/material/Box';
 import {useNavigate } from "react-router-dom";
@@ -30,9 +30,9 @@ const ProjectList = ({project, setErrorMain}) => {
         navigate('/login')
       }
       else {
-        navigate(`/categories/${e.target.value}`)
+        
       }
-      
+      navigate(`/categories/${e.target.value}`)
     }
 
     // HANDLE EDIT WINDOW 
@@ -96,7 +96,7 @@ const ProjectList = ({project, setErrorMain}) => {
 
 
   return (
-    <Grid item xs={4}>
+    <div>
         <Box style={{paddingTop: 25}}>
         <Typography variant='h6' style={{padding: 5, fontWeight: 'Bold'}}>{project.title}</Typography>
         <Typography style={{marginTop:10}}>{project.description}</Typography>
@@ -109,7 +109,7 @@ const ProjectList = ({project, setErrorMain}) => {
         {projectEdit()}
         </div>
         </Box>
-    </Grid>
+    </div>
   )
 }
 

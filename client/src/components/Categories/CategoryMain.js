@@ -1,4 +1,4 @@
-import { Box, Button, Grid } from '@mui/material'
+import { Box, Button, Grid, Paper } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
@@ -6,8 +6,8 @@ import { fetchCategory } from '../../Redux/category/CategorySlice';
 import CreateCategory from './CreateCategory';
 
 
-const CategoryMain = ({ setErrorMain }) => {
-
+const CategoryMain = ({setErrorMain}) => {
+  
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
@@ -28,24 +28,25 @@ const CategoryMain = ({ setErrorMain }) => {
   // BUTTON CLICK HANDLER
   const handleClick = (e) => {
     e.preventDefault()
-    if (currentUser === null) {
-      setErrorMain(['Please login first'])
+    if(currentUser === null){
+      setErrorMain('Please login first')
       navigate('/login')
     }
-    else { navigate(`/categories/${e.target.value}`) }
-  }
+    else { navigate(`/categories/${e.target.value}`) }}
 
   // ALL CATEGORY BUTTONS
   const buttonMap = categories.map((category) => {
-    return <Grid item xs={2}><Box style={{ paddingTop: 20 }} key={category.id}> <Button id={category.id} value={category.code} variant="contained" onClick={handleClick}>{category.code}</Button> </Box></Grid>
+    return <Box style={{ paddingTop: 20 }} key={category.id}> <Button id={category.id} value={category.code} variant="contained" onClick={handleClick}>{category.code}</Button> </Box>
   })
 
 
   return (
-    <>
-      {buttonMap}
-      <Button onClick={handleCategoryOpen}>+ Add New</Button>
-      <CreateCategory setHideNewCategory={setHideNewCategory} hideNewCategory={hideNewCategory} />
+    <><div style={{ height: 100 }}>
+      <Grid>
+        {buttonMap}
+        <Button onClick={handleCategoryOpen}>+ Add New</Button>
+        <CreateCategory setHideNewCategory={setHideNewCategory} hideNewCategory={hideNewCategory} />
+      </Grid> </div>
     </>
   )
 }

@@ -8,22 +8,22 @@ import ProjectMain from './Projects/ProjectMain';
 const Home = ({ currentUser, setErrorMain, categories }) => {
 
   return (
-    <>
     <Grid container style={{ paddingTop: 100 }}>
-      <Grid item xs={12}>
+      <Grid item xs={2}>
         <Typography variant="h4">Categories</Typography>
+        <CategoryMain setErrorMain={setErrorMain} />
       </Grid>
-      <CategoryMain setErrorMain={setErrorMain} />
-      <Grid item xs={12}>
-        <Typography variant="h4" style={{ paddingBottom: 25, paddingTop: 25 }}>Projects</Typography>
+      <Grid item xs={5}>
+        <Typography variant="h4" style={{ paddingBottom: 25 }}>Projects</Typography>
+        <ProjectMain currentUser={currentUser} setErrorMain={setErrorMain} />
       </Grid>
-      <ProjectMain currentUser={currentUser} setErrorMain={setErrorMain} />
-      <Grid item xs={12}>
-      <Typography variant="h4" style={{ paddingBottom: 25, paddingTop: 25 }}>Posts</Typography>  
+
+      <Grid item xs={5}>
+        <Typography variant="h4">Posts</Typography>
+        <PostMain currentUser={currentUser} />
       </Grid>
-      <PostMain currentUser={currentUser} />
+
     </Grid>
-    </>
   )
 }
 

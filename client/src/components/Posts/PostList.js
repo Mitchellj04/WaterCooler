@@ -1,4 +1,4 @@
-import { Accordion, AccordionDetails, AccordionSummary, Alert, Box, Button, Grid, Link, Paper, Typography } from '@mui/material'
+import { Accordion, AccordionDetails, AccordionSummary, Alert, Box, Button, Link, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import DeleteIcon from '@mui/icons-material/Delete';
 import ReplyIcon from '@mui/icons-material/Reply';
@@ -90,7 +90,8 @@ const PostList = ({ post, comments }) => {
   }
 
   return (
-    <Grid item xs={6}>
+    <>
+      <div>
         <Box style={{ paddingTop: 45 }}>
           <Typography variant='h6' style={{ padding: 5, fontWeight: 'Bold' }}>{post.title}</Typography>
           <Typography variant='body1' style={{ marginTop: 10 }}>{post.description}</Typography>
@@ -98,6 +99,7 @@ const PostList = ({ post, comments }) => {
           <Typography variant='body1'>Creator: {creator()}</Typography>
           {mapCategory}
         </Box>
+      </div>
       <Box>
         <Accordion className="Accordion-side" style={{ width: "100%", color: "white", backgroundColor: "#295b9d", marginTop: 10 }}>
           <AccordionSummary
@@ -115,7 +117,7 @@ const PostList = ({ post, comments }) => {
       <div>
         {postEdit()}
       </div>
-      </Grid>
+    </>
   )
 }
 
