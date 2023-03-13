@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchUser } from '../../Redux/users/AllUserSlice'
 import { Box, Button, Grid, Link, Paper, Typography } from '@mui/material'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { fetchProjects } from '../../Redux/projects/ProjectSlice'
 import { fetchPosts } from '../../Redux/posts/PostSlice'
 
@@ -10,6 +10,7 @@ const UserProfile = () => {
     
     const {username} = useParams()
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     
 
     useEffect(() => {
@@ -30,7 +31,10 @@ const UserProfile = () => {
     console.log(posts)
     console.log(projects)
 
-
+    const handleCommentClick = (e) => {
+      navigate(`/posts/${e.target.id}`)
+    }
+ 
     // const userInfo = user.map((user) => {
     //    return <Box elevation="20" style={{padding: 100}}>
     //     <Typography variant='h4'>{user.name} Profile</Typography>
@@ -68,7 +72,7 @@ const UserProfile = () => {
               <Typography>{post.title}</Typography>
               <Typography>{post.description}</Typography>
               <Typography>Link: <Link href={post.link}>{post.link}</Link></Typography>
-              <Button variant="contained" color="secondary">comments</Button>
+              <Button variant="contained" color="secondary" id={post.id} onClick={handleCommentClick}>comments</Button>
           </Paper>
       </Box>
       } else{

@@ -48,6 +48,11 @@ const ProjectList = ({project, setErrorMain}) => {
       dispatch(deleteProject(project.id))
     }
 
+    // NAVIGATE TO USER 
+    const handleUser = () => {
+      navigate(`/userprofile/${projectUser}`)
+    }
+
     // EDIT AND DELETE BUTTONS 
     function projectEdit(){
         if(currentUser === null){ return <></> }
@@ -61,7 +66,7 @@ const ProjectList = ({project, setErrorMain}) => {
     function creator(){
       if(currentUser === null){ return <>{projectUser}</>}
       else if(currentUser.username === projectUser){ return <>{projectUser}</>}
-      else { return <Link href={`/userprofile/${projectUser}`}>{projectUser}</Link>}}
+      else { return <Link onClick={handleUser}>{projectUser}</Link>}}
 
     // PROJECT COLLAB NAVIGATE 
     const hanldeProject = () => {

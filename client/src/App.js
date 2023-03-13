@@ -16,6 +16,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchUser } from './Redux/users/UserSlice';
 import UserProfile from './components/Profile/UserProfile';
 import { createTheme, ThemeProvider, colors } from '@mui/material';
+import PostItem from './components/Posts/PostItem';
 
 const theme = createTheme({
   palette: {
@@ -90,6 +91,7 @@ function App() {
               <Route path='/posts' element={<PostList />} />
               <Route path='/projects-all' element={<AllProjects />} />
               <Route path='/posts-all' element={<AllPosts currentUser={currentUser} />} />
+              <Route path='/posts/:id' element={<PostItem currentUser={currentUser}/>} />
               <Route path='/projects/:id' element={<ProjectItem currentUser={reduxCurrentUser} />} />
               <Route path='/create' element={<Create currentUser={currentUser} />} />
               <Route path='/login' element={<Login currentUser={currentUser} setCurrentUser={setCurrentUser} errorMain={errorMain} setErrorMain={setErrorMain} />} />

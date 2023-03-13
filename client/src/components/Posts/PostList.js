@@ -95,7 +95,7 @@ const PostList = ({ post, comments }) => {
         <Box style={{ paddingTop: 45 }}>
           <Typography variant='h6' style={{ padding: 5, fontWeight: 'Bold' }}>{post.title}</Typography>
           <Typography variant='body1' style={{ marginTop: 10 }}>{post.description}</Typography>
-          <Typography variant='body1'>Link:<Link href={'http://www.google.com'}> {post.link}</Link></Typography>
+          <Typography variant='body1'>Link:<Link href={post.link}> {post.link}</Link></Typography>
           <Typography variant='body1'>Creator: {creator()}</Typography>
           {mapCategory}
         </Box>
