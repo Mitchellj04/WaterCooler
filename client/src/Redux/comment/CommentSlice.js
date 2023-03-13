@@ -44,6 +44,7 @@ const commentSlice = createSlice({
             state.comments.push(payload)
         })
         .addCase(deleteComment.fulfilled, (state, {payload}) => {
+            console.log(payload)
             let index = state.comments.findIndex(({id}) => id === payload)
             state.comments.splice(index, 1)
         })
