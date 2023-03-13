@@ -26,6 +26,17 @@ import bubblesBackground from '../bubbles.png'
   }
 
 
+  const handleProfile = () => {
+    if (currentUser === null) {
+      navigate('/login')
+      setErrorMain(["Please login to see profile"])
+    }
+    else {
+      navigate('/profile-main')
+    }
+  }
+
+
   const appStyle = {
     // backgroundImage: process.env.PUBLIC_URL + "/bubbles.jpg"
     backgroundColor:"#6c95e9",
@@ -51,7 +62,8 @@ import bubblesBackground from '../bubbles.png'
                     aria-controls="menu-appbar"
                     aria-haspopup="true"
                     style={{align:"right"}}
-                    color="inherit">
+                    color="inherit"
+                    onClick={handleProfile}>
                     <AccountCircleIcon />
                 </IconButton>
             </Toolbar>

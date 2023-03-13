@@ -1,4 +1,4 @@
-import {Button, Link, ThemeProvider, Typography } from '@mui/material'
+import {Button, Grid, Link, ThemeProvider, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import Box from '@mui/material/Box';
 import {useNavigate } from "react-router-dom";
@@ -61,7 +61,7 @@ const ProjectList = ({project, setErrorMain}) => {
     function creator(){
       if(currentUser === null){ return <>{projectUser}</>}
       else if(currentUser.username === projectUser){ return <>{projectUser}</>}
-      else { return <Link href={`/profile/${projectUser}`}>{projectUser}</Link>}}
+      else { return <Link href={`/userprofile/${projectUser}`}>{projectUser}</Link>}}
 
     // PROJECT COLLAB NAVIGATE 
     const hanldeProject = () => {
@@ -96,7 +96,7 @@ const ProjectList = ({project, setErrorMain}) => {
 
 
   return (
-    <div>
+    <Grid item xs={4}>
         <Box style={{paddingTop: 25}}>
         <Typography variant='h6' style={{padding: 5, fontWeight: 'Bold'}}>{project.title}</Typography>
         <Typography style={{marginTop:10}}>{project.description}</Typography>
@@ -109,7 +109,7 @@ const ProjectList = ({project, setErrorMain}) => {
         {projectEdit()}
         </div>
         </Box>
-    </div>
+    </Grid>
   )
 }
 

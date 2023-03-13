@@ -86,8 +86,8 @@ function App() {
           <div className="App" style={{}}>
             <Routes>
               <Route exact path='/' element={<Home currentUser={currentUser} setErrorMain={setErrorMain} />} />
-              <Route path='/profile' element={<Profile currentUser={currentUser} />} />
-              <Route path='/projects' element={<ProjectList />} />
+              <Route path='/profile-main' element={<Profile currentUser={currentUser} />} />
+              <Route path='/projects-main' element={<ProjectList />} />
               <Route path='/posts' element={<PostList />} />
               <Route path='/projects-all' element={<AllProjects />} />
               <Route path='/posts-all' element={<AllPosts currentUser={currentUser} />} />
@@ -95,7 +95,7 @@ function App() {
               <Route path='/create' element={<Create currentUser={currentUser} />} />
               <Route path='/login' element={<Login currentUser={currentUser} setCurrentUser={setCurrentUser} errorMain={errorMain} setErrorMain={setErrorMain} />} />
               <Route path='/categories/:type' element={<CategoryItem />} />
-              <Route path='/profile/:username' element={<UserProfile />} />
+              <Route path='/userprofile/:username' element={<UserProfile />} />
             </Routes>
 
           </div>

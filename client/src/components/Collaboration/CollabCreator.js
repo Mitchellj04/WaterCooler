@@ -32,7 +32,7 @@ const CollabCreator = ({collab}) => {
             return <><Link>{collab.user.username}</Link> wants to collaborate on this project <Button onClick={handleAccept}>Accept</Button></>
         }
         else if(collab.acceptance === true){
-            return <>You have accepted to collaborate with <Link href={`/profile/${collab.user.username}`}>{collab.user.name}</Link> see profile to message them.</>
+            return <>You have accepted to collaborate with <Link href={`/userprofile/${collab.user.username}`}>{collab.user.name}</Link> see profile to message them.</>
         }
       }
 

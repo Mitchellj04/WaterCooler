@@ -20,9 +20,9 @@ const PostMain = ({currentUser}) => {
  
 
   return (
-    <div>
+    <>
       {mapPosts}
-    </div>
+    </>
   )
 }
 

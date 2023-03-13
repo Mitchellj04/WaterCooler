@@ -19,23 +19,24 @@ const ProjectItem = ({ currentUser }) => {
   console.log(id)
 
   const projects = useSelector((state) => state.project.projects.filter((project) => project.id === parseInt(id)))
+  const category = useSelector((state) => state.category.categories)
 
 
   const showProject = projects.map((project) => {
     return <>
-      <Typography>{project.title}</Typography>
-      <Typography>{project.description}</Typography>
+      <Typography variant='h6' style={{padding: 5, fontWeight: 'Bold'}}>{project.title}</Typography>
+      <Typography style={{marginTop:10}}>{project.description}</Typography>
       <Typography>{project.github_link}</Typography>
-      <Typography>Creator: {project.user.username}</Typography>
+      <Typography style={{marginTop:10}}>Creator: {project.user.username}</Typography>
     </>
   })
 
-  console.log(projects)
+  console.log(category)
 
 
   const mapCategory = projects.map((data) => {
-    return <>{data.categories.map((cat) => {
-      <><Button key={cat.id}>{cat.code}</Button></>
+     <>{data.categories.map((cat) => {
+     return <><Button key={cat.id}>{cat.code}</Button></>
     })}</>
   })
 
@@ -48,9 +49,7 @@ const ProjectItem = ({ currentUser }) => {
       <Box style={{ padding: 100 }}>
         <Paper>
           {showProject}
-          {/* {mapCategory} */}
-
-
+          {mapCategory}
         </Paper>
         <Paper style={{ padding: 50 }}>
           {userCollabs}

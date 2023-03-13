@@ -51,7 +51,7 @@ const AllProjects = () => {
   function creator(projectUser){
     if(currentUser === null){ return <>{projectUser}</>}
     else if(currentUser.username === projectUser){ return <>{projectUser}</>}
-    else { return <Link href={`/profile/${projectUser}`}>{projectUser}</Link>}}
+    else { return <Link href={`/userprofile/${projectUser}`}>{projectUser}</Link>}}
 
 
   const displayAll = projects.map((data) => {

@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import ProjectList from './ProjectList'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchProjects } from '../../Redux/projects/ProjectSlice';
+import { Grid } from '@mui/material';
 
 const ProjectMain = ({ projects, setErrorMain }) => {
   const dispatch = useDispatch()
@@ -19,7 +20,7 @@ const ProjectMain = ({ projects, setErrorMain }) => {
 
   return (
     <>
-      <div>{homeProjects}</div>
+      {homeProjects}
     </>
   )
 }

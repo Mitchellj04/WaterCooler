@@ -6,8 +6,8 @@ import { fetchCategory } from '../../Redux/category/CategorySlice';
 import CreateCategory from './CreateCategory';
 
 
-const CategoryMain = ({setErrorMain}) => {
-  
+const CategoryMain = ({ setErrorMain }) => {
+
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
@@ -28,25 +28,24 @@ const CategoryMain = ({setErrorMain}) => {
   // BUTTON CLICK HANDLER
   const handleClick = (e) => {
     e.preventDefault()
-    if(currentUser === null){
+    if (currentUser === null) {
       setErrorMain(['Please login first'])
       navigate('/login')
     }
-    else { navigate(`/categories/${e.target.value}`) }}
+    else { navigate(`/categories/${e.target.value}`) }
+  }
 
   // ALL CATEGORY BUTTONS
   const buttonMap = categories.map((category) => {
-    return <Box style={{ paddingTop: 20 }} key={category.id}> <Button id={category.id} value={category.code} variant="contained" onClick={handleClick}>{category.code}</Button> </Box>
+    return <Grid item xs={2}><Box style={{ paddingTop: 20 }} key={category.id}> <Button id={category.id} value={category.code} variant="contained" onClick={handleClick}>{category.code}</Button> </Box></Grid>
   })
 
 
   return (
-    <><div style={{ height: 100 }}>
-      <Grid>
-        {buttonMap}
-        <Button onClick={handleCategoryOpen}>+ Add New</Button>
-        <CreateCategory setHideNewCategory={setHideNewCategory} hideNewCategory={hideNewCategory} />
-      </Grid> </div>
+    <>
+      {buttonMap}
+      <Button onClick={handleCategoryOpen}>+ Add New</Button>
+      <CreateCategory setHideNewCategory={setHideNewCategory} hideNewCategory={hideNewCategory} />
     </>
   )
 }

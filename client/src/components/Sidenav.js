@@ -62,7 +62,7 @@ function Sidenav({ setErrorMain }) {
       setErrorMain(["Please login to see profile"])
     }
     else {
-      navigate('/profile')
+      navigate('/profile-main')
     }
   }
 
@@ -72,7 +72,7 @@ function Sidenav({ setErrorMain }) {
       setErrorMain([])
     }
     else {
-      navigate('/profile')
+      navigate('/profile-main')
     }
   }
 
