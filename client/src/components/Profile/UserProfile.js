@@ -12,7 +12,7 @@ const UserProfile = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     
-
+    // FETCH DATA
     useEffect(() => {
         dispatch(fetchUser(username))
         dispatch(fetchProjects())
@@ -25,29 +25,7 @@ const UserProfile = () => {
     const posts = useSelector((state) => state.post.posts)
     const projects = useSelector((state) => state.project.projects)
     
-
-    // const newUser = profileUser.filter((user) => user.username === username)
-    console.log(user)
-    console.log(posts)
-    console.log(projects)
-
-    const handleCommentClick = (e) => {
-      navigate(`/posts/${e.target.id}`)
-    }
- 
-    // const userInfo = user.map((user) => {
-    //    return <Box elevation="20" style={{padding: 100}}>
-    //     <Typography variant='h4'>{user.name} Profile</Typography>
-    //   <Paper>
-    //       <Typography variant='h6' style={{fontWeight: "Bold"}}>Username: </Typography>{user.username}
-    //      <Typography variant='h6' style={{fontWeight: "Bold"}}>Fullname: </Typography>{user.name}
-    //       <Typography variant='h6' style={{fontWeight: "Bold"}}>Age: </Typography>{user.age}
-    //      <Typography variant='h6' style={{fontWeight: "Bold"}}>Experience: </Typography>{user.experience}
-    //      <Typography variant='h6' style={{fontWeight: "Bold"}}>Bio: </Typography>{user.bio}
-    //   </Paper>
-    //   </Box>
-    // })
-    
+    // ALL PROJECTS FOR USER
     const listProjects = projects.map((project) => {
       if(project.user.username === user.username){
                 return <Box key={project.id}>
@@ -55,7 +33,7 @@ const UserProfile = () => {
                 <Typography variant='h6' style={{padding: 5, fontWeight: 'Bold'}}>{project.title}</Typography>
                 <Typography>{project.description}</Typography>
                 <Typography>Link: <Link href={project.github_link}>{project.github_link}</Link></Typography>
-                <Button variant="contained" color="secondary" sx={{backgroundColor: 'secondary.light'}} style={{margin: 20}}>Collaborate</Button>
+                <Button variant="contained" color="secondary" sx={{backgroundColor: 'secondary.light'}} style={{margin: 20}} onClick={() => navigate(`/projects/${project.id}`)}>Collaborate</Button>
             </Paper>
         </Box>
       }
@@ -65,6 +43,7 @@ const UserProfile = () => {
 
     })
 
+    // ALL POSTS FOR USER
     const listPosts = posts.map((post) => {
       if(post.user.username === user.username){
       return <Box key={post.id}>
@@ -72,7 +51,7 @@ const UserProfile = () => {
               <Typography>{post.title}</Typography>
               <Typography>{post.description}</Typography>
               <Typography>Link: <Link href={post.link}>{post.link}</Link></Typography>
-              <Button variant="contained" color="secondary" id={post.id} onClick={handleCommentClick}>comments</Button>
+              <Button variant="contained" color="secondary" id={post.id} onClick={() => navigate(`/posts/${post.id}`)}>comments</Button>
           </Paper>
       </Box>
       } else{
@@ -99,13 +78,7 @@ const UserProfile = () => {
     <Grid item xs={2}><Typography variant='h6' style={{ fontWeight: "Bold", textAlign: 'left', marginLeft: 50 }}>Bio: </Typography></Grid>
     <Grid item xs={10} style={{ textAlign: 'left' }}>{user.bio}</Grid>
     <Grid item xs={12}></Grid>
-           {/* <Typography variant='h6' style={{fontWeight: "Bold"}}>Username: </Typography>{user.username}
-          <Typography variant='h6' style={{fontWeight: "Bold"}}>Fullname: </Typography>{user.name}
-           <Typography variant='h6' style={{fontWeight: "Bold"}}>Age: </Typography>{user.age}
-          <Typography variant='h6' style={{fontWeight: "Bold"}}>Experience: </Typography>{user.experience}
-          <Typography variant='h6' style={{fontWeight: "Bold"}}>Bio: </Typography>{user.bio} */}
-       {/* </Paper> */}
-    {/* </Box> */}
+
     <Grid item xs={6} style={{marginTop: 50}} sx={{ borderBottom: 1, borderRight: 1}}><Typography variant="h4">Projects</Typography></Grid>
     <Grid item xs={6} style={{marginTop: 50}} sx={{ borderBottom: 1, borderRight: 1}}><Typography variant="h4">Posts</Typography></Grid>
     <Grid item xs={6} sx={{ borderRight: 1}}> {listProjects}</Grid>

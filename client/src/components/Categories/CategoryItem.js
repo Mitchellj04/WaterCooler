@@ -11,11 +11,9 @@ const CategoryItem = () => {
   const dispatch = useDispatch()
   const { type } = useParams()
 
-  console.log(type)
 
   // FETCH CATEGORIES
   useEffect(() => {
-    console.log(type)
     dispatch(fetchCategoryType(type))
   }, [])
 
