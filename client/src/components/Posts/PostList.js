@@ -98,7 +98,7 @@ const PostList = ({ post, comments, setErrorMain }) => {
   function creator() {
     if (currentUser === null) { return <>{postUser}</> }
     else if (postUser === currentUser.username) { return <>{postUser}</> }
-    else { return <Link href={`/userprofile/${postUser}`}>{postUser}</Link> }
+    else { return <Link onClick={navigate(`/userprofile/${postUser}`)}>{postUser}</Link> }
   }
 
   return (
