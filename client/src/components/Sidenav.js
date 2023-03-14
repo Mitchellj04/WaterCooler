@@ -179,12 +179,6 @@ function Sidenav({ setErrorMain }) {
             </ListItemButton>
           </ListItem>
           <ListItem>
-            <ListItemButton >
-              <ListItemIcon>
-                <FeedIcon />
-              </ListItemIcon>
-              <ListItemText primary="Categories" />
-            </ListItemButton>
           </ListItem>
           <ListItem>
             <ListItemButton onClick={createPage}>

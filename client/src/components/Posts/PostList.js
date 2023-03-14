@@ -10,12 +10,14 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useDispatch, useSelector } from 'react-redux';
 import { deletePost } from '../../Redux/posts/PostSlice';
 import { fetchComment } from '../../Redux/comment/CommentSlice';
+import { useNavigate } from 'react-router-dom';
 
 
 
-const PostList = ({ post, comments }) => {
+const PostList = ({ post, comments, setErrorMain }) => {
 
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const [postUser, setPostUser] = useState(post.user.username)
   const [category, setCategory] = useState(post.categories)
   // const [comments, setComments] = useState(post.comments)
@@ -27,6 +29,7 @@ const PostList = ({ post, comments }) => {
   const handleCommentOpen = () => { setHideCommentPost(true) }
 
 
+
   // FETCH ALL COMMENTS
   useEffect(() => {
     dispatch(fetchComment())
@@ -36,13 +39,23 @@ const PostList = ({ post, comments }) => {
   const posts = useSelector((state) => state.post.posts)
   const currentUser = useSelector((state) => state.user.users)
   const comment = useSelector((state) => state.comment.comments)
-  const postComment = useSelector((state) => state.post.posts.comments)
+  const postComment = useSelector((state) => state.post.posts.comments)    
+  
+  const handleCategory = (e) => {
+      e.preventDefault()
+      if(currentUser === null){
+        setErrorMain(['Please login first'])
+        navigate('/login')
+      }
+      else {
+        navigate(`/categories/${e.target.value}`)
+      }}
 
   // MAP COMMENTS TO POST
   const mapComments = comments.map((comment) => <Comment key={comment.id} post={post} postUser={postUser} comment={comment} currentUser={currentUser} />)
 
   // MAP CATEGORY TO POST
-  const mapCategory = category.map((data) => { return <Button variant='outlined' key={data.id}>{data.code}</Button> })
+  const mapCategory = category.map((data) => { return <Button variant='outlined' value={data.code} key={data.id} onClick={handleCategory}>{data.code}</Button> })
 
 
   // HANDLE EMPTY COMMENT ALERT

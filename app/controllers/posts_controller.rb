@@ -45,8 +45,9 @@ class PostsController < ApplicationController
     def commentDelete
         comment = find_comment
         comment.delete 
-        post = find_post
-        post.comments.splice(0)
+        post_id = comment.post_id
+        post = Post.find(post_id)
+        render json: post
     end
 
 
@@ -54,6 +55,10 @@ class PostsController < ApplicationController
 
     def find_post
         Post.find(params[:id])
+    end
+
+    def find_comment
+        Comment.find(params[:id])
     end
 
     def post_error

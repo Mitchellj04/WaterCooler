@@ -64,7 +64,7 @@ const AllProjects = () => {
       </Box>
       {data.categories.map((category) => { return <Button variant='outlined' value={category.code} style={{ margin: 5 }} key={category.id} onClick={handleCategory}>{category.code}</Button> })}
       <div><Button variant='contained' color="secondary" sx={{ backgroundColor: 'secondary.light' }} style={{ marginTop: 10, }}>Collaborate</Button></div>
-      <div>{projectEdit(data.user.username)}</div>
+      {/* <div>{projectEdit(data.user.username)}</div> */}
     </Grid>
     </>
   })

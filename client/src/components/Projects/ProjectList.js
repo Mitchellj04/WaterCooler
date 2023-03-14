@@ -30,10 +30,8 @@ const ProjectList = ({project, setErrorMain}) => {
         navigate('/login')
       }
       else {
-        
-      }
-      navigate(`/categories/${e.target.value}`)
-    }
+        navigate(`/categories/${e.target.value}`)
+      }}
 
     // HANDLE EDIT WINDOW 
     const handleProjectOpen = () => {setHideEditProject(true)}
