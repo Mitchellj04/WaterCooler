@@ -1,4 +1,4 @@
-import { Alert} from '@mui/material'
+import { Alert } from '@mui/material'
 import React from 'react'
 import CollabCreator from './CollabCreator'
 import CollabUser from './CollabUser'
@@ -9,7 +9,7 @@ const CollabMain = ({ collab, currentUser }) => {
 
   function collaborations() {
     if (currentUser.username === collab.user.username) {
-      if(collab.collaborations.length > 0 ){
+      if (collab.collaborations.length > 0) {
         return collab.collaborations.map((collab) => <CollabCreator collab={collab} currentUser={currentUser} />)
       }
       else {

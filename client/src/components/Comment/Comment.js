@@ -1,7 +1,6 @@
 import { Box, Button, Paper, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteComment } from '../../Redux/comment/CommentSlice';
 import { deletePostComment } from '../../Redux/posts/PostSlice';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 
@@ -32,9 +31,9 @@ const Comment = ({ comment, postUser, post }) => {
   function filterComment() {
     if (comment.post_id === post.id) {
       return <>
-      <div style={{marginTop: 5}}>
-        {comment.user.username}:
-        <div> <Typography>{comment.answer}{userComment()}</Typography></div>
+        <div style={{ marginTop: 5 }}>
+          {comment.user.username}:
+          <div> <Typography>{comment.answer}{userComment()}</Typography></div>
         </div>
       </>
     }

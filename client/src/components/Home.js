@@ -20,7 +20,7 @@ const Home = ({ currentUser, setErrorMain, categories }) => {
 
       <Grid item xs={5}>
         <Typography variant="h4">Posts</Typography>
-        <PostMain currentUser={currentUser} setErrorMain={setErrorMain}/>
+        <PostMain currentUser={currentUser} setErrorMain={setErrorMain} />
       </Grid>
 
     </Grid>

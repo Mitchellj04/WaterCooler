@@ -5,7 +5,7 @@ import { fetchCategory } from '../../Redux/category/CategorySlice'
 import { createPosts } from '../../Redux/posts/PostSlice'
 
 const CreatePost = () => {
-    
+
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -22,7 +22,7 @@ const CreatePost = () => {
     const currentUser = useSelector((state) => state.user.users)
     const category = useSelector((state) => state.category.categories)
     const errors = useSelector((state) => state.post.errors)
-    
+
 
 
     // STYLE

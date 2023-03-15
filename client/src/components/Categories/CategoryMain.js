@@ -6,8 +6,8 @@ import { fetchCategory } from '../../Redux/category/CategorySlice';
 import CreateCategory from './CreateCategory';
 
 
-const CategoryMain = ({setErrorMain}) => {
-  
+const CategoryMain = ({ setErrorMain }) => {
+
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
@@ -28,11 +28,12 @@ const CategoryMain = ({setErrorMain}) => {
   // BUTTON CLICK HANDLER
   const handleClick = (e) => {
     e.preventDefault()
-    if(currentUser === null){
+    if (currentUser === null) {
       setErrorMain('Please login first')
       navigate('/login')
     }
-    else { navigate(`/categories/${e.target.value}`) }}
+    else { navigate(`/categories/${e.target.value}`) }
+  }
 
   // ALL CATEGORY BUTTONS
   const buttonMap = categories.map((category) => {

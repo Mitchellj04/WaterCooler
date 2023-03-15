@@ -66,7 +66,7 @@ const CategoryItem = () => {
       <Grid item xs={12}>
         <Box style={boxStyle}>
           <Typography variant="h4">Projects</Typography>
-          
+
         </Box>
       </Grid>
       {cat.projects.map((projects) => <CategoryProject key={projects.id} projects={projects} />)}
@@ -113,7 +113,7 @@ const CategoryItem = () => {
       <div style={{ paddingTop: 100 }}>
         <Button onClick={() => { setSelectAll(true); setSelectProject(false); setSelectPost(false) }}>All</Button>
         <Button onClick={() => { setSelectProject(true); setSelectAll(false); setSelectPost(false) }}>Projects</Button>
-        <Button onClick={() => { setSelectPost(true); setSelectProject(false); setSelectAll(false);  }}>Posts</Button>
+        <Button onClick={() => { setSelectPost(true); setSelectProject(false); setSelectAll(false); }}>Posts</Button>
       </div>
       <div>
         {switchView()}

@@ -1,4 +1,4 @@
-import { Alert, Box, Button, Card, Link, Paper, Typography } from '@mui/material'
+import { Box, Button, Link, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
@@ -30,10 +30,6 @@ const PostItem = ({ currentUser }) => {
         if (currentUser === null) { return <>{postUser}</> }
         else if (postUser === currentUser.username) { return <>{postUser}</> }
         else { return <Link href={`/userprofile/${postUser}`}>{postUser}</Link> }
-    }
-
-    const handleCreateComment = (post) => {
-
     }
 
 

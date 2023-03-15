@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import LoginForm from './LoginForm'
 import SignUp from './SignUp'
 
-const Login = ({currentUser, setCurrentUser, errorMain}) => {
+const Login = ({ currentUser, setCurrentUser, errorMain }) => {
 
   const [loggedIn, setLoggedIn] = useState(true)
   const userLoggedIn = useSelector((state) => state.user.loggedIn)
@@ -21,25 +21,25 @@ const Login = ({currentUser, setCurrentUser, errorMain}) => {
   }
 
 
-  if(userLoggedIn === true){ navigate('/')}
+  if (userLoggedIn === true) { navigate('/') }
   return (
     <div style={backgroundStyle}>
-    { loggedIn ? (
-      <div style={divStyle}>
-      {errorMain.map((err) => <Alert key="id" severity='error' style={{backgroundColor: "#6c95e9", color: 'white'}}>{err}</Alert>)}
-      <LoginForm setCurrentUser={setCurrentUser}/>
-      <p>Don't have an account?</p>
-      <Button variant="secondary" sx={{color: 'secondary.light'}} onClick={() => setLoggedIn(false)}>SignUp</Button>
-      </div>
-  ) : (
-      <div style={divStyle}>
-      {errorMain.map((err) => <Alert key="id" severity='error' style={{backgroundColor: "#6c95e9", color: 'white'}}>{err}</Alert>)}
-      <SignUp setCurrentUser={setCurrentUser} currentUser={currentUser}/>
-      <p>Already have an account?</p>
-      <Button onClick={() => setLoggedIn(true)}>Login</Button>
-      </div>
-  )}
-  </div>
+      {loggedIn ? (
+        <div style={divStyle}>
+          {errorMain.map((err) => <Alert key="id" severity='error' style={{ backgroundColor: "#6c95e9", color: 'white' }}>{err}</Alert>)}
+          <LoginForm setCurrentUser={setCurrentUser} />
+          <p>Don't have an account?</p>
+          <Button variant="secondary" sx={{ color: 'secondary.light' }} onClick={() => setLoggedIn(false)}>SignUp</Button>
+        </div>
+      ) : (
+        <div style={divStyle}>
+          {errorMain.map((err) => <Alert key="id" severity='error' style={{ backgroundColor: "#6c95e9", color: 'white' }}>{err}</Alert>)}
+          <SignUp setCurrentUser={setCurrentUser} currentUser={currentUser} />
+          <p>Already have an account?</p>
+          <Button onClick={() => setLoggedIn(true)}>Login</Button>
+        </div>
+      )}
+    </div>
   )
 }
 

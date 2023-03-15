@@ -39,17 +39,18 @@ const PostList = ({ post, comments, setErrorMain }) => {
   const posts = useSelector((state) => state.post.posts)
   const currentUser = useSelector((state) => state.user.users)
   const comment = useSelector((state) => state.comment.comments)
-  const postComment = useSelector((state) => state.post.posts.comments)    
-  
+  const postComment = useSelector((state) => state.post.posts.comments)
+
   const handleCategory = (e) => {
-      e.preventDefault()
-      if(currentUser === null){
-        setErrorMain(['Please login first'])
-        navigate('/login')
-      }
-      else {
-        navigate(`/categories/${e.target.value}`)
-      }}
+    e.preventDefault()
+    if (currentUser === null) {
+      setErrorMain(['Please login first'])
+      navigate('/login')
+    }
+    else {
+      navigate(`/categories/${e.target.value}`)
+    }
+  }
 
   // MAP COMMENTS TO POST
   const mapComments = comments.map((comment) => <Comment key={comment.id} post={post} postUser={postUser} comment={comment} currentUser={currentUser} />)

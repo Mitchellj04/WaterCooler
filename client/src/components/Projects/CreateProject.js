@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Alert, Box, Button, Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel, Grid, Paper, Radio, RadioGroup, TextField, Typography } from '@mui/material'
+import { Alert, Box, Button, Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel, Grid, Paper, TextField, Typography } from '@mui/material'
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { createProjects } from '../../Redux/projects/ProjectSlice';
@@ -13,7 +13,7 @@ const CreateProject = () => {
   useEffect(() => {
     dispatch(fetchCategory())
   }, {})
-  
+
 
   // STYLE
   const fieldStyle = {
@@ -46,7 +46,7 @@ const CreateProject = () => {
   const handleCategoryChange = (e) => {
     const { value, checked } = e.target;
     console.log(`${value} is ${checked}`)
-    if(checked) {
+    if (checked) {
       setCategoryInfo([...categoryInfo, parseInt(value)])
     }
     else {

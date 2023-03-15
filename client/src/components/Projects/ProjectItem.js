@@ -24,10 +24,10 @@ const ProjectItem = ({ currentUser }) => {
 
   const showProject = projects.map((project) => {
     return <>
-      <Typography variant='h6' style={{padding: 5, fontWeight: 'Bold'}}>{project.title}</Typography>
-      <Typography style={{marginTop:10}}>{project.description}</Typography>
+      <Typography variant='h6' style={{ padding: 5, fontWeight: 'Bold' }}>{project.title}</Typography>
+      <Typography style={{ marginTop: 10 }}>{project.description}</Typography>
       <Typography>{project.github_link}</Typography>
-      <Typography style={{marginTop:10}}>Creator: {project.user.username}</Typography>
+      <Typography style={{ marginTop: 10 }}>Creator: {project.user.username}</Typography>
     </>
   })
 
@@ -35,8 +35,8 @@ const ProjectItem = ({ currentUser }) => {
 
 
   const mapCategory = projects.map((data) => {
-     <>{data.categories.map((cat) => {
-     return <><Button key={cat.id}>{cat.code}</Button></>
+    <>{data.categories.map((cat) => {
+      return <><Button key={cat.id}>{cat.code}</Button></>
     })}</>
   })
 

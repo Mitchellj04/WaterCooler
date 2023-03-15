@@ -1,9 +1,8 @@
 import React from 'react'
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import ProjectList from './ProjectList'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchProjects } from '../../Redux/projects/ProjectSlice';
-import { Grid } from '@mui/material';
 
 const ProjectMain = ({ projects, setErrorMain }) => {
   const dispatch = useDispatch()

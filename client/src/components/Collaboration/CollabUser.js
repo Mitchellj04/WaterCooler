@@ -1,20 +1,13 @@
 import { Button, Link } from '@mui/material'
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { createCollab } from '../../Redux/Collaboration/CollabsSlice'
 import { addProjectCollab } from '../../Redux/projects/ProjectSlice'
 
-const CollabUser = ({projects, currentUser}) => {
+const CollabUser = ({ projects, currentUser }) => {
   const dispatch = useDispatch()
 
   const [projectUser, setProjectUser] = useState(false)
   const [message, setMessage] = useState('')
-
-  // const newCollab = {
-  //   user_id: currentUser.id,
-  //   project_id: projects.id,
-  //   collaborate: true
-  // }
 
   const data = {
     id: projects.id,
@@ -31,15 +24,15 @@ const CollabUser = ({projects, currentUser}) => {
     setMessage("You asked to collaborate on this project")
   }
 
-    const alreadyCollaborated = projects.collaborations.filter((collab) => collab.user.username === currentUser.username)
+  const alreadyCollaborated = projects.collaborations.filter((collab) => collab.user.username === currentUser.username)
 
-    console.log(alreadyCollaborated.length)
+  console.log(alreadyCollaborated.length)
 
-    function userCollabs(){
-    if(alreadyCollaborated.length > 0){
+  function userCollabs() {
+    if (alreadyCollaborated.length > 0) {
       return <>You have already asked to collaborate with <Link>{projects.user.username}</Link></>
     }
-    else if (projectUser === false){
+    else if (projectUser === false) {
       return <Button variant='contained' color='secondary' onClick={handleCollab}>Collaborate</Button>
     }
   }

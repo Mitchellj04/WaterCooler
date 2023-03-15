@@ -27,7 +27,6 @@ const AllPosts = ({ currentUser }) => {
     const handleClick = (e) => {
         console.log(e.target.value)
         e.preventDefault()
-        // setSelected(e.target.value)
         navigate(`/categories/${e.target.value}`)
     }
 

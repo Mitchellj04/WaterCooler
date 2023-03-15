@@ -11,7 +11,7 @@ const PostEdit = ({ post, hideEditPost, setHideEditPost }) => {
   const [postEdit, setPostEdit] = useState(post)
   const handlePostClose = () => { setHideEditPost(false) }
   const handleChange = (e) => { setPostEdit({ ...postEdit, [e.target.name]: e.target.value }) }
-  
+
 
   // STYLE 
   const fieldStyle = {

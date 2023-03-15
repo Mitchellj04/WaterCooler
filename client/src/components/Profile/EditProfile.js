@@ -4,46 +4,33 @@ import { useDispatch, useSelector } from 'react-redux'
 import { editUser } from '../../Redux/users/UserSlice'
 
 const EditProfile = ({ hideEditProfile, setHideEditProfile }) => {
- 
+
   const dispatch = useDispatch()
   const currentUser = useSelector((state) => state.user.users)
- 
+
 
   const [profile, setProfile] = useState(currentUser)
 
- 
+
 
   //Handle Dialog Open/Close
   const handleProfileClose = () => { setHideEditProfile(false) }
 
-  const handleChange = (e) => { setProfile({ ...profile, [e.target.name]: e.target.value }) }    
-  
-  
+  const handleChange = (e) => { setProfile({ ...profile, [e.target.name]: e.target.value }) }
+
+
   const updatedUser = {
-      username: profile.username,
-      name: profile.name,
-      age: profile.age,
-      experience: profile.experience,
-      bio: profile.bio
-    }
+    username: profile.username,
+    name: profile.name,
+    age: profile.age,
+    experience: profile.experience,
+    bio: profile.bio
+  }
 
   const handleEditSubmit = (e) => {
     e.preventDefault()
     let id = profile.id
-    dispatch(editUser({id, updatedUser}))
-    // fetch(`/users/${currentUser.id}`, {
-    //   method: "PATCH",
-    //   headers: {
-    //     "Accept": "application/json",
-    //     "Content-Type": "application/json"
-    //   },
-    //   body: JSON.stringify(updatedUser)
-    // })
-    //   .then((resp) => resp.json())
-    //   .then((user) => {
-    //     setCurrentUser(user)
-    //     setHideEditProfile(false)
-    //   })
+    dispatch(editUser({ id, updatedUser }))
   }
 
   //Styling

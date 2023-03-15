@@ -1,6 +1,6 @@
 import './App.css';
 import { useState, useEffect } from "react";
-import { Routes, Route} from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Header from './components/Header';
 import Home from './components/Home';
 import ProjectList from './components/Projects/ProjectList';
@@ -61,9 +61,6 @@ function App() {
 
   useEffect(() => {
     dispatch(fetchUser())
-    // dispatch(fetchProjects())
-    // dispatch(fetchPosts())
-    // dispatch(fetchCategory())
   }, [])
 
   // USER
@@ -75,30 +72,28 @@ function App() {
 
   // ERRORS 
   const [errorMain, setErrorMain] = useState([])
-  // const [authenticate, setAuthenticate] = useState([])
 
-  // const navigate = useNavigate()
 
   return (
     <>
       <ThemeProvider theme={theme}>
-          <Header currentUser={currentUser} setCurrentUser={setCurrentUser} setErrorMain={setErrorMain} />
-          <div className="App" style={{}}>
-            <Routes>
-              <Route exact path='/' element={<Home currentUser={currentUser} setErrorMain={setErrorMain} />} />
-              <Route path='/profile-main' element={<Profile currentUser={currentUser} />} />
-              <Route path='/projects-main' element={<ProjectList />} />
-              <Route path='/posts' element={<PostList />} />
-              <Route path='/projects-all' element={<AllProjects />} />
-              <Route path='/posts-all' element={<AllPosts currentUser={currentUser} />} />
-              <Route path='/posts/:id' element={<PostItem currentUser={currentUser}/>} />
-              <Route path='/projects/:id' element={<ProjectItem currentUser={reduxCurrentUser} />} />
-              <Route path='/create' element={<Create currentUser={currentUser} />} />
-              <Route path='/login' element={<Login currentUser={currentUser} setCurrentUser={setCurrentUser} errorMain={errorMain} setErrorMain={setErrorMain} />} />
-              <Route path='/categories/:type' element={<CategoryItem />} />
-              <Route path='/userprofile/:username' element={<UserProfile />} />
-            </Routes>
-          </div>
+        <Header currentUser={currentUser} setCurrentUser={setCurrentUser} setErrorMain={setErrorMain} />
+        <div className="App" style={{}}>
+          <Routes>
+            <Route exact path='/' element={<Home currentUser={currentUser} setErrorMain={setErrorMain} />} />
+            <Route path='/profile-main' element={<Profile currentUser={currentUser} />} />
+            <Route path='/projects-main' element={<ProjectList />} />
+            <Route path='/posts' element={<PostList />} />
+            <Route path='/projects-all' element={<AllProjects />} />
+            <Route path='/posts-all' element={<AllPosts currentUser={currentUser} />} />
+            <Route path='/posts/:id' element={<PostItem currentUser={currentUser} />} />
+            <Route path='/projects/:id' element={<ProjectItem currentUser={reduxCurrentUser} />} />
+            <Route path='/create' element={<Create currentUser={currentUser} />} />
+            <Route path='/login' element={<Login currentUser={currentUser} setCurrentUser={setCurrentUser} errorMain={errorMain} setErrorMain={setErrorMain} />} />
+            <Route path='/categories/:type' element={<CategoryItem />} />
+            <Route path='/userprofile/:username' element={<UserProfile />} />
+          </Routes>
+        </div>
       </ThemeProvider>
 
     </>

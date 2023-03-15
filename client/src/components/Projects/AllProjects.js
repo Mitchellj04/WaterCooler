@@ -48,10 +48,11 @@ const AllProjects = () => {
     </Box></Grid>
   })
 
-  function creator(projectUser){
-    if(currentUser === null){ return <>{projectUser}</>}
-    else if(currentUser.username === projectUser){ return <>{projectUser}</>}
-    else { return <Link href={`/userprofile/${projectUser}`}>{projectUser}</Link>}}
+  function creator(projectUser) {
+    if (currentUser === null) { return <>{projectUser}</> }
+    else if (currentUser.username === projectUser) { return <>{projectUser}</> }
+    else { return <Link href={`/userprofile/${projectUser}`}>{projectUser}</Link> }
+  }
 
 
   const displayAll = projects.map((data) => {
