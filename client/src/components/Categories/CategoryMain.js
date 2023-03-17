@@ -29,7 +29,7 @@ const CategoryMain = ({ setErrorMain }) => {
   const handleClick = (e) => {
     e.preventDefault()
     if (currentUser === null) {
-      setErrorMain('Please login first')
+      setErrorMain(['Please login first'])
       navigate('/login')
     }
     else { navigate(`/categories/${e.target.value}`) }

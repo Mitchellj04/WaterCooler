@@ -93,7 +93,7 @@ const projectSlice = createSlice({
             }
         })    
         .addCase(createProjects.rejected, (state, action) => {
-            console.log(action)
+            state.projects.errors = action.payload
         })
         .addCase(deleteProject.fulfilled, (state, {payload}) => {
             const index = state.projects.findIndex(({id}) => id === payload)

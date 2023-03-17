@@ -17,14 +17,13 @@ const ProjectList = ({ project, setErrorMain }) => {
 
   // REACT STATE
   const [category, setCategory] = useState(project.categories)
-  const [selected, setSelected] = useState('')
   const [projectUser, setProjectUser] = useState(project.user.username)
   const [hideEditProject, setHideEditProject] = useState(false)
   const navigate = useNavigate()
 
+  
   const handleCategory = (e) => {
     e.preventDefault()
-    setSelected(e.target.value)
     if (currentUser === null) {
       setErrorMain(['Please login first'])
       navigate('/login')

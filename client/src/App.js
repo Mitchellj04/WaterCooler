@@ -77,7 +77,7 @@ function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <Header currentUser={currentUser} setCurrentUser={setCurrentUser} setErrorMain={setErrorMain} />
+        <Header setCurrentUser={setCurrentUser} setErrorMain={setErrorMain} currentUser={reduxCurrentUser}/>
         <div className="App" style={{}}>
           <Routes>
             <Route exact path='/' element={<Home currentUser={currentUser} setErrorMain={setErrorMain} />} />
@@ -90,7 +90,7 @@ function App() {
             <Route path='/projects/:id' element={<ProjectItem currentUser={reduxCurrentUser} />} />
             <Route path='/create' element={<Create currentUser={currentUser} />} />
             <Route path='/login' element={<Login currentUser={currentUser} setCurrentUser={setCurrentUser} errorMain={errorMain} setErrorMain={setErrorMain} />} />
-            <Route path='/categories/:type' element={<CategoryItem />} />
+            <Route path='/categories/:type' element={<CategoryItem setErrorMain={setErrorMain} currentUser={reduxCurrentUser}/>} />
             <Route path='/userprofile/:username' element={<UserProfile />} />
           </Routes>
         </div>

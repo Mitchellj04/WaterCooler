@@ -5,8 +5,9 @@ import { useNavigate } from 'react-router-dom'
 const CategoryProject = ({ projects }) => {
 
   const navigate = useNavigate()
-  console.log(projects)
-
+  const emptyProject = () => {
+    
+  }
 
   return (
     <Box style={{ padding: 25 }}>
