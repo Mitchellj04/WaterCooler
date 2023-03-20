@@ -1,12 +1,14 @@
-import { Box, Button, Grid, Paper, TextField, Typography, Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel, Alert, } from '@mui/material'
+import { Box, Button, Grid, Paper, TextField, Typography, Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel, Alert, Dialog, DialogContent, DialogActions, } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { fetchCategory } from '../../Redux/category/CategorySlice'
 import { createPosts } from '../../Redux/posts/PostSlice'
 
 const CreatePost = () => {
 
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     useEffect(() => {
         dispatch(fetchCategory())
@@ -16,10 +18,12 @@ const CreatePost = () => {
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const [categories, setCategories] = useState([])
+    const [message, setMessage] = useState(false)
     const [link, setLink] = useState('')
 
     // REDUX
     const currentUser = useSelector((state) => state.user.users)
+    const post = useSelector((state) => state.post.posts)
     const category = useSelector((state) => state.category.categories)
     const errors = useSelector((state) => state.post.errors)
 
@@ -70,14 +74,21 @@ const CreatePost = () => {
     }
 
 
-    function errorHandler() {
-        if (errors.length > 0) {
-            console.log(errors)
-            return <>{errors.map((err) => <Alert key="id" severity='error'>{err}</Alert>)}</>
+    const errorHandleOpen = () => {
+        setMessage(true)
+    }
+
+    const handleErrorClose = () => {
+        if (errors[0] === "Successful") {
+            console.log(true)
+            setMessage(false)
+            navigate(`/posts/${post[post.length - 1].id}`)
         }
         else {
-            return <></>
+            console.log(false)
+            setMessage(false)
         }
+
     }
 
     return (
@@ -115,8 +126,16 @@ const CreatePost = () => {
                                     {mapCheckCategories}
                                 </FormGroup>
                             </FormControl>
-                            <Button type="submit">Submit</Button>
-                            {errorHandler()}
+                            <Button type="submit" onClick={errorHandleOpen}>Submit</Button>
+                            {/* {errorHandler()} */}
+                            <Dialog
+                                open={message}
+                                keepMounted
+                                onClose={handleErrorClose}
+                                maxWidth="lg">
+                                <DialogContent>{errors.map((err) => { if (err === "Successful") { return <Alert key='id' severity='success'>{err}</Alert> } else { return <Alert key={err} severity='error'>{err}</Alert> } })}</DialogContent>
+                                <DialogActions><Button onClick={handleErrorClose}>Close</Button></DialogActions>
+                            </Dialog>
                         </form>
                     </Paper>
                 </Box>

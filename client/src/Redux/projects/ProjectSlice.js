@@ -81,6 +81,7 @@ const projectSlice = createSlice({
         builder
         .addCase(fetchProjects.fulfilled, (state, action) => {
             state.projects = action.payload
+            state.errors = []
         })
         .addCase(createProjects.fulfilled, (state, action) => {
             if(action.payload.errors){
@@ -89,7 +90,7 @@ const projectSlice = createSlice({
             }
             else{
               state.projects.push(action.payload)  
-              state.errors = []
+              state.errors = ["Successful"]
             }
         })    
         .addCase(createProjects.rejected, (state, action) => {

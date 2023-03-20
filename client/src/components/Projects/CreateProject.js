@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Alert, Box, Button, Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel, Grid, Paper, TextField, Typography } from '@mui/material'
+import { Alert, Box, Button, Checkbox, Dialog, DialogActions, DialogContent, FormControl, FormControlLabel, FormGroup, FormLabel, Grid, Paper, TextField, Typography } from '@mui/material'
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { createProjects } from '../../Redux/projects/ProjectSlice';
@@ -31,15 +31,17 @@ const CreateProject = () => {
   const [link, setLink] = useState('')
   const [categories, setCategories] = useState([])
   const [categoryInfo, setCategoryInfo] = useState([])
+  const [success, setSuccess] = useState(false)
+  const [failure, setFailure] = useState(false)
   const navigate = useNavigate()
 
   // REDUX
-  const project = useSelector((state) => state.project)
+  const project = useSelector((state) => state.project.projects)
   const currentUser = useSelector((state) => state.user.users)
   const errors = useSelector((state) => state.project.errors)
   const category = useSelector((state) => state.category.categories)
 
-  console.log(errors.length)
+  console.log(errors)
   console.log(project)
 
   // HANLDE CHECK BOX 
@@ -71,11 +73,22 @@ const CreateProject = () => {
     tag: categoryInfo
   }
 
-
   // HANDLE ERROR FOR SUBMIT
-  function errorHandle() {
-    if (errors.length > 0) { return <> {errors.map((err) => <Alert key="id" severity='error'>{err}</Alert>)} </> }
-    else { return <></> }
+  const errorHandle = () => {
+    setFailure(true)
+  }
+
+  const handleErrorClose = () => {
+    if (errors[0] === "Successful") {
+      console.log(true)
+      setFailure(false)
+      navigate(`/projects/${project[project.length - 1].id}`)
+    }
+    else {
+      console.log(false)
+      setFailure(false)
+    }
+
   }
 
   // SUBMIT NEW PROJECT 
@@ -120,8 +133,17 @@ const CreateProject = () => {
                   {mapCheckCategories}
                 </FormGroup>
               </FormControl>
-              <Button type="submit" variant='contained'>Submit</Button>
-              {errorHandle()}
+              <Button type="submit" variant='contained' onClick={errorHandle}>Submit</Button>
+              <Dialog
+                open={failure}
+                keepMounted
+                onClose={handleErrorClose}
+                maxWidth="lg">
+                <DialogContent>{errors.map((err) => { if (err === "Successful") { return <Alert key='id' severity='success'>{err}</Alert> } else { return <Alert key={err} severity='error'>{err}</Alert> } })}</DialogContent>
+                <DialogActions>
+                  <Button onClick={handleErrorClose}>Close</Button>
+                </DialogActions>
+              </Dialog>
             </form>
 
           </Paper>

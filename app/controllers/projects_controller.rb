@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-rescue_from ActiveRecord::RecordInvalid, with: :project_error
+# rescue_from ActiveRecord::RecordInvalid, with: :project_error
 wrap_parameters format: []
 skip_before_action :authorize, only: [:index, :create]
 
@@ -23,6 +23,8 @@ skip_before_action :authorize, only: [:index, :create]
         tags.each { |tag| Tagging.new(tag)}
         @project.categories << category
         render json: @project, status: :created
+    rescue ActiveRecord::RecordInvalid => e 
+        render json: {errors: e.record.errors.full_messages}
     end
 
     def update 
@@ -63,7 +65,7 @@ skip_before_action :authorize, only: [:index, :create]
     end
 
     def project_error
-        render json: {errors: ["Could not create new project"]}
+        render json: {errors: record.errors.full_messages}
     end
 
     def collab_params

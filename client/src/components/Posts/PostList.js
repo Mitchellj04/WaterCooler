@@ -28,6 +28,7 @@ const PostList = ({ post, comments, setErrorMain }) => {
   const [hideCommentPost, setHideCommentPost] = useState(false)
   const handleCommentOpen = () => { setHideCommentPost(true) }
 
+  console.log(comments)
 
 
   // FETCH ALL COMMENTS

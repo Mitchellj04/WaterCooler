@@ -2,8 +2,10 @@ import { Button, Typography } from '@mui/material'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { deleteComment } from '../../Redux/comment/CommentSlice'
+import { deletePostComment } from '../../Redux/posts/PostSlice'
+import Comment from './Comment'
 
-const SinglePostComment = ({ comment }) => {
+const SinglePostComment = ({ comment, post }) => {
 
   console.log(comment)
 
@@ -11,29 +13,11 @@ const SinglePostComment = ({ comment }) => {
   const currentUser = useSelector((state) => state.user.users)
 
 
+  const mapper = comment.map((comments) => <Comment postUser={post.user.username} comment={comments} post={post}/>)
 
-  const handleDelete = (id) => { dispatch(deleteComment(id)) }
-
-  const userComment = (user, id) => {
-    if (currentUser === null) {
-      return <></>
-    }
-    else if (currentUser.username === user) {
-      return <>
-        <Button size="small" onClick={() => handleDelete(id)}>Delete</Button>
-      </>
-    }
-  }
-
-  const commentMap = comment.map((comments) => {
-    return <div style={{ padding: 20 }}>
-      {comments.user.username}: <Typography>{comments.answer} {userComment(comments.user.username, comments.id)}</Typography>
-      {/* {userComment(comments.user.username, comments.id)} */}
-    </div>
-  })
   return (
     <>
-      {commentMap}
+      {mapper}
     </>
   )
 }

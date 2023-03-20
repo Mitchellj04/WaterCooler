@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-    rescue_from ActiveRecord::RecordInvalid, with: :post_error
+    # rescue_from ActiveRecord::RecordInvalid, with: :post_error
     skip_before_action :authorize, only: :index
 
     def index
@@ -20,6 +20,8 @@ class PostsController < ApplicationController
         tags.each { |tag| Tag.new(tag)}
         @post.categories << category
         render json: @post, status: :created
+    rescue ActiveRecord::RecordInvalid => e 
+        render json: {errors: e.record.errors.full_messages}
     end
 
     def update 

@@ -69,14 +69,15 @@ const postSlice = createSlice({
         builder
         .addCase(fetchPosts.fulfilled, (state, action) => {
             state.posts = action.payload
+            state.errors = []
         })
         .addCase(createPosts.fulfilled, (state, action) => {
             if(action.payload.errors){
                 state.errors = action.payload.errors
             }
             else{
-                state.errors = []
                 state.posts.push(action.payload)
+                state.errors = ["Successful"]
             }
             
         })

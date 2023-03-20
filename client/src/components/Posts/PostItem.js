@@ -46,7 +46,7 @@ const PostItem = ({ currentUser }) => {
             <Button variant='contained' onClick={handleCommentOpen}>Comment</Button>
             <CreateComment setHideCommentPost={setHideCommentPost} hideCommentPost={hideCommentPost} post={post} />
             <div>
-                <SinglePostComment comment={post.comments} />
+                <SinglePostComment comment={post.comments} post={post}/>
             </div>
         </>
     })

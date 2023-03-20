@@ -29,6 +29,8 @@ const CreateComment = ({ hideCommentPost, setHideCommentPost, post }) => {
     e.preventDefault()
     console.log(data)
     dispatch(createPostComment(data))
+    setHideCommentPost(false)
+    setAnswer('')
   }
 
   return (
