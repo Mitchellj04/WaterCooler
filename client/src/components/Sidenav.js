@@ -42,7 +42,7 @@ function Sidenav({ setErrorMain }) {
   const dispatch = useDispatch()
 
   const currentUser = useSelector((state) => state.user.users)
-  console.log(currentUser)
+
 
   const handleDrawerOpen = () => { setOpen(true); };
 

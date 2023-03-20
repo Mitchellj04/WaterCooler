@@ -8,10 +8,7 @@ const EditProfile = ({ hideEditProfile, setHideEditProfile }) => {
   const dispatch = useDispatch()
   const currentUser = useSelector((state) => state.user.users)
 
-
   const [profile, setProfile] = useState(currentUser)
-
-
 
   //Handle Dialog Open/Close
   const handleProfileClose = () => { setHideEditProfile(false) }

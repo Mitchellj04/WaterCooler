@@ -5,13 +5,10 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Sidenav from './Sidenav';
 import { useNavigate } from "react-router-dom";
 import bubblesBackground from '../bubbles.png'
-import { useSelector } from 'react-redux';
-
 
 function Header({currentUser, setCurrentUser, setErrorMain }) {
 
   const navigate = useNavigate()
-  console.log(currentUser)
 
   const handleHome = () => {
     navigate('/')

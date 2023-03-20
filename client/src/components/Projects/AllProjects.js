@@ -23,13 +23,11 @@ const AllProjects = () => {
 
   const handleClick = (e) => {
     e.preventDefault()
-    // setSelected(e.target.value)
     navigate(`/categories/${e.target.value}`)
   }
 
   const handleCategory = (e) => {
     e.preventDefault()
-    // setSelected(e.target.value)
     navigate(`/categories/${e.target.value}`)
   }
 
@@ -55,6 +53,39 @@ const AllProjects = () => {
   }
 
 
+    // PROJECT COLLAB NAVIGATE 
+    const hanldeProject = (project) => {
+     navigate(`/projects/${project}`)
+    }
+  
+    // HANDLE PROJECT COLLAB BUTTON
+    const collabs = (projectUser, id) => {
+      if (currentUser === null) {
+        return <Button
+          variant='contained'
+          color="secondary"
+          onClick={() => hanldeProject(id)}
+          sx={{ backgroundColor: 'secondary.light' }}
+          style={{ marginTop: 15 }}>Collaborate</Button>
+      }
+      else if (currentUser.username === projectUser.username) {
+        return <Button
+          variant='contained'
+          onClick={() => hanldeProject(id)}
+          sx={{ backgroundColor: 'secondary.light' }}
+          style={{ marginTop: 15 }}>Collaborations</Button>
+      }
+      else {
+        return <Button
+          variant='contained'
+          color="secondary"
+          sx={{ backgroundColor: 'secondary.light' }}
+          onClick={() => hanldeProject(id)}
+          style={{ marginTop: 15 }}>Collaborate</Button>
+      }
+    }
+  
+
   const displayAll = projects.map((data) => {
     return <><Grid item xs={4} >
       <Box style={{ marginTop: 20 }} key={data.id}>
@@ -64,8 +95,7 @@ const AllProjects = () => {
         <Typography style={{ padding: 5 }}>User: {creator(data.user.username)}</Typography>
       </Box>
       {data.categories.map((category) => { return <Button variant='outlined' value={category.code} style={{ margin: 5 }} key={category.id} onClick={handleCategory}>{category.code}</Button> })}
-      <div><Button variant='contained' color="secondary" sx={{ backgroundColor: 'secondary.light' }} style={{ marginTop: 10, }}>Collaborate</Button></div>
-      {/* <div>{projectEdit(data.user.username)}</div> */}
+      <div>{collabs(data.user, data.id)}</div>
     </Grid>
     </>
   })

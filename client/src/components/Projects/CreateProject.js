@@ -14,7 +14,6 @@ const CreateProject = () => {
     dispatch(fetchCategory())
   }, {})
 
-
   // STYLE
   const fieldStyle = {
     margin: '5px auto'
@@ -29,9 +28,7 @@ const CreateProject = () => {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [link, setLink] = useState('')
-  const [categories, setCategories] = useState([])
   const [categoryInfo, setCategoryInfo] = useState([])
-  const [success, setSuccess] = useState(false)
   const [failure, setFailure] = useState(false)
   const navigate = useNavigate()
 

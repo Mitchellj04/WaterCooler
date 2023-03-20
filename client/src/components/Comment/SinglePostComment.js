@@ -9,9 +9,7 @@ const SinglePostComment = ({ comment, post }) => {
 
   console.log(comment)
 
-  const dispatch = useDispatch()
   const currentUser = useSelector((state) => state.user.users)
-
 
   const mapper = comment.map((comments) => <Comment postUser={post.user.username} comment={comments} post={post}/>)
 
