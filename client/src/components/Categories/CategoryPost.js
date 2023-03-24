@@ -12,7 +12,7 @@ const CategoryPost = ({ post }) => {
       <Paper>
         <Typography variant='h6' style={{ padding: 5, fontWeight: 'Bold' }}>{post.title}</Typography>
         <Typography>{post.description}</Typography>
-        <Typography>Link: <Link href={post.link}>{post.link}</Link></Typography>
+        <Typography>Link: <Link href={post.link} target="_blank" rel='noopener noreferrer'>{post.link}</Link></Typography>
         <Button variant='contained' color='secondary' onClick={() => navigate(`/posts/${post.id}`)}>Comments
         </Button>
       </Paper>

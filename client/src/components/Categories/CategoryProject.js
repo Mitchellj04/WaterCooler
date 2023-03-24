@@ -14,7 +14,7 @@ const CategoryProject = ({ projects }) => {
       <Paper>
         <Typography variant='h6' style={{ padding: 5, fontWeight: 'Bold' }}>{projects.title}</Typography>
         <Typography>{projects.description}</Typography>
-        <Typography>Link: <Link href={projects.github_link}>{projects.github_link}</Link></Typography>
+        <Typography>Link: <Link href={projects.github_link} target="_blank" rel='noopener noreferrer'>{projects.github_link}</Link></Typography>
         <Button variant='contained' color='secondary' onClick={() => navigate(`/projects/${projects.id}`)}>Collaborate</Button>
       </Paper>
     </Box>

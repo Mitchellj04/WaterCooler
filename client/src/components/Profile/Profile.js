@@ -65,7 +65,7 @@ const Profile = ({ currentUser }) => {
                 <Paper style={{ backgroundColor: 'inherit', margin: 10 }}>
                     <Typography variant='h6' style={{ padding: 5, fontWeight: 'Bold' }}>{project.title}</Typography>
                     <Typography>{project.description}</Typography>
-                    <Typography>Link: <Link href={project.github_link}>{project.github_link}</Link></Typography>
+                    <Typography>Link: <Link href={project.github_link} target="_blank" rel='noopener noreferrer'>{project.github_link}</Link></Typography>
                     <Button
                         variant="contained"
                         color="secondary"
@@ -102,7 +102,7 @@ const Profile = ({ currentUser }) => {
                 <Paper style={{ backgroundColor: 'inherit', margin: 10 }}>
                     <Typography variant='h6' style={{ padding: 5, fontWeight: 'Bold' }}>{post.title}</Typography>
                     <Typography>{post.description}</Typography>
-                    <Typography>Link: <Link href={post.link}>{post.link}</Link></Typography>
+                    <Typography>Link: <Link href={post.link} target="_blank" rel='noopener noreferrer'>{post.link}</Link></Typography>
                     <Button variant="contained" color="secondary" sx={{ backgroundColor: 'secondary.light' }} id={post.id} style={{ margin: 20 }} onClick={() => navigate(`/posts/${post.id}`)}>comments</Button>
                     <div>{postEdit(post)}</div>
                 </Paper>

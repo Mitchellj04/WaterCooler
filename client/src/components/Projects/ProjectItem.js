@@ -1,4 +1,4 @@
-import { Box, Button, Paper, Typography } from '@mui/material'
+import { Box, Button, Link, Paper, Typography } from '@mui/material'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router'
@@ -26,7 +26,7 @@ const ProjectItem = ({ currentUser }) => {
     return <>
       <Typography variant='h6' style={{ padding: 5, fontWeight: 'Bold' }}>{project.title}</Typography>
       <Typography style={{ marginTop: 10 }}>{project.description}</Typography>
-      <Typography>{project.github_link}</Typography>
+      <Typography><Link href={project.github_link} target="_blank" rel='noopener noreferrer'>{project.github_link}</Link></Typography>
       <Typography style={{ marginTop: 10 }}>Creator: {project.user.username}</Typography>
     </>
   })

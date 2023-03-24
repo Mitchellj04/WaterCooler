@@ -91,7 +91,7 @@ const AllProjects = () => {
       <Box style={{ marginTop: 20 }} key={data.id}>
         <Typography variant='h6' style={{ padding: 5, fontWeight: 'Bold' }}>{data.title}</Typography>
         <Typography style={{ padding: 5 }}>{data.description}</Typography>
-        <Typography style={{ padding: 5 }}>Link: <Link href={data.github_link}>{data.github_link}</Link></Typography>
+        <Typography style={{ padding: 5 }}>Link: <Link href={data.github_link} target="_blank" rel='noopener noreferrer'>{data.github_link}</Link></Typography>
         <Typography style={{ padding: 5 }}>User: {creator(data.user.username)}</Typography>
       </Box>
       {data.categories.map((category) => { return <Button variant='outlined' value={category.code} style={{ margin: 5 }} key={category.id} onClick={handleCategory}>{category.code}</Button> })}

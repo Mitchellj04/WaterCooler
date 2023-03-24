@@ -112,7 +112,7 @@ const ProjectList = ({ project, setErrorMain }) => {
       <Box style={{ paddingTop: 25 }}>
         <Typography variant='h6' style={{ padding: 5, fontWeight: 'Bold' }}>{project.title}</Typography>
         <Typography style={{ marginTop: 10 }}>{project.description}</Typography>
-        <Typography>Link: <Link href={project.github_link}>{project.github_link}</Link></Typography>
+        <Typography>Link: <Link href={project.github_link} target="_blank" rel='noopener noreferrer'>{project.github_link}</Link></Typography>
         <Typography style={{ marginTop: 10 }}>Creator: {creator()}</Typography>
         {mapCategory}
         <div>
