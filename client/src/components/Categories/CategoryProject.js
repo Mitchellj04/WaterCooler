@@ -10,7 +10,7 @@ const CategoryProject = ({ projects }) => {
   }
 
   return (
-    <Box style={{ padding: 25 }}>
+    <Box style={{ marginBottom: 5, paddingTop: 25, paddingBottom: 5, border: '2px solid #6fa2e4', color: 'black', borderRadius: 8}}>
       <Paper>
         <Typography variant='h6' style={{ padding: 5, fontWeight: 'Bold' }}>{projects.title}</Typography>
         <Typography>{projects.description}</Typography>

@@ -57,7 +57,7 @@ const PostList = ({ post, comments, setErrorMain }) => {
   const mapComments = comments.map((comment) => <Comment key={comment.id} post={post} postUser={postUser} comment={comment} currentUser={currentUser} />)
 
   // MAP CATEGORY TO POST
-  const mapCategory = category.map((data) => { return <Button variant='outlined' value={data.code} key={data.id} onClick={handleCategory}>{data.code}</Button> })
+  const mapCategory = category.map((data) => { return <Button variant='contained' value={data.code} key={data.id} onClick={handleCategory}>{data.code}</Button> })
 
 
   // HANDLE EMPTY COMMENT ALERT
@@ -105,15 +105,13 @@ const PostList = ({ post, comments, setErrorMain }) => {
 
   return (
     <>
-      <div>
-        <Box style={{ paddingTop: 45 }}>
+        <Box style={{marginBottom: 5, paddingTop: 25, paddingBottom: 5,border: '2px solid #6fa2e4', color: 'black', borderRadius: 8}}>
           <Typography variant='h6' style={{ padding: 5, fontWeight: 'Bold' }}>{post.title}</Typography>
           <Typography variant='body1' style={{ marginTop: 10 }}>{post.description}</Typography>
           <Typography variant='body1'>Link:<Link href={post.link} target="_blank" rel='noopener noreferrer'> {post.link}</Link></Typography>
           <Typography variant='body1'>Creator: {creator()}</Typography>
           {mapCategory}
-        </Box>
-      </div>
+       
       <Box>
         <Accordion className="Accordion-side" style={{ width: "100%", color: "white", backgroundColor: "#295b9d", marginTop: 10 }}>
           <AccordionSummary
@@ -127,10 +125,12 @@ const PostList = ({ post, comments, setErrorMain }) => {
             {createComment()}
           </AccordionDetails>
         </Accordion>
-      </Box>
+      </Box> 
+      
       <div>
         {postEdit()}
       </div>
+      </Box>
     </>
   )
 }

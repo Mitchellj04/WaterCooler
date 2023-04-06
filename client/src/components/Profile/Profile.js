@@ -61,7 +61,7 @@ const Profile = ({ currentUser }) => {
     // USER PROJECTS 
     const listProjects = projects.map((project) => {
         if (project.user.username === user.username) {
-            return <Box key={project.id}>
+            return <Box key={project.id} style={{margin: 5, paddingTop: 25, paddingBottom: 5,border: '2px solid #6fa2e4', color: 'black', borderRadius: 8}}>
                 <Paper style={{ backgroundColor: 'inherit', margin: 10 }}>
                     <Typography variant='h6' style={{ padding: 5, fontWeight: 'Bold' }}>{project.title}</Typography>
                     <Typography>{project.description}</Typography>
@@ -98,7 +98,7 @@ const Profile = ({ currentUser }) => {
     // USER POSTS 
     const listPosts = posts.map((post) => {
         if (post.user.username === user.username) {
-            return <Box key={post.id}>
+            return <Box key={post.id} style={{margin: 5, paddingTop: 25, paddingBottom: 5,border: '2px solid #6fa2e4', color: 'black', borderRadius: 8}}>
                 <Paper style={{ backgroundColor: 'inherit', margin: 10 }}>
                     <Typography variant='h6' style={{ padding: 5, fontWeight: 'Bold' }}>{post.title}</Typography>
                     <Typography>{post.description}</Typography>
@@ -131,14 +131,10 @@ const Profile = ({ currentUser }) => {
                 <Grid item xs={10} style={{ textAlign: 'left' }}>{user.experience}</Grid>
                 <Grid item xs={2}><Typography variant='h6' style={{ fontWeight: "Bold", textAlign: 'left', marginLeft: 50 }}>Bio: </Typography></Grid>
                 <Grid item xs={10} style={{ textAlign: 'left' }}>{user.bio}</Grid>
-                <Grid item xs={12}></Grid>
+                <Grid item xs={12} sx={{borderTop: 1}}></Grid>
 
-                <Grid item xs={6} style={{ marginTop: 50 }} sx={{ borderBottom: 1, borderRight: 1 }}> <Typography variant="h4">Projects</Typography> </Grid>
-                <Grid item xs={6} style={{ marginTop: 50 }} sx={{ borderBottom: 1 }}> <Typography variant="h4">Posts</Typography>  </Grid>
-                <Grid item xs={6} sx={{ borderRight: 1 }}> {listProjects}</Grid>
-                <Grid item xs={6}> {listPosts}</Grid>
-
-
+                <Grid item xs={5} style={{ marginTop: 50 }} sx={{ margin: 2 }}> <Typography variant="h4">Projects</Typography> {listProjects}</Grid>
+                <Grid item xs={5} style={{ marginTop: 50 }} sx={{ margin: 2 }}> <Typography variant="h4">Posts</Typography>  {listPosts}</Grid>
             </Grid>
         </>
     )

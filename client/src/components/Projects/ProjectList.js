@@ -38,7 +38,7 @@ const ProjectList = ({ project, setErrorMain }) => {
 
   // CATERGORY BUTTONS 
   const mapCategory = category.map((category) => {
-    return <Button variant='outlined' value={category.code} style={{ margin: 5 }} key={category.id} onClick={handleCategory}>{category.code}</Button>
+    return <Button variant='contained' value={category.code} style={{ margin: 5 }} key={category.id} onClick={handleCategory}>{category.code}</Button>
   })
 
   // DELETE ACTION HANDLER 
@@ -109,7 +109,7 @@ const ProjectList = ({ project, setErrorMain }) => {
 
   return (
     <div>
-      <Box style={{ paddingTop: 25 }}>
+      <Box style={{ marginBottom: 5, paddingTop: 25, paddingBottom: 5, border: '2px solid #6fa2e4', color: 'black', borderRadius: 8}}>
         <Typography variant='h6' style={{ padding: 5, fontWeight: 'Bold' }}>{project.title}</Typography>
         <Typography style={{ marginTop: 10 }}>{project.description}</Typography>
         <Typography>Link: <Link href={project.github_link} target="_blank" rel='noopener noreferrer'>{project.github_link}</Link></Typography>

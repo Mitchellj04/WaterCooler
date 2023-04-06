@@ -44,9 +44,10 @@ const CategoryMain = ({ setErrorMain }) => {
   return (
     <><div style={{ height: 100 }}>
       <Grid>
+    <Box style={{marginBottom: 5, paddingTop: 25, paddingBottom: 5, border: '2px solid #6fa2e4', color: 'black', borderRadius: 8}}>
         {buttonMap}
         <Button onClick={handleCategoryOpen}>+ Add New</Button>
-        <CreateCategory setHideNewCategory={setHideNewCategory} hideNewCategory={hideNewCategory} />
+        <CreateCategory setHideNewCategory={setHideNewCategory} hideNewCategory={hideNewCategory} /></Box>
       </Grid> </div>
     </>
   )

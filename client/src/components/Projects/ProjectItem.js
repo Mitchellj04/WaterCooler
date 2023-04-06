@@ -26,7 +26,7 @@ const ProjectItem = ({ currentUser }) => {
     return <>
       <Typography variant='h6' style={{ padding: 5, fontWeight: 'Bold' }}>{project.title}</Typography>
       <Typography style={{ marginTop: 10 }}>{project.description}</Typography>
-      <Typography><Link href={project.github_link} target="_blank" rel='noopener noreferrer'>{project.github_link}</Link></Typography>
+      <Typography>Link: <Link href={project.github_link} target="_blank" rel='noopener noreferrer'>{project.github_link}</Link></Typography>
       <Typography style={{ marginTop: 10 }}>Creator: {project.user.username}</Typography>
     </>
   })
@@ -46,13 +46,14 @@ const ProjectItem = ({ currentUser }) => {
 
   return (
     <>
-      <Box style={{ padding: 100 }}>
-        <Paper>
+      <Box style={{ margin: 100, borderRadius: 8, border: '2px solid #6fa2e4', color: 'black', backgroundColor: 'grey' }}>
+        <Paper style={{backgroundColor: 'grey', color: 'whitesmoke'}}>
           {showProject}
           {mapCategory}
-        </Paper>
-        <Paper style={{ padding: 50 }}>
+        
+        <Paper style={{ padding: 50, backgroundColor: 'grey', color: 'whitesmoke' }}>
           {userCollabs}
+        </Paper>
         </Paper>
       </Box>
     </>

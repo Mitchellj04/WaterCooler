@@ -8,7 +8,7 @@ const CategoryPost = ({ post }) => {
 
 
   return (
-    <Box style={{ paddingTop: 25 }}>
+    <Box style={{ marginBottom: 5, paddingTop: 25, paddingBottom: 5, border: '2px solid #6fa2e4', color: 'black', borderRadius: 8}}>
       <Paper>
         <Typography variant='h6' style={{ padding: 5, fontWeight: 'Bold' }}>{post.title}</Typography>
         <Typography>{post.description}</Typography>
